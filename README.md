@@ -48,7 +48,7 @@
 
 ### Set up docker
 
-This is based on the [Tutorial](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo).
+This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo).
 
 1. Update your os and accept its 'Suite' value from 'testing' to 'oldstable' explicitly before updates for this repository can be applied.
 
@@ -104,4 +104,51 @@ This is based on the [Tutorial](https://dev.to/elalemanyo/how-to-install-docker-
 
     ```
     docker run hello-world
+    ```
+
+### Set up tensorflow
+    
+    https://github.com/fgervais/docker-tensorflow/blob/master/Dockerfile
+    https://github.com/armindocachada/raspberrypi-docker-tensorflow-opencv
+    https://github.com/lhelontra/tensorflow-on-arm
+    https://github.com/samjabrahams/tensorflow-on-raspberry-pi
+    
+    Camera
+    https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/
+
+#### Build own tensorflow containters
+
+    https://github.com/tensorflow/build
+    https://medium.com/tensorflow/tensorflow-1-9-officially-supports-the-raspberry-pi-b91669b0aa0
+    https://www.tensorflow.org/install/docker
+    https://github.com/tensorflow/build/tree/master/raspberry_pi_builds
+
+#### Use tensorflow container to run in an interactive bash
+    
+1. Start container.
+
+    ```
+    docker run --rm -it francoisgervais/tensorflow:2.1.0-cp35 bash
+    ```   
+    
+    Alternatively, use these containers
+    
+    ```
+    armswdev/tensorflow-arm-neoverse
+    ```
+    
+#### Use tensorflow container to run a small program
+
+1. Run tensorflow docker container and execute a small example script.
+
+    ```
+    docker run -it francoisgervais/tensorflow:2.1.0-cp35 python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+    ```
+
+#### Use tensorflow container to run a script
+
+1. Run tensorflow docker container and execute a small example script.
+
+    ```
+    docker run -it francoisgervais/tensorflow:2.1.0-cp35 python3 -c script_file
     ```
