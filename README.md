@@ -139,7 +139,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     
 #### Use tensorflow container to run a small program
 
-1. Run tensorflow docker container and execute a small example script.
+1. Run tensorflow docker container and execute a small example program.
 
     ```
     docker run -it francoisgervais/tensorflow:2.1.0-cp35 python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
@@ -150,5 +150,8 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
 1. Run tensorflow docker container and execute a small example script.
 
     ```
-    docker run -it francoisgervais/tensorflow:2.1.0-cp35 python3 -c script_file
+    docker run -it \
+    -v /home/pi/knowledgeBases:/home/ubuntu/knowledgeBases \
+    armswdev/tensorflow-arm-neoverse  \
+    python3 /home/ubuntu/knowledgeBases/testScript.py
     ```
