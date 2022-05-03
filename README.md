@@ -38,7 +38,7 @@
     ssh pi@141.89.39.173
     ```
 
-or by
+    or by
 
     ```
     ssh pi@AiLabraspberry1.local
