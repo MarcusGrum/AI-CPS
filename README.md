@@ -1,6 +1,8 @@
-# AI-CPS
+# Welcome to the Platform for AI-based Cyber-Physical Systems
 
+The AI-CPS is an end-to-end open source platform for cyber-physical systems considering a knowledge base with the aid of artificial neuronal networks (ANN). It has a comprehensive, flexible ecosystem of tools, libraries, and community resources that lets researchers push the state-of-the-art in ANN and developers easily build and deploy ANN-powered applications. Its particular focus lays on the efficient application of knowledge of ANN.
 
+The tool was originally developed by Marcus Grum.
 
 ## Getting Started
 
