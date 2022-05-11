@@ -12,7 +12,6 @@ from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D , MaxPool2D , Flatten , Dropout 
 from keras.preprocessing.image import ImageDataGenerator
-#from keras.optimizers import Adam
 
 
 ### define contstants and global values, clear console ###
@@ -71,11 +70,6 @@ def createKnnSolution():
 
     # extract images and label of first batch
     imgs, label = next(train_batches)
-    
-    # print corresponding labels to image in terminal
-    for i in range(3):
-        mindex = np.argmax(label[i])
-        print(labels[mindex])
 
     # define layers of Sequential model
     model = Sequential([
