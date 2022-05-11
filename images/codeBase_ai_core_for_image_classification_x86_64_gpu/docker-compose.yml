@@ -1,8 +1,8 @@
-version: "3.9"
+version: "3.0"
 services:
   code_base:
     build: .
-    image: marcusgrum/codebase_ai_core_for_image_classification_aarch64
+    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu
     volumes:
        - ai_system:/tmp
     command:
