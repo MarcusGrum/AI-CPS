@@ -210,12 +210,13 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
 1. Start container.   
     
     ```
-    docker pull tensorflow/tensorflow                     # latest stable release (cpu-based calculation)
+    docker pull tensorflow/tensorflow                     # latest stable release (cpu-based calculation), which is right now: 2.8.0
     ```
     
     Alternatively, use containers with an alternative configuration.
     
     ```
+    docker pull tensorflow/tensorflow:latest-gpu            # "gpu" support; "latest" of the latest TensorFlow binary image, which is right now: 2.6.0
     docker pull tensorflow/tensorflow:version-gpu           # "gpu" support; "version" of the TensorFlow binary image, for example: 2.1.0
     ```
     
