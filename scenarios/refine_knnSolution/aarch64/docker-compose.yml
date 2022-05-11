@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   learning_base:
-    build: .
     image: marcusgrum/learningbase_apple_banana_orange_pump_02
     volumes:
        - ai_system:/tmp

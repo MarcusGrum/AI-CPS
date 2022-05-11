@@ -61,7 +61,19 @@
     
 ## Build and deploy your image for multiple architectures, such as `amd64`, `arm32v7` and `arm64v8 `.
 
-1. Realize all this with the aid of the following command:
+1. Create a new builder which gives access to the new multi-architecutre features.
+
+    ```
+    docker buildx create --name mybuilder
+    ```
+
+1. Switch to this builder.
+
+    ```
+    docker buildx use mybuilder
+    ```
+
+1. Create images for corresponding architectures and push them to ´dockerhub´.
 
     ```
     docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/knowledgebase_apple_banana_orange_pump_20:latest --push  .
