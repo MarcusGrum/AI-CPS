@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  knowledge_base:
+    build: .
+    image: marcusgrum/knowledgebase_apple_banana_orange_pump_20:latest
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;
+volumes:
+  ai_system:
+    external: true

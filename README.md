@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-### Set up device via terminal
+### Set up raspberry via terminal
 
 1. Download and install recent OS, e.g. `raspberry Pi OS Lite buster 12.02.2020`, on sd card via laptop.
 
@@ -24,7 +24,7 @@
 
 1. Put SD card into raspberry and start device.
 
-### Log in to your device
+### Log in to your raspberry
 
 1. Change default password.
 
@@ -46,7 +46,9 @@
 
 1. Test your current distro by `lsb_release -a`.
 
-### Set up docker
+1. Test your architecture by `uname -a`.
+
+### Set up docker at raspberry
 
 This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo).
 
@@ -106,46 +108,57 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     docker run hello-world
     ```
 
-### Set up tensorflow
+### Set up tensorflow at raspberry
     
+1. TBD
+
+    ```
     https://github.com/fgervais/docker-tensorflow/blob/master/Dockerfile
     https://github.com/armindocachada/raspberrypi-docker-tensorflow-opencv
     https://github.com/lhelontra/tensorflow-on-arm
     https://github.com/samjabrahams/tensorflow-on-raspberry-pi
+    ```
     
-    Camera
+1. Maybe include camera at pi.
+
+    ```
     https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/
+    ```
 
-#### Build own tensorflow containters
+#### Build own tensorflow containers and deploy them
 
+1. TBD
+
+    ```
     https://github.com/tensorflow/build
     https://medium.com/tensorflow/tensorflow-1-9-officially-supports-the-raspberry-pi-b91669b0aa0
     https://www.tensorflow.org/install/docker
     https://github.com/tensorflow/build/tree/master/raspberry_pi_builds
+    ```
 
-#### Use tensorflow container to run in an interactive bash
+#### Use tensorflow container to run in an interactive bash at raspberry
     
-1. Start container.
+1. Start container that provide all (SciPi, Matplotlib, etc.).
 
     ```
-    docker run --rm -it francoisgervais/tensorflow:2.1.0-cp35 bash
+    docker run --rm -it armswdev/tensorflow-arm-neoverse bash
     ```   
     
-    Alternatively, use these containers
+    Alternatively, use light-weight containers.
     
     ```
-    armswdev/tensorflow-arm-neoverse
+    docker run --rm -it francoisgervais/tensorflow:2.1.0-cp35 bash
     ```
     
-#### Use tensorflow container to run a small program
+#### Use tensorflow container to run a small program at raspberry
 
 1. Run tensorflow docker container and execute a small example program.
 
     ```
-    docker run -it francoisgervais/tensorflow:2.1.0-cp35 python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+    docker run -it armswdev/tensorflow-arm-neoverse python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     ```
 
-#### Use tensorflow container to run a script
+#### Use tensorflow container to run a script at raspberry
 
 1. Run tensorflow docker container and execute a small example script.
 
@@ -155,3 +168,159 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     armswdev/tensorflow-arm-neoverse  \
     python3 /home/ubuntu/knowledgeBases/testScript.py
     ```
+
+#### Use tensorflow container to run in the background and initiate script execution at raspberry   
+   
+1. Run tensorflow docker container in background.
+
+    ```
+    docker run \
+    -v /home/pi/knowledgeBases:/home/ubuntu/knowledgeBases \
+    armswdev/tensorflow-arm-neoverse 
+    ```
+
+1. Get to know the container's name, which is in this example `37eb7158877c`.
+
+    ```
+    docker ps
+    ```
+
+1. Execute script.
+
+    ```
+    docker exec 37eb7158877c python3 /home/ubuntu/knowledgeBases/tensorflowWorkDir/testScript.py
+    ``` 
+   
+### Set up docker at mac
+
+This is based on the [Docker Installation Guide](https://docs.docker.com/desktop/mac/install/).
+
+1. Download recent `.dmg` file called `Docker Desktop for Mac` and install it.
+
+1. Run Hello World Container for testing Docker installation.
+
+    ```
+    docker run hello-world
+    ```
+    
+### Set up tensorflow at mac  
+    
+#### Use tensorflow container to run in an interactive bash at mac    
+    
+1. Start container.   
+    
+    ```
+    docker pull tensorflow/tensorflow                     # latest stable release (cpu-based calculation)
+    ```
+    
+    Alternatively, use containers with an alternative configuration.
+    
+    ```
+    docker pull tensorflow/tensorflow:version-gpu           # "gpu" support; "version" of the TensorFlow binary image, for example: 2.1.0
+    ```
+    
+    For further information, have a look on [Access an NVIDIA GPU Information Section](https://docs.docker.com/engine/reference/commandline/run/#access-an-nvidia-gpu).
+    
+#### Use tensorflow container to run a small program at mac
+
+1. Run tensorflow docker container and execute a small example program.
+
+    ```
+    docker run -it tensorflow/tensorflow python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+    ```
+
+#### Use tensorflow container to run a script at mac
+
+1. Run tensorflow docker container and execute a small example script.
+
+    ```
+    docker run -it \
+    -v /home/pi/knowledgeBases:/home/ubuntu/knowledgeBases \
+    tensorflow/tensorflow  \
+    python3 /home/ubuntu/knowledgeBases/testScript.py
+    ```
+    
+    Alternatively, consider the tmp folder as current working directory
+    
+    ```
+    docker run -it --rm \
+    -v $PWD/repositories/tensorflowWorkDir:/tmp \
+    -w /tmp \
+    tensorflow/tensorflow \
+    python3 ./testScript.py
+    ```
+    
+#### Install relevant content manually
+
+1. If further packages are required, you might install them from inside the container.
+
+    ```
+    python -m pip install -U pip
+    python -m pip install -U matplotlib
+    pip install SciPy
+    ```
+    
+    Of course, you can prepare an corresponding image providing packages required.
+    For a quick testing, this is okay.
+
+### Deploy relevant files from desktop to raspberry 
+
+#### Deploy relevant files via terminal and scp command.
+    
+1. Copy relevant files from local desktop to raspberry.    
+    
+    ```
+    scp -r /Users/mgrum/repositories/tensorflowWorkDir/ pi@141.89.39.173:/home/pi/knowledgeBases/
+    ```
+    
+    Alternatively, you can deploy them via github or via docker.
+    
+#### Deploy relevant file, such as a solution/image, via docker and copy files manually.
+
+1. Create Dockerfile for creating an image.
+
+    ```
+    # syntax=docker/dockerfile:1
+    FROM busybox
+    ADD ./apple_banana_orange_pump_20.h5  /knowledgeBase/currentSolution.h5
+    CMD ["/knowledgeBase"]
+    ```
+    
+    Alternatively, consider the following
+    
+    ```
+    scratch       # 34.0MB
+    busybox       # 35.2MB
+    alpine:3.14   # 39.6MB
+    ```
+
+1. Build docker image from Dockerfile specified.
+
+    ```
+    docker build --tag apple_banana_orange_pump_20 .
+    ```
+
+1. Have a look on the image created.    
+    
+    ```
+    docker run -it --rm apple_banana_orange_pump_20 sh
+    ```
+    
+1. Copy data from container, e.g. this is called `bold_galileo`, to local file.
+
+    ```
+    docker cp bold_galileo:/test /Users/mgrum/repositories/tensorflowWorkDir/test_volume02
+    ```
+
+1. Start container having this directory mounted.
+    ```
+    docker run -it --rm \
+    -v $PWD/repositories/tensorflowWorkDir:/tmp \
+    -v /Users/mgrum/repositories/tensorflowWorkDir/test_volume02:/tmp/test_volume02 \
+    -w /tmp \
+    tensorflow/tensorflow
+    ```
+    
+#### Deploy relevant file, such as a solution/image, via docker and consider file copying via `docker-compose`routines.
+
+1. Follow individual readme files of `image` and `scenario` folders.

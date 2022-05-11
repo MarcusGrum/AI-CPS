@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  learning_base:
+    build: .
+    image: marcusgrum/learningbase_apple_banana_orange_pump_02
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;
+  code_base:
+    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
+    volumes:
+       - ai_system:/tmp
+    depends_on:
+      - "learning_base"
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
+      python3 /tmp/codeBase/refine_knnSolution.py;
+volumes:
+  ai_system:
+    external: true
