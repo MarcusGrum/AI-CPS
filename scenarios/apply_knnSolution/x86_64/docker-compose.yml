@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.0"
 services:
   knowledge_base:
     image: marcusgrum/knowledgebase_apple_banana_orange_pump_20
