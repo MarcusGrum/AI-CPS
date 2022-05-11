@@ -11,6 +11,7 @@ services:
     - |
       rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;
   code_base:
+    user: root
     image: marcusgrum/codebase_ai_core_for_image_classification_aarch64
     volumes:
        - ai_system:/tmp
