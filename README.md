@@ -123,7 +123,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
 
 ### Set up tensorflow at raspberry
     
-1. TBD
+1. Find useful links, here:
 
     ```
     https://github.com/fgervais/docker-tensorflow/blob/master/Dockerfile
@@ -140,7 +140,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
 
 #### Build own tensorflow containers and deploy them
 
-1. TBD
+1. Find useful links, here:
 
     ```
     https://github.com/tensorflow/build
@@ -151,7 +151,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
 
 #### Use tensorflow container to run in an interactive bash at raspberry
     
-1. Start container that provide all (SciPi, Matplotlib, etc.).
+1. Start container that provides all (SciPi, Matplotlib, etc.).
 
     ```
     docker run --rm -it armswdev/tensorflow-arm-neoverse bash
