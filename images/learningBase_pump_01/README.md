@@ -1,8 +1,6 @@
 
 # Dealing with this local image
 
-The current activation refers to image called `rotated_by_15_Screen Shot 2018-06-08 at 4.59.49 PM.png`.
-
 ## Build local docker image manually with `Dockerfile` for Over-The-Air-Deployment of relevant data.
 
 ### Build local docker image manually with `Dockerfile`.
@@ -10,13 +8,13 @@ The current activation refers to image called `rotated_by_15_Screen Shot 2018-06
 1. Build docker image from Dockerfile specified.
 
     ```
-    docker build --tag marcusgrum/activationbase_apple_okay_01:latest .
+    docker build --tag marcusgrum/learningbase_pump_01:latest .
     ```
 
 1. Have a look on the image created.    
     
     ```
-    docker run -it --rm marcusgrum/activationbase_apple_okay_01:latest sh
+    docker run -it --rm marcusgrum/learningbase_pump_01:latest sh
     ```
 
 ### Alternatively, build local docker image manually with `yml` file.
@@ -44,7 +42,7 @@ The current activation refers to image called `rotated_by_15_Screen Shot 2018-06
 1. Test your image, e.g. by executing a shell.
 
     ```
-    docker exec -it marcusgrum/activationbase_apple_okay_01:latest sh
+    docker exec -it marcusgrum/learningbase_pump_01:latest sh
     ```
     
 1. Shut down image with `docker-compose`.
@@ -58,7 +56,7 @@ The current activation refers to image called `rotated_by_15_Screen Shot 2018-06
 1. Push image to `https://hub.docker.com/` of account called `marcusgrum`.
     
     ```
-    docker image push marcusgrum/activationbase_apple_okay_01:latest
+    docker image push marcusgrum/learningbase_pump_01:latest
     ```
     
 ## Build and deploy your image for multiple architectures, such as `amd64`, `arm32v7` and `arm64v8 `.
@@ -78,7 +76,7 @@ The current activation refers to image called `rotated_by_15_Screen Shot 2018-06
 1. Create images for corresponding architectures and push them to ´dockerhub´.
 
     ```
-    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/activationbase_apple_okay_01:latest --push  .
+    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_pump_01:latest --push  .
     
     ```
     
