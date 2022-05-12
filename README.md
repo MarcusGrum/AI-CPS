@@ -3,7 +3,7 @@
 The AI-CPS is an end-to-end open source platform for cyber-physical systems considering a knowledge base with the aid of artificial neuronal networks (ANN). 
 It has a comprehensive, flexible ecosystem of tools, libraries, and community resources that lets researchers push the state-of-the-art in ANN and developers easily build and deploy ANN-powered applications. 
 Its particular focus lays on the efficient application of knowledge of ANN.
-For this, it enables the flexible, node-independent (a) `ANN applicatio`n, (b) `ANN training and validation` as well as (c) `ANN refinement`,
+For this, it enables the flexible, node-independent (a) situational `ANN application`, (b) `ANN training and validation` as well as (c) `ANN refinement`,
 which is realized as Over-The-Air deployment of 
 (1) ANN models considered as `knowledge base`,
 (2) ANN activations considered as `activation base`,
