@@ -17,7 +17,7 @@ For instance, so, you can base a cyber-physical production system,
 such as the Research and Application Center Industry 4.0 (RACI),
 on the basis of AI-CPS.
 
-<img src="./documentation/UMLsequenceDiagram.png" height="200" />
+<img src="./documentation/UMLsequenceDiagram.png" height="600" />
 
 The tool was originally developed by Dr.-Ing. Marcus Grum.
 
