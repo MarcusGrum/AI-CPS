@@ -13,12 +13,6 @@ Among furthers, this is realized on behalf of `tensor_flow` libraries, `docker` 
 so that they can be realized on any kind of device (tested with `raspberry`, `mac`, `ubuntu`),
 any kind of platform (tested with `aarch64`, `x86_64` and `x86_64_gpu`).
 
-For instance, so, you can base a cyber-physical production system, 
-such as the Research and Application Center Industry 4.0 (RACI),
-on the basis of AI-CPS.
-
-<img src="./documentation/UMLsequenceDiagram.png" height="600" />
-
 The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 ## Getting Started
@@ -344,3 +338,23 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
 #### Deploy relevant file, such as a solution/image, via docker and consider file copying via `docker-compose`routines.
 
 1. Follow individual readme files of `image` and `scenario` folders.
+
+## Application examples
+
+### EV3-Based Industry4.0-Production-System
+
+For instance, you can base an entire cyber-physical production system, 
+such as the CoNM application example of `EV3-Based Industry4.0-Production-System`,
+on the basis of AI-CPS.
+
+Further details can be found at:
+
+Grum M. 2022. Construction of a Concept of Neuronal Modeling. Springer Gabler Wiesbaden. https://doi.org/10.1007/978-3-658-35999-7
+
+### Research and Application Center Industry 4.0
+
+For instance, you can base an entire cyber-physical production system, 
+such as the Research and Application Center Industry 4.0 (RACI),
+on the basis of AI-CPS.
+
+<img src="./documentation/UMLsequenceDiagram.png" height="600" />
