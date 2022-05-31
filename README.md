@@ -13,6 +13,12 @@ Among furthers, this is realized on behalf of `tensor_flow` libraries, `docker` 
 so that they can be realized on any kind of device (tested with `raspberry`, `mac`, `ubuntu`),
 any kind of platform (tested with `aarch64`, `x86_64` and `x86_64_gpu`).
 
+For instance, so, you can base a cyber-physical production system, 
+such as the Research and Application Center Industry 4.0 (RACI),
+on the basis of AI-CPS.
+
+<img src="./documentation/UMLsequenceDiagram.png" height="200" />
+
 The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 ## Getting Started
@@ -45,7 +51,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
     sudo passwd pi
     ```
 
-1. Connect on your raspberry via shell with user `pi`, e.g. with password `RaspBerry`:
+1. Connect on your raspberry via shell with user `pi`, e.g. with password `raspberry`:
 
     ```
     ssh pi@141.89.39.173
