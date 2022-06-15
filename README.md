@@ -31,7 +31,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 1. Download and install Raspberry Pi Imager (e.g. v1.7.2) from [Raspberry Pi OS Page](https://www.raspberrypi.com/software/).
 
-1. Configure your device by selecting `rasperry Pi OS Lite (64bit)`, SD card and corresponding settings.
+1. Configure your device by selecting `raspberry Pi OS Lite (64bit)`, SD card and corresponding settings.
 
 1. Hit `write os`.
 
@@ -137,6 +137,14 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     ```
     https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/
     ```
+
+### Set up MQTT at raspberry
+
+1. Install MQTT library:
+
+   ```
+   pip3 install paho-mqtt
+   ```
 
 #### Build own tensorflow containers and deploy them
 
@@ -327,6 +335,7 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     ```
 
 1. Start container having this directory mounted.
+
     ```
     docker run -it --rm \
     -v $PWD/repositories/tensorflowWorkDir:/tmp \
@@ -338,6 +347,65 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
 #### Deploy relevant file, such as a solution/image, via docker and consider file copying via `docker-compose`routines.
 
 1. Follow individual readme files of `image` and `scenario` folders.
+
+### Set up MQTT at mac
+
+1. Install MQTT library:
+
+   ```
+   pip3 install paho-mqtt
+   ```
+
+#### Test installation
+
+1. Start MQTT server at first CLI for managing communication:
+
+    ```
+    /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf    
+    ```
+
+1. If desired, subscribe from second CLI for displaying all messages:
+
+    ```
+    mosquitto_sub -t "#" -v -u testuser
+    ```
+    
+Here, relevant tags represent as follows:
+
+- `h`: mqtt host to connect to. Defaults to localhost.
+- `p`: network port to connect to. Defaults to 1883 for plain MQTT and 8883 for MQTT over TLS.
+- `t`: mqtt topic to subscribe to. May be repeated multiple times.
+- `u`: provide a username.
+- `P`: provide a password.
+- `v`: print published messages verbosely.
+
+Alternatively, consider testing at world-wide, public test server:
+
+    ```
+    mosquitto_sub -t "CoNM/workflow_system" -v -u testuser -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Start `AI_simulation_basis_communication_client.py` from a third CLI:
+
+    ```
+    python AI_simulation_basis_communication_client.py
+    ```
+
+1. Send message manually from fourth CLI:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "This is a test message."
+    ```
+    
+Alternatively, consider testing at world-wide, public test server:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please do manaul test instruction mxy." -h "test.mosquitto.org" -p 1883
+    ```
+    
+Face communication management throughout the process at first CLI being the `message broker`.
+Relevant messages from subscriptions e.g. can be seen at the second CLI representing a machine being a `mqtt client`.
+The third CLI represents a machine that is activated by messages in order to realize any kind of complex, algorithmic procedures.
 
 ## Application examples
 
