@@ -461,7 +461,7 @@ if __name__ == '__main__':
     hostName = os.uname()[1]
     hostArch = platform.machine()
     if("AILab" in hostName):
-        hostName = hostName + "_gpu"
+        hostArch = hostArch + "_gpu"
 
     # specify client for messaging
     client = mqtt.Client()
