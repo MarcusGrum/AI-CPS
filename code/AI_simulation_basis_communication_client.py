@@ -117,7 +117,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')
@@ -157,7 +157,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
             f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
             f.write('    # daemon.json.'+'\n')
@@ -202,7 +202,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
             f.write('    user: root'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')
@@ -240,7 +240,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')
@@ -270,7 +270,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
             f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
             f.write('    # daemon.json.'+'\n')
@@ -305,7 +305,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
             f.write('    user: root'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')
@@ -351,7 +351,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')
@@ -391,7 +391,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    - |'+'\n')
             f.write('      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
             f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
             f.write('    # daemon.json.'+'\n')
@@ -436,7 +436,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;'+'\n')
             f.write('  code_base:'+'\n')
             f.write('    user: root'+'\n')
-            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
+            f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
             f.write('       - ai_system:/tmp'+'\n')
             f.write('    depends_on:'+'\n')

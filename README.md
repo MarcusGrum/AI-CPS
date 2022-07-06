@@ -356,6 +356,20 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
    pip3 install paho-mqtt
    ```
 
+### Set up MQTT at linux
+
+1. Install pip3 for installing MQTT library:
+
+   ```
+   sudo apt install python3-pip
+   ```
+
+1. Install MQTT library:
+
+   ```
+   pip3 install paho-mqtt
+   ```
+
 #### Test installation
 
 1. Start MQTT server at first CLI for managing communication:
@@ -412,17 +426,17 @@ The third CLI represents a machine that is activated by messages in order to rea
 1. Initiate example `apply_knnSolution` from remote:
 
     ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
 
 1. Initiate example `create_knnSolution` from remote:    
     ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
 
 1. Initiate example `refine_knnSolution` from remote:    
     ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
 
 ## Application examples
