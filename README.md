@@ -407,6 +407,24 @@ Face communication management throughout the process at first CLI being the `mes
 Relevant messages from subscriptions e.g. can be seen at the second CLI representing a machine being a `mqtt client`.
 The third CLI represents a machine that is activated by messages in order to realize any kind of complex, algorithmic procedures.
 
+#### Test installation from remote
+
+1. Initiate example `apply_knnSolution` from remote:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Initiate example `create_knnSolution` from remote:    
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Initiate example `refine_knnSolution` from remote:    
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification_x86_64, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
+
 ## Application examples
 
 ### EV3-Based Industry4.0-Production-System

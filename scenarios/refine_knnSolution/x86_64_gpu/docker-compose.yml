@@ -28,6 +28,7 @@ services:
        - ai_system:/tmp
     depends_on:
       - "learning_base"
+      - "knowledge_base"
     command:
     - sh
     - "-c"
