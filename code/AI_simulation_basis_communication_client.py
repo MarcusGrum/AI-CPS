@@ -14,6 +14,7 @@ from multiprocessing import Process, Queue, current_process, freeze_support
 import time
 import csv
 import os
+import platform
 
 def load_data_from_CsvFile(path):
     """
@@ -49,7 +50,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     
     # provide variables as global so that these are known in this thread
-    # ...
+    #global hostName
     
     # unroll messages
     message = msg.payload.decode()
@@ -67,7 +68,7 @@ def on_message(client, userdata, msg):
 
     # realize instructions from messages
     # by running docker-compose file created at current working directory
-    #subprocess.call("docker-compose -f docker-compose.yml up", shell=True)
+    subprocess.call("docker-compose -f docker-compose.yml up", shell=True)
     print('Message of ' + sender + ' has been processed at ' + receiver + ' successfully!')
 
 def unroll_message(message):
@@ -91,11 +92,9 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
     and considers variables from message, here.
     The file is stored at current working directory.
     """ 
-    
-    arch = 'x86_64' # ToDo: Get this automatically and consider this at docker-compose file crateion below!
 
     # if architecture = 'x86_64'
-    if(arch=='x86_64'):
+    if(hostArch=='x86_64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
@@ -135,7 +134,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    external: true'+'\n')
 
     # if architecture = 'x86_64_gpu'
-    if(arch=='x86_64_gpu'):
+    if(hostArch=='x86_64_gpu'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
             f.write('services:'+'\n')
@@ -179,7 +178,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    external: true'+'\n')
 
     # if architecture = 'aarch64'
-    if(arch=='aarch64'):
+    if(hostArch=='aarch64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
@@ -225,11 +224,9 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
     and considers variables from message, here.
     The file is stored at current working directory.
     """ 
-    
-    arch = 'x86_64' # ToDo: Get this automatically and consider this at docker-compose file crateion below!
 
     # if architecture = 'x86_64'
-    if(arch=='x86_64'):
+    if(hostArch=='x86_64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
@@ -259,41 +256,41 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('    external: true'+'\n')
 
     # if architecture = 'x86_64_gpu'
-    if(arch=='x86_64_gpu'):
+    if(hostArch=='x86_64_gpu'):
         with open('./docker-compose.yml', 'w') as f:
-                f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
-                f.write('services:'+'\n')
-                f.write('  learning_base:'+'\n')
-                f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
-                f.write('    volumes:'+'\n')
-                f.write('       - ai_system:/tmp'+'\n')
-                f.write('    command:'+'\n')
-                f.write('    - sh'+'\n')
-                f.write('    - "-c"'+'\n')
-                f.write('    - |'+'\n')
-                f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n')
-                f.write('  code_base:'+'\n')
-                f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
-                f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
-                f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
-                f.write('    # daemon.json.'+'\n')
-                f.write('    runtime: nvidia'+'\n')
-                f.write('    volumes:'+'\n')
-                f.write('       - ai_system:/tmp'+'\n')
-                f.write('    depends_on:'+'\n')
-                f.write('      - "learning_base"'+'\n')
-                f.write('    command:'+'\n')
-                f.write('    - sh'+'\n')
-                f.write('    - "-c"'+'\n')
-                f.write('    - |'+'\n')
-                f.write('      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;'+'\n')
-                f.write('      python3 /tmp/codeBase/create_knnSolution.py;'+'\n')
-                f.write('volumes:'+'\n')
-                f.write('  ai_system:'+'\n')
-                f.write('    external: true'+'\n')
+            f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
+            f.write('services:'+'\n')
+            f.write('  learning_base:'+'\n')
+            f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
+            f.write('    volumes:'+'\n')
+            f.write('       - ai_system:/tmp'+'\n')
+            f.write('    command:'+'\n')
+            f.write('    - sh'+'\n')
+            f.write('    - "-c"'+'\n')
+            f.write('    - |'+'\n')
+            f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n')
+            f.write('  code_base:'+'\n')
+            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+            f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
+            f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
+            f.write('    # daemon.json.'+'\n')
+            f.write('    runtime: nvidia'+'\n')
+            f.write('    volumes:'+'\n')
+            f.write('       - ai_system:/tmp'+'\n')
+            f.write('    depends_on:'+'\n')
+            f.write('      - "learning_base"'+'\n')
+            f.write('    command:'+'\n')
+            f.write('    - sh'+'\n')
+            f.write('    - "-c"'+'\n')
+            f.write('    - |'+'\n')
+            f.write('      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;'+'\n')
+            f.write('      python3 /tmp/codeBase/create_knnSolution.py;'+'\n')
+            f.write('volumes:'+'\n')
+            f.write('  ai_system:'+'\n')
+            f.write('    external: true'+'\n')
 
     # if architecture = 'aarch64'
-    if(arch=='aarch64'):
+    if(hostArch=='aarch64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
@@ -329,11 +326,9 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
     and considers variables from message, here.
     The file is stored at current working directory.
     """ 
-    
-    arch = 'x86_64' # ToDo: Get this automatically and consider this at docker-compose file crateion below!
 
     # if architecture = 'x86_64'
-    if(arch=='x86_64'):
+    if(hostArch=='x86_64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
@@ -373,51 +368,51 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    external: true'+'\n')
 
     # if architecture = 'x86_64_gpu'
-    if(arch=='x86_64_gpu'):
+    if(hostArch=='x86_64_gpu'):
         with open('./docker-compose.yml', 'w') as f:
-                f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
-                f.write('services:'+'\n')
-                f.write('  learning_base:'+'\n')
-                f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
-                f.write('    volumes:'+'\n')
-                f.write('       - ai_system:/tmp'+'\n')
-                f.write('    command:'+'\n')
-                f.write('    - sh'+'\n')
-                f.write('    - "-c"'+'\n')
-                f.write('    - |'+'\n')
-                f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n') 
-                f.write('  knowledge_base:'+'\n')
-                f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
-                f.write('    volumes:'+'\n')
-                f.write('       - ai_system:/tmp'+'\n')
-                f.write('    command:'+'\n')
-                f.write('    - sh'+'\n')
-                f.write('    - "-c"'+'\n')
-                f.write('    - |'+'\n')
-                f.write('      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;'+'\n')
-                f.write('  code_base:'+'\n')
-                f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
-                f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
-                f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
-                f.write('    # daemon.json.'+'\n')
-                f.write('    runtime: nvidia'+'\n')
-                f.write('    volumes:'+'\n')
-                f.write('       - ai_system:/tmp'+'\n')
-                f.write('    depends_on:'+'\n')
-                f.write('      - "learning_base"'+'\n')
-                f.write('      - "knowledge_base"'+'\n')
-                f.write('    command:'+'\n')
-                f.write('    - sh'+'\n')
-                f.write('    - "-c"'+'\n')
-                f.write('    - |'+'\n')
-                f.write('      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;'+'\n')
-                f.write('      python3 /tmp/codeBase/refine_knnSolution.py;'+'\n')
-                f.write('volumes:'+'\n')
-                f.write('  ai_system:'+'\n')
-                f.write('    external: true'+'\n')
+            f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
+            f.write('services:'+'\n')
+            f.write('  learning_base:'+'\n')
+            f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
+            f.write('    volumes:'+'\n')
+            f.write('       - ai_system:/tmp'+'\n')
+            f.write('    command:'+'\n')
+            f.write('    - sh'+'\n')
+            f.write('    - "-c"'+'\n')
+            f.write('    - |'+'\n')
+            f.write('      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;'+'\n') 
+            f.write('  knowledge_base:'+'\n')
+            f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
+            f.write('    volumes:'+'\n')
+            f.write('       - ai_system:/tmp'+'\n')
+            f.write('    command:'+'\n')
+            f.write('    - sh'+'\n')
+            f.write('    - "-c"'+'\n')
+            f.write('    - |'+'\n')
+            f.write('      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;'+'\n')
+            f.write('  code_base:'+'\n')
+            f.write('    image: ' + code_base + ''+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+            f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
+            f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
+            f.write('    # daemon.json.'+'\n')
+            f.write('    runtime: nvidia'+'\n')
+            f.write('    volumes:'+'\n')
+            f.write('       - ai_system:/tmp'+'\n')
+            f.write('    depends_on:'+'\n')
+            f.write('      - "learning_base"'+'\n')
+            f.write('      - "knowledge_base"'+'\n')
+            f.write('    command:'+'\n')
+            f.write('    - sh'+'\n')
+            f.write('    - "-c"'+'\n')
+            f.write('    - |'+'\n')
+            f.write('      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;'+'\n')
+            f.write('      python3 /tmp/codeBase/refine_knnSolution.py;'+'\n')
+            f.write('volumes:'+'\n')
+            f.write('  ai_system:'+'\n')
+            f.write('    external: true'+'\n')
 
     # if architecture = 'aarch64'
-    if(arch=='aarch64'):
+    if(hostArch=='aarch64'):
         with open('./docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
@@ -462,9 +457,11 @@ if __name__ == '__main__':
     This function initiates communication client
     and manages the corresponding AI reguests.
     """
-
-    #os.system('hostname > /dev/shm/hostname.txt')
-    print('hostname = ', os.system('hostname'))
+    global hostName, hostArch
+    hostName = os.uname()[1]
+    hostArch = platform.machine()
+    if("AILab" in hostName):
+        hostName = hostName + "_gpu"
 
     # specify client for messaging
     client = mqtt.Client()
