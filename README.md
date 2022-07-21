@@ -121,6 +121,12 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     docker run hello-world
     ```
 
+1. Create docker volume `ai_system` for using mechanisms of this repository:
+
+	```
+	docker volume create ai_system
+	```
+
 ### Set up tensorflow at raspberry
     
 1. Find useful links, here:
@@ -223,6 +229,12 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     ```
     docker run hello-world
     ```
+
+1. Create docker volume `ai_system` for using mechanisms of this repository:
+
+	```
+	docker volume create ai_system
+	```
     
 ### Set up tensorflow at mac  
     
@@ -364,19 +376,39 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
    sudo apt install python3-pip
    ```
 
-1. Install MQTT library:
+1. Install MQTT library for communication client:
 
    ```
    pip3 install paho-mqtt
    ```
 
-#### Test installation
+1. Install mosquitto server for MQTT broker:
+
+	```
+	sudo apt-get install mosquitto
+	```
+
+#### Test MQTT installation
 
 1. Start MQTT server at first CLI for managing communication:
 
+	For Mac:
+	
     ```
     /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf    
     ```
+
+	For Ubuntu:
+	
+	```
+	mosquitto -v
+	```
+	
+	or
+	
+	```
+	sudo /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+	```	
 
 1. If desired, subscribe from second CLI for displaying all messages:
 
@@ -429,15 +461,35 @@ The third CLI represents a machine that is activated by messages in order to rea
     mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
 
-1. Initiate example `create_knnSolution` from remote:    
+1. Initiate example `create_knnSolution` from remote:
+    
     ```
     mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
 
-1. Initiate example `refine_knnSolution` from remote:    
+1. Initiate example `refine_knnSolution` from remote:   
+ 
     ```
     mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     ```
+
+### Test installation of individual components
+
+1. Test AI container manually:
+
+	```
+	cd $repositories/AI-CPS/scenarios/apply_knnSolution/x86_gpu
+	docker-compose up
+	```
+
+1. Run local MQTT client:
+
+	```
+	cd $repositories/AI-CPS/code/
+	sudo python3 AI_simulation_basis_communication_client.py
+	```
+
+1. Release one of the remote requests shown before and face AI case realization.
 
 ## Application examples
 

@@ -471,10 +471,10 @@ if __name__ == '__main__':
 
     # specify server for messaging
     global MQTT_Broker
-    MQTT_Broker = "test.mosquitto.org" # world wide network via public test server (communication can be seen by everyone)
+    #MQTT_Broker = "test.mosquitto.org" # world wide network via public test server (communication can be seen by everyone)
     #MQTT_Broker = "broker.hivemq.com" # world wide network via public test server (communication can be seen by everyone)
     #MQTT_Broker = "iot.eclipse.org"   # world wide network via public test server (communication can be seen by everyone)
-    #MQTT_Broker = "localhost"         # communication in local network
+    MQTT_Broker = "localhost"         # communication in local network (start server with /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf )
 
     # establish connection of client and server
     client.connect(MQTT_Broker, 1883, 60)
