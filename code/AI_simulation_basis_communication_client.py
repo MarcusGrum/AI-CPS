@@ -78,6 +78,7 @@ def on_message(client, userdata, msg):
 
     # realize instructions from messages
     # by running docker-compose file created at current working directory
+    # Remark: By subprocess.call(), parallel requests at the same machine are realized sequentially, which is managed by message broaker (next request is delivered when previous request has been finished).
     subprocess.call("docker-compose -f docker-compose.yml up", shell=True)
     print('Message of ' + sender + ' has been processed at ' + receiver + ' successfully!')
 
