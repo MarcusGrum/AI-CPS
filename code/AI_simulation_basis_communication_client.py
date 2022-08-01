@@ -76,11 +76,22 @@ def on_message(client, userdata, msg):
     if(scenario == 'refine_knnSolution'):
         build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
-    # realize instructions from messages
-    # by running docker-compose file created at current working directory
-    # Remark: By subprocess.call(), parallel requests at the same machine are realized sequentially, which is managed by message broaker (next request is delivered when previous request has been finished).
-    subprocess.call("docker-compose -f docker-compose.yml up", shell=True)
-    print('Message of ' + sender + ' has been processed at ' + receiver + ' successfully!')
+    # realize instructions from messages by running docker-compose file created at machine-specific working directory
+    #################################################################################################################
+
+    # a) by subprocess.run() or by subprocess.call() [depreciated]
+    # Remark: By this variant, parallel requests at the same machine are realized sequentially, which is managed by message broaker (next request is delivered when previous request has been finished).
+    #         So, requests are realized one after the other.
+    #subprocess.call("docker-compose -f docker-compose.yml up", shell=True)
+    #subprocess.run("docker-compose -f docker-compose.yml up", shell=True)
+    #print('Message of ' + sender + ' has been processed at ' + receiver + ' successfully!')
+    
+    # b) by subprocess.Popen()
+    # Remark: By this variant, parallel requests at the same machine are realized in parallel. Hence, individual stdout and stderr have been created so that CLI output is separated correctly.
+    # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
+    with open("./"+sender+"_stdout.txt","wb") as out, open("./"+sender+"_stderr.txt","wb") as err:
+       subprocess.Popen("docker-compose -f "+sender+"-docker-compose.yml up", shell=True, stdout=out, stderr=err)
+    print('Message of ' + sender + ' has been initiated at ' + receiver + ' successfully!')
 
 def unroll_message(message):
     """
@@ -106,7 +117,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
 
     # if architecture = 'x86_64'
     if(hostArch=='x86_64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
             f.write('  knowledge_base_'+sender+':\n')
@@ -146,7 +157,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
 
     # if architecture = 'x86_64_gpu'
     if(hostArch=='x86_64_gpu'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
             f.write('services:'+'\n')
             f.write('  knowledge_base_'+sender+':\n')
@@ -190,7 +201,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
 
     # if architecture = 'aarch64'
     if(hostArch=='aarch64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
             f.write('  knowledge_base_'+sender+':\n')
@@ -238,7 +249,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'x86_64'
     if(hostArch=='x86_64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')
@@ -268,7 +279,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'x86_64_gpu'
     if(hostArch=='x86_64_gpu'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')
@@ -302,7 +313,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'aarch64'
     if(hostArch=='aarch64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')
@@ -340,7 +351,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'x86_64'
     if(hostArch=='x86_64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.0"'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')
@@ -380,7 +391,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'x86_64_gpu'
     if(hostArch=='x86_64_gpu'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')
@@ -424,7 +435,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
 
     # if architecture = 'aarch64'
     if(hostArch=='aarch64'):
-        with open('./docker-compose.yml', 'w') as f:
+        with open('./'+sender+'-docker-compose.yml', 'w') as f:
             f.write('version: "3.9"'+'\n')
             f.write('services:'+'\n')
             f.write('  learning_base_'+sender+':\n')

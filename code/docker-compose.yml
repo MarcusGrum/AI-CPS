@@ -1,36 +1,36 @@
 version: "3.0"
 services:
-  learning_base_SenderB:
+  learning_base_SenderA:
     image: marcusgrum/learningbase_apple_banana_orange_pump_02
     volumes:
-       - ai_system:/tmp/SenderB
+       - ai_system:/tmp/SenderA
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/SenderB/learningBase/ && cp -r /learningBase/ /tmp/SenderB/;
-  knowledge_base_SenderB:
+      rm -rf /tmp/SenderA/learningBase/ && cp -r /learningBase/ /tmp/SenderA/;
+  knowledge_base_SenderA:
     image: marcusgrum/knowledgebase_apple_banana_orange_pump_01
     volumes:
-       - ai_system:/tmp/SenderB
+       - ai_system:/tmp/SenderA
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/SenderB/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/SenderB/;
-  code_base_SenderB:
+      rm -rf /tmp/SenderA/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/SenderA/;
+  code_base_SenderA:
     image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
     volumes:
-       - ai_system:/tmp/SenderB
+       - ai_system:/tmp/SenderA
     depends_on:
-      - "learning_base_SenderB"
-      - "knowledge_base_SenderB"
+      - "learning_base_SenderA"
+      - "knowledge_base_SenderA"
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/SenderB/codeBase/ && cp -r /codeBase/ /tmp/SenderB/;
-      python3 /tmp/SenderB/codeBase/refine_knnSolution.py SenderB ReceiverB;
+      rm -rf /tmp/SenderA/codeBase/ && cp -r /codeBase/ /tmp/SenderA/;
+      python3 /tmp/SenderA/codeBase/refine_knnSolution.py SenderA ReceiverB;
 volumes:
   ai_system:
     external: true
