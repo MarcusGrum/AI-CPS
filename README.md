@@ -409,6 +409,21 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
 	```
 	sudo /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
 	```	
+	
+	You can stop broker server by one of the following lines:
+	
+	```
+	sudo service mosquitto stop
+	sudo systemctl stop mosquitto.service
+	```
+
+	If you want to see verbose information, which is not displayed at CLI when broker is started as service,
+	have a look on the corresponding log file:
+	
+	```
+	sudo tail -n20 -f /var/log/mosquitto/mosquitto.log
+	```
+
 
 1. If desired, subscribe from second CLI for displaying all messages:
 
@@ -428,7 +443,7 @@ Here, relevant tags represent as follows:
 Alternatively, consider testing at world-wide, public test server:
 
     ```
-    mosquitto_sub -t "CoNM/workflow_system" -v -u testuser -h "test.mosquitto.org" -p 1883
+	mosquitto_sub -t "CoNM/workflow_system" -v -u testuser -h "test.mosquitto.org" -p 1883
     ```
 
 1. Start `AI_simulation_basis_communication_client.py` from a third CLI:

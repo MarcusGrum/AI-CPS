@@ -74,8 +74,8 @@ def plotTrainingAndValidationPerformance(epochs, accuracy, val_accuracy, loss, v
     #plt.show()
     
     # indicate performance by storing the plot as png and pdf file
-    plt.savefig('/tmp/learningBase/TrainingPerformance.png')
-    plt.savefig('/tmp/learningBase/TrainingPerformance.pdf')
+    plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.png')
+    plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.pdf')
 
 def createKnnSolution():
     """
@@ -95,9 +95,9 @@ def createKnnSolution():
 
     # acquire image data from learningBase
     train_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
-    .flow_from_directory(directory = ("/tmp/learningBase/train"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
+    .flow_from_directory(directory = ("/tmp/"+sender+"/learningBase/train"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
     valid_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
-    .flow_from_directory(directory = ("/tmp/learningBase/validation"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
+    .flow_from_directory(directory = ("/tmp/"+sender+"/learningBase/validation"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
 
     # extract images and labels of first batch
     imgs, label = next(train_batches)
@@ -139,7 +139,7 @@ def createKnnSolution():
                         runs.history["loss"], runs.history["val_loss"])
 
     # specify standard path for storing ANN-based solution
-    name = "/tmp/knowledgeBase/currentSolution.h5"
+    name = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
     
     # save solution in hierarchical data-format (HDF5, short h5)
     model.save(name, save_format="h5")
@@ -161,4 +161,10 @@ def main() -> int:
     return 0
 
 if __name__ == '__main__':
+
+    # input parameters from CLI
+    sender = sys.argv[1]
+    receiver = sys.argv[2]
+    
+    # output parameters to CLI
     sys.exit(main())

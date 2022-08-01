@@ -1,36 +1,36 @@
 version: "3.0"
 services:
-  knowledge_base:
-    image: marcusgrum/knowledgebase_apple_banana_orange_pump_20
+  learning_base_SenderB:
+    image: marcusgrum/learningbase_apple_banana_orange_pump_02
     volumes:
-       - ai_system:/tmp
+       - ai_system:/tmp/SenderB
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;
-  activation_base:
-    image: marcusgrum/activationbase_apple_okay_01
+      rm -rf /tmp/SenderB/learningBase/ && cp -r /learningBase/ /tmp/SenderB/;
+  knowledge_base_SenderB:
+    image: marcusgrum/knowledgebase_apple_banana_orange_pump_01
     volumes:
-       - ai_system:/tmp
+       - ai_system:/tmp/SenderB
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;
-  code_base:
+      rm -rf /tmp/SenderB/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/SenderB/;
+  code_base_SenderB:
     image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
     volumes:
-       - ai_system:/tmp
+       - ai_system:/tmp/SenderB
     depends_on:
-      - "knowledge_base"
-      - "activation_base"
+      - "learning_base_SenderB"
+      - "knowledge_base_SenderB"
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/apply_knnSolution.py;
+      rm -rf /tmp/SenderB/codeBase/ && cp -r /codeBase/ /tmp/SenderB/;
+      python3 /tmp/SenderB/codeBase/refine_knnSolution.py SenderB ReceiverB;
 volumes:
   ai_system:
     external: true

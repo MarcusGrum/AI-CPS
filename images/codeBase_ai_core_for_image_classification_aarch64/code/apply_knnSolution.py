@@ -74,7 +74,7 @@ def applyKnnSolution():
     """
 
     # specify standard path for loading images from activationBase
-    path = "/tmp/activationBase/"
+    path = "/tmp/"+sender+"/activationBase/"
 
     # start time measurement (for evaluation purposes)
     start = timeit.default_timer()
@@ -120,4 +120,10 @@ def main() -> int:
     return 0
 
 if __name__ == '__main__':
+    
+    # input parameters from CLI
+    sender = sys.argv[1]
+    receiver = sys.argv[2]
+    
+    # output parameters to CLI
     sys.exit(main())
