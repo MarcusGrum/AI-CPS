@@ -55,7 +55,7 @@ def openKnnSolution():
     global model
 
     # specify standard path for loading ANN-based solution
-    path = "/tmp/knowledgeBase/currentSolution.h5"
+    path = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
     
     # load solution from standard path
     model = tf.keras.models.load_model(path)
