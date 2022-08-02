@@ -71,7 +71,7 @@ the client subscribes once at `broker1` and publishes once at the same broker,
 effectively the client subscribes to topics on `broker1` and publishes them to `broker2`
 as well as the client subscribes to topics on `broker2` and publishes them ot `broker1`.
 
-<img src="./documentation/MosquittoServer.png" />
+<img src="../../documentation/MosquittoServer.png" />
 
 ## Establish connection with user account
 
