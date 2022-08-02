@@ -52,11 +52,11 @@ def on_message(client, userdata, msg):
     This function continuously receives messages from broker and starts scenario realization.
     It can be called via the following CLI commands:
         1. Initiate example apply_knnSolution from remote:
-        mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+        mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
         2. Initiate example create_knnSolution from remote:
-        mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+        mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
         3. Initiate example refine_knnSolution from remote:
-        mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+        mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
     """
     
     # provide variables as global so that these are known in this thread
@@ -91,7 +91,7 @@ def on_message(client, userdata, msg):
     # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
     with open(logDirectory+"/"+sender+"_stdout.txt","wb") as out, open(logDirectory+"/"+sender+"_stderr.txt","wb") as err:
        subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up", shell=True, stdout=out, stderr=err)
-    print('Message of ' + sender + ' has been initiated at ' + receiver + ' successfully!')
+    print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + ' successfully!')
 
 def unroll_message(message):
     """
@@ -492,17 +492,26 @@ if __name__ == '__main__':
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
-    #client.username_pw_set("username", "password")
+    client.username_pw_set(username="user1", password="password1")
 
     # specify server for messaging
     global MQTT_Broker
-    MQTT_Broker = "test.mosquitto.org" # world wide network via public test server (communication can be seen by everyone)
+    #MQTT_Broker = "test.mosquitto.org" # world wide network via public test server (communication can be seen by everyone)
     #MQTT_Broker = "broker.hivemq.com" # world wide network via public test server (communication can be seen by everyone)
     #MQTT_Broker = "iot.eclipse.org"   # world wide network via public test server (communication can be seen by everyone)
-    #MQTT_Broker = "localhost"         # communication in local network (start server with /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf )
+    MQTT_Broker = "localhost"         # communication in local network (start server with /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf )
 
     # establish connection of client and server
+    # - Method 1 - connect via plain MQTT protocol
     client.connect(MQTT_Broker, 1883, 60)
+    # - Method 2 - connect via secure MQTT over TLS/SSL
+    # TBD when required
+    # - Method 3 - connect via MQTT over TLS/SSL with certificates
+    # TBD when required
+    # - Method 4 - connect via plain WebSockets configuration
+    # TBD when required
+    # - Method 5 - connect via WebSockets over TLS/SSL
+    # TBD when required
 
     # Blocking call that processes network traffic, dispatches callbacks and
     # handles reconnecting.
@@ -514,7 +523,7 @@ if __name__ == '__main__':
     # ...
 
     # optionally announce presence of client at server's topic-specific message channel
-    client.publish(MQTT_Topic_CoNM,'Hi there! My name is x and I have subscribed to topic ' + MQTT_Topic_CoNM + '.')
+    client.publish(MQTT_Topic_CoNM,'Hi there! My name is ' + hostName + ' and I have subscribed to topic ' + MQTT_Topic_CoNM + '.')
     # ...
 
     # start listening here
