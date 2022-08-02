@@ -483,7 +483,7 @@ if __name__ == '__main__':
     hostName = os.uname()[1]
     hostArch = platform.machine()
     logDirectory = "./logs"
-    if("AILab" in hostName):
+    if("ailabnode" in hostName):
         hostArch = hostArch + "_gpu"
     if not os.path.exists(logDirectory):
         os.makedirs(logDirectory)
