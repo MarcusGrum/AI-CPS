@@ -1,4 +1,3 @@
-
 # Dealing with this local image
 
 This image contains all data from 'pump-impeller' dataset.
@@ -12,7 +11,14 @@ This image contains all data from 'pump-impeller' dataset.
     ```
     docker build --tag marcusgrum/learningbase_pump_01:latest .
     ```
-
+	
+	If you base this image on content outside the current dockerfile context,	
+	switch to parent repository path to execute the following instead:
+	
+	```
+	docker build --tag marcusgrum/learningbase_pump_01:latest -f ./images/learningBase_pump_01/Dockerfile .
+	```
+	
 1. Have a look on the image created.    
     
     ```
@@ -32,6 +38,8 @@ This image contains all data from 'pump-impeller' dataset.
     ```
     docker-compose build
     ```
+
+	Here, all content needs to be inside the current dockerfile context.	
 
 ### Test local docker image.
 
@@ -78,7 +86,15 @@ This image contains all data from 'pump-impeller' dataset.
 1. Create images for corresponding architectures and push them to ´dockerhub´.
 
     ```
-    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_pump_01:latest --push  .
+    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_pump_01:latest --push  -f ./images/learningBase_pump_01/Dockerfile .
+    
+    ```
+    
+    If you base this image on content outside the current dockerfile context,	
+	switch to parent repository path to execute the following instead:
+	
+	```
+    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_pump_01:latest --push  -f ./images/learningBase_pump_01/Dockerfile .
     
     ```
     

@@ -1,5 +1,4 @@
-# Citation
+# Credits
 
-This dataset has been based on the 'casting product image data for quality inspection' dataset from
-
-https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product
+Picture material is coming from the following repositories:
+Original pump data is coming from kaggle repository [Ravirajsinh Dabhi, Nevil Kantesaria, Priyank Vaghasia, Jenish Hirpara, Ronak Bhoraniya, 2020](https://www.kaggle.com/ravirajsinh45/real-life-industrial-dataset-of-casting-product) under `CC BY-NC-ND 4.0` license.
