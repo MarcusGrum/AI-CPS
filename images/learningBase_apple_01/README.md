@@ -1,7 +1,7 @@
 
 # Dealing with this local image
 
-This image contains three example pictures per category from 'fruits-fresh-and-rotten-fruits' dataset and 'pump-impeller' dataset.
+This image contains all apple data from 'fruits-fresh-and-rotten-fruits' dataset.
 
 ## Build local docker image manually with `Dockerfile` for Over-The-Air-Deployment of relevant data.
 
@@ -10,13 +10,13 @@ This image contains three example pictures per category from 'fruits-fresh-and-r
 1. Build docker image from Dockerfile specified.
 
     ```
-    docker build --tag marcusgrum/learningbase_apple_banana_orange_pump_02:latest .
+    docker build --tag marcusgrum/learningbase_apple_01:latest .
     ```
 
 1. Have a look on the image created.    
     
     ```
-    docker run -it --rm marcusgrum/learningbase_apple_banana_orange_pump_02:latest sh
+    docker run -it --rm marcusgrum/learningbase_apple_01:latest sh
     ```
 
 ### Alternatively, build local docker image manually with `yml` file.
@@ -44,7 +44,7 @@ This image contains three example pictures per category from 'fruits-fresh-and-r
 1. Test your image, e.g. by executing a shell.
 
     ```
-    docker exec -it marcusgrum/learningbase_apple_banana_orange_pump_02:latest sh
+    docker exec -it marcusgrum/learningbase_apple_01:latest sh
     ```
     
 1. Shut down image with `docker-compose`.
@@ -58,7 +58,7 @@ This image contains three example pictures per category from 'fruits-fresh-and-r
 1. Push image to `https://hub.docker.com/` of account called `marcusgrum`.
     
     ```
-    docker image push marcusgrum/learningbase_apple_banana_orange_pump_02:latest
+    docker image push marcusgrum/learningbase_apple_01:latest
     ```
     
 ## Build and deploy your image for multiple architectures, such as `amd64`, `arm32v7` and `arm64v8 `.
@@ -78,7 +78,7 @@ This image contains three example pictures per category from 'fruits-fresh-and-r
 1. Create images for corresponding architectures and push them to ´dockerhub´.
 
     ```
-    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_apple_banana_orange_pump_02:latest --push  .
+    docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag marcusgrum/learningbase_apple_01:latest --push  .
     
     ```
     
@@ -88,4 +88,3 @@ This image contains three example pictures per category from 'fruits-fresh-and-r
 
 Picture material is coming from the following repositories:
 Original fruit data is coming from kaggle repository [Sriram Reddy Kalluri](https://www.kaggle.com/sriramr/fruits-fresh-and-rotten-for-classification) under `unknown` license.
-Original pump data is coming from kaggle repository [Ravirajsinh Dabhi, Nevil Kantesaria, Priyank Vaghasia, Jenish Hirpara, Ronak Bhoraniya, 2020](https://www.kaggle.com/ravirajsinh45/real-life-industrial-dataset-of-casting-product) under `CC BY-NC-ND 4.0` license.

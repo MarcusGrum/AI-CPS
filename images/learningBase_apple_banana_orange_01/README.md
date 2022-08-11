@@ -1,6 +1,8 @@
 
 # Dealing with this local image
 
+This image contains all data from 'fruits-fresh-and-rotten-fruits' dataset.
+
 ## Build local docker image manually with `Dockerfile` for Over-The-Air-Deployment of relevant data.
 
 ### Build local docker image manually with `Dockerfile`.
@@ -86,4 +88,3 @@
 
 Picture material is coming from the following repositories:
 Original fruit data is coming from kaggle repository [Sriram Reddy Kalluri](https://www.kaggle.com/sriramr/fruits-fresh-and-rotten-for-classification) under `unknown` license.
-Original pump data is coming from kaggle repository [Ravirajsinh Dabhi, Nevil Kantesaria, Priyank Vaghasia, Jenish Hirpara, Ronak Bhoraniya, 2020](https://www.kaggle.com/ravirajsinh45/real-life-industrial-dataset-of-casting-product) under `CC BY-NC-ND 4.0` license.

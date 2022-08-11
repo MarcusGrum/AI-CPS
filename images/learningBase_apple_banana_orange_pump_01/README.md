@@ -1,6 +1,8 @@
 
 # Dealing with this local image
 
+This image contains all data from 'fruits-fresh-and-rotten-fruits' dataset and 'pump-impeller' dataset.
+
 ## Build local docker image manually with `Dockerfile` for Over-The-Air-Deployment of relevant data.
 
 ### Build local docker image manually with `Dockerfile`.
