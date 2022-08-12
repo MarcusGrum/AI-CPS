@@ -76,6 +76,8 @@ def on_message(client, userdata, msg):
     if(scenario == 'refine_knnSolution'):
         build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
+    build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+
     # realize instructions from messages by running docker-compose file created at machine-specific working directory
     #################################################################################################################
 
@@ -90,7 +92,7 @@ def on_message(client, userdata, msg):
     # Remark: By this variant, parallel requests at the same machine are realized in parallel. Hence, individual stdout and stderr have been created so that CLI output is separated correctly.
     # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
     with open(logDirectory+"/"+sender+"_stdout.txt","wb") as out, open(logDirectory+"/"+sender+"_stderr.txt","wb") as err:
-       subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up", shell=True, stdout=out, stderr=err)
+       subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
     print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + ' successfully!')
 
 def unroll_message(message):
@@ -108,6 +110,19 @@ def unroll_message(message):
 
     return scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver
 
+def build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+    """
+    This functions builds docker file for ANN storage at Docker's hub.
+    The file is stored at current working directory.
+    """ 
+
+    # if architecture = 'x86_64'
+    if(hostArch=='x86_64'):
+        with open(logDirectory+'/'+sender+'-docker-file', 'w') as f:
+            f.write('# syntax=docker/dockerfile:1'+'\n')
+            f.write('FROM busybox'+'\n')
+            f.write('ADD ./tmp/'+sender+'/knowledgeBase/currentSolution.h5  /knowledgeBase/currentSolution.h5'+'\n')
+
 def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
     """
     This functions builds docker-compose file for scenario called apply_knnSolution
@@ -123,25 +138,25 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_20
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  activation_base_'+sender+':\n')
             f.write('    image: ' + activation_base + ''+'\n') # e.g. marcusgrum/activationbase_apple_okay_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && mkdir -p /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
             f.write('      - "activation_base_'+sender+'"'+'\n')
@@ -149,7 +164,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/apply_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -163,21 +178,21 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_20
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/knowledgeBase/;'+'\n')
             f.write('  activation_base_'+sender+':\n')
             f.write('    image: ' + activation_base + ''+'\n') # e.g. marcusgrum/activationbase_apple_okay_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && mkdir -p /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
@@ -185,7 +200,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    # daemon.json.'+'\n')
             f.write('    runtime: nvidia'+'\n')
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
             f.write('      - "activation_base_'+sender+'"'+'\n')
@@ -193,7 +208,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/apply_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -207,26 +222,26 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_20
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/knowledgeBase/;'+'\n')
             f.write('  activation_base_'+sender+':\n')
             f.write('    image: ' + activation_base + ''+'\n') # e.g. marcusgrum/activationbase_apple_okay_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/activationBase/ && mkdir -p /tmp/'+sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    user: root'+'\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
             f.write('      - "activation_base_'+sender+'"'+'\n')
@@ -234,7 +249,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/apply_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -255,23 +270,23 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/create_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -285,12 +300,12 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
@@ -298,14 +313,14 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('    # daemon.json.'+'\n')
             f.write('    runtime: nvidia'+'\n')
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/create_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -319,24 +334,24 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    user: root'+'\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/create_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -357,25 +372,25 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/knowledgeBase/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
@@ -383,7 +398,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/refine_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -397,21 +412,21 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n') 
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n') 
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/knowledgeBase/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
             f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
@@ -419,7 +434,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    # daemon.json.'+'\n')
             f.write('    runtime: nvidia'+'\n')
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
@@ -427,7 +442,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/refine_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -441,26 +456,26 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('  learning_base_'+sender+':\n')
             f.write('    image: ' + learning_base + ''+'\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/'+sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
             f.write('  knowledge_base_'+sender+':\n')
             f.write('    image: ' + knowledge_base + ''+'\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    command:'+'\n')
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/'+sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/knowledgeBase/;'+'\n')
             f.write('  code_base_'+sender+':\n')
             f.write('    user: root'+'\n')
             f.write('    image: ' + code_base + '_' + hostArch +'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
             f.write('    volumes:'+'\n')
-            f.write('       - ai_system:/tmp/'+sender+''+'\n')
+            f.write('       - ai_system:/tmp/'+''+'\n')
             f.write('    depends_on:'+'\n')
             f.write('      - "learning_base_'+sender+'"'+'\n')
             f.write('      - "knowledge_base_'+sender+'"'+'\n')
@@ -468,7 +483,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
             f.write('    - sh'+'\n')
             f.write('    - "-c"'+'\n')
             f.write('    - |'+'\n')
-            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+            f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/'+sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
             f.write('      python3 /tmp/'+sender+'/codeBase/refine_knnSolution.py '+ sender + " " + receiver +';\n')
             f.write('volumes:'+'\n')
             f.write('  ai_system:'+'\n')
@@ -478,6 +493,7 @@ if __name__ == '__main__':
     """
     This function initiates communication client
     and manages the corresponding AI reguests.
+    - ToDo: Pull images for having most recent updates and having the containers at all...
     """
     global hostName, hostArch, logDirectory
     hostName = os.uname()[1]
