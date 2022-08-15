@@ -76,8 +76,6 @@ def on_message(client, userdata, msg):
     if(scenario == 'refine_knnSolution'):
         build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
-    build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
-
     # realize instructions from messages by running docker-compose file created at machine-specific working directory
     #################################################################################################################
 
@@ -92,7 +90,20 @@ def on_message(client, userdata, msg):
     # Remark: By this variant, parallel requests at the same machine are realized in parallel. Hence, individual stdout and stderr have been created so that CLI output is separated correctly.
     # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
     with open(logDirectory+"/"+sender+"_stdout.txt","wb") as out, open(logDirectory+"/"+sender+"_stderr.txt","wb") as err:
+       # carry out current scenario
        subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
+       
+       # If new knowledgeBase needs to be published to docker's hub, when create or refine scenarios have been finalized:
+
+       # 1. specify docker file for knowledgeBase (for preparing publication to docker's hub)
+       # build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+
+       # 2. copy ANN to dockers current build context folder (for preparing publication to docker's hub)
+       #subprocess.Popen("docker run --rm -v $PWD/logs:/host -v ai_system:/ai_system -w /ai_system busybox cp /ai_system/"+sender+"/knowledgeBase/currentSolution.h5 /host/"+sender+"_currentSolution.h5", shell=True, stdout=out, stderr=err)
+       
+       # 3. build ANN-based container for relevant architectures in current build context folder and publish at docker's hub
+       #subprocess.Popen("docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --file "+logDirectory+"/"+sender+"-docker-file --tag marcusgrum/knowledgebase_"+sender+":latest --push  "+logDirectory+"/", shell=True, stdout=out, stderr=err)
+    
     print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + ' successfully!')
 
 def unroll_message(message):
@@ -114,6 +125,8 @@ def build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, act
     """
     This functions builds docker file for ANN storage at Docker's hub.
     The file is stored at current working directory.
+    - So far working for publishing knowledgeBase
+    - Might be extended for publishing activationBase, codeBase and learningBase if required.
     """ 
 
     # if architecture = 'x86_64'
@@ -121,7 +134,7 @@ def build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, act
         with open(logDirectory+'/'+sender+'-docker-file', 'w') as f:
             f.write('# syntax=docker/dockerfile:1'+'\n')
             f.write('FROM busybox'+'\n')
-            f.write('ADD ./tmp/'+sender+'/knowledgeBase/currentSolution.h5  /knowledgeBase/currentSolution.h5'+'\n')
+            f.write('ADD ./'+sender+'_currentSolution.h5  /knowledgeBase/currentSolution.h5'+'\n')
 
 def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
     """
@@ -498,7 +511,7 @@ if __name__ == '__main__':
     global hostName, hostArch, logDirectory
     hostName = os.uname()[1]
     hostArch = platform.machine()
-    logDirectory = "./logs"
+    logDirectory = "./logs" # = $PWD/logs
     if("ailabnode" in hostName):
         hostArch = hostArch + "_gpu"
     if not os.path.exists(logDirectory):
