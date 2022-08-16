@@ -58,16 +58,18 @@ def on_message(client, userdata, msg):
      """
      This function continuously receives messages from broker and starts scenario realization.
      It can be called via the following CLI commands:
-          1. Initiate example apply_knnSolution from remote:
-          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          2. Initiate example create_knnSolution from remote:
-          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          3. Initiate example refine_knnSolution from remote:
-          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          4. Initiate example publish_knnSolution from remote:
-          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=publish_knnSolution, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          5. Initiate experiment realize_knnExperiment from remote:
-          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=realize_knnExperiment, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          1. Initiate example apply_annSolution from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          2. Initiate example create_annSolution from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=create_annSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          3. Initiate example refine_annSolution from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=refine_annSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          4. Initiate example wire_annSolution from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=wire_annSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          5. Initiate example publish_annSolution from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=publish_annSolution, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          6. Initiate experiment realize_annExperiment from remote:
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=realize_annExperiment, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
      """
 
      # provide variables as global so that these are known in this thread
@@ -79,7 +81,7 @@ def on_message(client, userdata, msg):
      print(msg.topic + " " + str(message))
      scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver = unroll_message(str(message))
 
-     # realize scenario, such as create_knnSolution / apply_knnSolution / refine_knnSolution / publish_knnSolution #/ realize_knnExperiment
+     # realize scenario, such as create_annSolution / apply_annSolution / refine_annSolution / publish_annSolution #/ realize_annExperiment
      realize_scenario(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver, sub_process_method="parallel")
 
      print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + ' successfully!')
@@ -118,9 +120,9 @@ def build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, act
                     'ADD ./'+sender+'_currentSolution.h5  /knowledgeBase/currentSolution.h5'+'\n')
 
 
-def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+def build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
-     This functions builds docker-compose file for scenario called apply_knnSolution
+     This functions builds docker-compose file for scenario called apply_annSolution
      and considers variables from message, here.
      The file is stored at current working directory.
      """
@@ -160,7 +162,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/apply_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/apply_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -204,7 +206,7 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/apply_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/apply_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -245,15 +247,15 @@ def build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, ac
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/apply_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/apply_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
 
-def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+def build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
-     This functions builds docker-compose file for scenario called create_knnSolution
+     This functions builds docker-compose file for scenario called create_annSolution
      and considers variables from message, here.
      The file is stored at current working directory.
      """
@@ -283,7 +285,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/create_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/create_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -317,7 +319,7 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/create_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/create_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -348,15 +350,15 @@ def build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/create_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/create_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
 
-def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+def build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
-     This functions builds docker-compose file for scenario called refine_knnSolution
+     This functions builds docker-compose file for scenario called refine_annSolution
      and considers variables from message, here.
      The file is stored at current working directory.
      """
@@ -396,7 +398,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/refine_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/refine_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -440,7 +442,7 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/refine_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/refine_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
@@ -481,11 +483,79 @@ def build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, a
                f.write('    - "-c"'+'\n')
                f.write('    - |'+'\n')
                f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
-               f.write('      python3 /tmp/'+sender + '/codeBase/refine_knnSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/refine_annSolution.py ' + sender + " " + receiver + ';\n')
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
+def build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+     """
+     This functions builds docker-compose file for scenario called wire_annSolution
+     and considers variables from message, here.
+     The file is stored at current working directory.
+     """
+
+     # if architecture = 'x86_64'
+     if (hostArch == 'x86_64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.0"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  code_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/wire_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
+     # if architecture = 'x86_64_gpu'
+     if (hostArch == 'x86_64_gpu'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
+               f.write('services:'+'\n')
+               f.write('  code_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
+               f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
+               f.write('    # daemon.json.'+'\n')
+               f.write('    runtime: nvidia'+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/wire_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
+     # if architecture = 'aarch64'
+     if (hostArch == 'aarch64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.9"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  code_base_'+sender+':\n')
+               f.write('    user: root'+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/wire_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
 
 def realize_scenario(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver, sub_process_method):
      """
@@ -494,15 +564,17 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
      """
 
      # build docker-compose file based on message
-     if (scenario == 'apply_knnSolution'):
-          build_docker_compose_file_for_apply_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
-     if (scenario == 'create_knnSolution'):
-          build_docker_compose_file_for_create_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
-     if (scenario == 'refine_knnSolution'):
-          build_docker_compose_file_for_refine_knnSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'apply_annSolution'):
+          build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'create_annSolution'):
+          build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'refine_annSolution'):
+          build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'wire_annSolution'):
+          build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
      # realize instructions from messages by running docker-compose file created at machine-specific working directory
-     if (scenario == 'apply_knnSolution') or (scenario == 'create_knnSolution') or (scenario == 'refine_knnSolution'):
+     if (scenario == 'apply_annSolution') or (scenario == 'create_annSolution') or (scenario == 'refine_annSolution') or (scenario == 'wire_annSolution'):
 
           if (sub_process_method == "sequential"):
                # a) by subprocess.run() or by subprocess.call() [depreciated]
@@ -521,7 +593,7 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                     subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
 
      # If new knowledgeBase needs to be published to docker's hub, when create or refine scenarios have been finalized:
-     if (scenario == 'publish_knnSolution'):
+     if (scenario == 'publish_annSolution'):
           # 1. specify docker file for knowledgeBase (for preparing publication to docker's hub)
           build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
@@ -539,117 +611,136 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                with open(logDirectory+"/"+sender+"_stdout.txt", "wb") as out, open(logDirectory+"/"+sender+"_stderr.txt", "wb") as err:
                     subprocess.Popen("docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --file "+logDirectory+"/"+sender+"-docker-file --tag marcusgrum/knowledgebase_"+sender+":latest --push  "+logDirectory+"/", shell=True, stdout=out, stderr=err)
 
-     if (scenario == 'realize_knnExperiment'):
+     if (scenario == 'realize_annExperiment'):
           realize_experiment(numberOfExperiments=2)
 
 
 def realize_experiment(numberOfExperiments):
-     """
-     - ToDo: Get ANN0
-     - ToDo: Refine ANN on init dataset, too
-     - ToDo: KPIs of ANN stored
-     - ToDo: Plotting
-     """
+    """
+    - ToDo: Get ANN0
+    - ToDo: Refine ANN on init dataset, too
+    - ToDo: KPIs of ANN stored
+    - ToDo: Plotting
+    """
 
-     for experimentId in range(1, numberOfExperiments+1, 1):
-          print("experimentId = " + str(experimentId))
-          for machineId in range(1, 3+1, 1):
-               print("  machineId = " + str(machineId))
+    for experimentId in range(1, numberOfExperiments+1, 1):
+        print("experimentId = " + str(experimentId))
+        for machineId in range(1, 3+1, 1):
+            print("  machineId = " + str(machineId))
 
-               # Phase 1 - Working on focus dataset
-               ####################################
+            # Phase 1 - Working on focus dataset
+            ####################################
 
-               if (machineId == 1):
+            # wire and train ANNs by refinement to create initial state while having interim states at preparation
+            realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+            realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+            for iterationId_1 in range(1, 5+1, 1):
+                print("    iterationId_1 = " + str(iterationId_1))
+                if (machineId == 1):
                     learning_base = "marcusgrum/learningbase_apple_01"
-                    suffix1 = "_a"
-               elif (machineId == 2):
+                    if (iterationId_1 == 1):
+                        suffix_0 = ""
+                        suffix_1 = suffix_0 + "a"
+                    else:
+                        suffix_0 = suffix_1
+                        suffix_1 = suffix_1
+                elif (machineId == 2):
                     learning_base = "marcusgrum/learningbase_banana_01"
-                    suffix1 = "_b"
-               elif (machineId == 3):
+                    if (iterationId_1 == 1):
+                        suffix_0 = ""
+                        suffix_1 = suffix_0 + "b"
+                    else:
+                        suffix_0 = suffix_1
+                        suffix_1 = suffix_1
+                elif (machineId == 3):
                     learning_base = "marcusgrum/learningbase_orange_01"
-                    suffix1 = "_o"
-               else:
+                    if (iterationId_1 == 1):
+                        suffix_0 = ""
+                        suffix_1 = suffix_0 + "o"
+                    else:
+                        suffix_0 = suffix_1
+                        suffix_1 = suffix_1
+                else:
                     pass
+                # refine ANNs of machine 1,2,3 to create interim state 1-5
+                realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
+                realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
 
-               # create ANNs to create initial state
-               realize_scenario(scenario="create_knnSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration1"+suffix1, receiver="ReceiverB", sub_process_method="sequential")
-               realize_scenario(scenario="publish_knnSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration1"+suffix1, receiver="ReceiverB", sub_process_method="sequential")
+            # Phase 2 - Working on new dataset
+            ##################################
 
-               # Phase 2 - Working on new dataset
-               ##################################
+            for streamId in range(1, 2+1, 1):
+                print("    streamId = " + str(streamId))
+                for iterationId_2 in range(1, 5+1, 1):
+                    print("      iterationId_2 = " + str(iterationId_2))
+                    if (machineId == 1):
+                        if (streamId == 1):
+                            learning_base = "marcusgrum/learningbase_banana_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "b"
+                            else:
+                                suffix_2 = suffix_1 + "b"
+                                suffix_3 = suffix_1 + "b"
+                        elif (streamId == 2):
+                            learning_base = "marcusgrum/learningbase_orange_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "o"
+                            else:
+                                suffix_2 = suffix_1 + "o"
+                                suffix_3 = suffix_1 + "o"
+                        else:
+                            pass
+                    elif (machineId == 2):
+                        if(streamId == 1):
+                            learning_base = "marcusgrum/learningbase_apple_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "a"
+                            else:
+                                suffix_2 = suffix_1 + "a"
+                                suffix_3 = suffix_1 + "a"
+                        elif (streamId == 2):
+                            learning_base = "marcusgrum/learningbase_orange_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "o"
+                            else:
+                                suffix_2 = suffix_1 + "o"
+                                suffix_3 = suffix_1 + "o"
+                        else:
+                            pass
+                    elif (machineId == 3):
+                        if(streamId == 1):
+                            learning_base = "marcusgrum/learningbase_apple_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "a"
+                            else:
+                                suffix_2 = suffix_1 + "a"
+                                suffix_3 = suffix_1 + "a"
+                        elif (streamId == 2):
+                            learning_base = "marcusgrum/learningbase_banana_01"
+                            if (iterationId_2 == 1):
+                                suffix_2 = suffix_1
+                                suffix_3 = suffix_1 + "b"
+                            else:
+                                suffix_2 = suffix_1 + "b"
+                                suffix_3 = suffix_1 + "b"
+                        else:
+                            pass
+                    else:
+                        pass
 
-               for streamId in range(1, 2+1, 1):
-                    print("    streamId = " + str(streamId))
-                    for iterationId in range(1, 5+1, 1):
-                         print("      iterationId = " + str(iterationId))
-                         if (machineId == 1):
-                              if (streamId == 1):
-                                   learning_base = "marcusgrum/learningbase_banana_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "b"
-                                   else:
-                                        suffix2 = suffix1 + "b"
-                                        suffix3 = suffix1 + "b"
-                              elif (streamId == 2):
-                                   learning_base = "marcusgrum/learningbase_orange_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "o"
-                                   else:
-                                        suffix2 = suffix1 + "o"
-                                        suffix3 = suffix1 + "o"
-                              else:
-                                   pass
-                         elif (machineId == 2):
-                              if(streamId == 1):
-                                   learning_base = "marcusgrum/learningbase_apple_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "a"
-                                   else:
-                                        suffix2 = suffix1 + "a"
-                                        suffix3 = suffix1 + "a"
-                              elif (streamId == 2):
-                                   learning_base = "marcusgrum/learningbase_orange_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "o"
-                                   else:
-                                        suffix2 = suffix1 + "o"
-                                        suffix3 = suffix1 + "o"
-                              else:
-                                   pass
-                         elif (machineId == 3):
-                              if(streamId == 1):
-                                   learning_base = "marcusgrum/learningbase_apple_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "a"
-                                   else:
-                                        suffix2 = suffix1 + "a"
-                                        suffix3 = suffix1 + "a"
-                              elif (streamId == 2):
-                                   learning_base = "marcusgrum/learningbase_banana_01"
-                                   if (iterationId == 1):
-                                        suffix2 = suffix1
-                                        suffix3 = suffix1 + "b"
-                                   else:
-                                        suffix2 = suffix1 + "b"
-                                        suffix3 = suffix1 + "b"
-                              else:
-                                   pass
-                         else:
-                              pass
+                    # refine ANNs of machine 1,2,3 to create interim state 1-5
+                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
 
-                         # refine ANNs of machine 1,2,3 to create interim state 1-5
-                         realize_scenario(scenario="refine_knnSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId)+suffix2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, receiver="ReceiverB", sub_process_method="sequential")
-                         realize_scenario(scenario="refine_knnSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId)+suffix2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, receiver="ReceiverB", sub_process_method="sequential")
-                         realize_scenario(scenario="publish_knnSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, receiver="ReceiverB", sub_process_method="sequential")
-                         realize_scenario(scenario="publish_knnSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId+1)+suffix3, receiver="ReceiverB", sub_process_method="sequential")
-
-                         # apply ANNs created and refined at experiment states specified for machine 1,2,3
-                         # ...
+                    # apply ANNs created and refined at experiment states specified for machine 1,2,3
+                    # ...
 
 
 if __name__ == '__main__':

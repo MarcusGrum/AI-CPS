@@ -1,23 +1,14 @@
 version: "2.3"  # the only version where 'runtime' option is supported
 services:
-  knowledge_base:
-    image: marcusgrum/knowledgebase_apple_banana_orange_pump_20
+  learning_base:
+    image: marcusgrum/learningbase_apple_banana_orange_pump_02
     volumes:
        - ai_system:/tmp
     command:
     - sh
     - "-c"
     - |
-      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;
-  activation_base:
-    image: marcusgrum/activationbase_apple_okay_01
-    volumes:
-       - ai_system:/tmp
-    command:
-    - sh
-    - "-c"
-    - |
-      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;
+      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;
   code_base:
     image: marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu
     # Make Docker create the container with NVIDIA Container Toolkit
@@ -27,14 +18,13 @@ services:
     volumes:
        - ai_system:/tmp
     depends_on:
-      - "knowledge_base"
-      - "activation_base"
+      - "learning_base"
     command:
     - sh
     - "-c"
     - |
       rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/apply_knnSolution.py;
+      python3 /tmp/codeBase/create_annSolution.py;
 volumes:
   ai_system:
     external: true

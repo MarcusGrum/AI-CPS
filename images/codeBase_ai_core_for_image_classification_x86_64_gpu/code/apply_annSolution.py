@@ -46,7 +46,7 @@ labels   = ["apple-def","apple-ok",
             "pump-def","pump-ok"]     # default class-labels for example
 model = None
 
-def openKnnSolution():
+def openAnnSolution():
     """
     This function opens a pretrained ANN from the 'knowledgeBase' of docker volume 'ai_system'.
     """
@@ -55,10 +55,10 @@ def openKnnSolution():
     global model
 
     # specify standard path for loading ANN-based solution
-    path = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
+    pathKnowledgeBase = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
     
     # load solution from standard path
-    model = tf.keras.models.load_model(path)
+    model = tf.keras.models.load_model(pathKnowledgeBase)
     
     # show solution summary
     model.summary()
@@ -68,20 +68,20 @@ def openKnnSolution():
     
     return
 
-def applyKnnSolution():
+def applyAnnSolution():
     """
     This function applies the ANN loaded to images from the 'activationBase' of docker volume 'ai_system'.
     """
 
     # specify standard path for loading images from activationBase
-    path = "/tmp/"+sender+"/activationBase/"
+    pathActivationBase = "/tmp/"+sender+"/activationBase/"
 
     # start time measurement (for evaluation purposes)
     start = timeit.default_timer()
 
     # acquire image data from activationBase
     test_batch = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
-    .flow_from_directory(directory=path, target_size=(IMG_SIZE,IMG_SIZE) , shuffle = False)
+    .flow_from_directory(directory=pathActivationBase, target_size=(IMG_SIZE,IMG_SIZE) , shuffle = False)
 
     # calculate predictions for input image/s
     predictions = model.predict(test_batch)
@@ -90,7 +90,7 @@ def applyKnnSolution():
     end = timeit.default_timer()
 
     # store application results at standard path of activationBase
-    with open(path+'currentApplicationResults.txt', 'w') as f:
+    with open(pathActivationBase+'currentApplicationResults.txt', 'w') as f:
         for i in range(len(predictions)):
             mindex = np.argmax(predictions[i])
             output_text = test_batch.filepaths[i] + " -> " + str(labels[mindex])
@@ -114,8 +114,8 @@ def main() -> int:
     For instance, limited raspberry resources can be unleashed and energy can be saved.
     """
     
-    openKnnSolution()
-    applyKnnSolution()
+    openAnnSolution()
+    applyAnnSolution()
     
     return 0
 

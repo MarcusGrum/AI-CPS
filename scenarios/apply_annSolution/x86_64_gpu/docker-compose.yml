@@ -1,4 +1,4 @@
-version: "3.0"
+version: "2.3"  # the only version where 'runtime' option is supported
 services:
   knowledge_base:
     image: marcusgrum/knowledgebase_apple_banana_orange_pump_20
@@ -19,7 +19,11 @@ services:
     - |
       rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;
   code_base:
-    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
+    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu
+    # Make Docker create the container with NVIDIA Container Toolkit
+    # You don't need it if you set 'nvidia' as the default runtime in
+    # daemon.json.
+    runtime: nvidia
     volumes:
        - ai_system:/tmp
     depends_on:
@@ -30,7 +34,7 @@ services:
     - "-c"
     - |
       rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/apply_knnSolution.py;
+      python3 /tmp/codeBase/apply_annSolution.py;
 volumes:
   ai_system:
     external: true

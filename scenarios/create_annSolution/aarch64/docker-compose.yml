@@ -9,15 +9,6 @@ services:
     - "-c"
     - |
       rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;
-  knowledge_base:
-    image: marcusgrum/knowledgebase_apple_banana_orange_pump_01
-    volumes:
-       - ai_system:/tmp
-    command:
-    - sh
-    - "-c"
-    - |
-      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;
   code_base:
     user: root
     image: marcusgrum/codebase_ai_core_for_image_classification_aarch64
@@ -25,13 +16,12 @@ services:
        - ai_system:/tmp
     depends_on:
       - "learning_base"
-      - "knowledge_base"
     command:
     - sh
     - "-c"
     - |
       rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/refine_knnSolution.py;
+      python3 /tmp/codeBase/create_annSolution.py;
 volumes:
   ai_system:
     external: true

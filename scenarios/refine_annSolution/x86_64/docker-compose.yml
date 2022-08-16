@@ -30,7 +30,7 @@ services:
     - "-c"
     - |
       rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/refine_knnSolution.py;
+      python3 /tmp/codeBase/refine_annSolution.py;
 volumes:
   ai_system:
     external: true

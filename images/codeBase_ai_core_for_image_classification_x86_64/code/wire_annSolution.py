@@ -77,12 +77,12 @@ def plotTrainingAndValidationPerformance(epochs, accuracy, val_accuracy, loss, v
     plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.png')
     plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.pdf')
 
-def createKnnSolution():
+def wireAnnSolution():
     """
     This function realizes the following:
-    (1) It creates a new ANN on the base of an architecture specified,
+    (1) It wires a new ANN on the base of an architecture specified,
     (2) it loads training material from the 'learningBase' of docker volume 'ai_system',
-    (3) it carries out training and test routines,
+    (-) -------------------------------------------------,
     (4) it stores training and validation performance and
     (5) it stores the ANN trained at the 'knowledgeBase' of docker volume 'ai_system'.
     """
@@ -91,7 +91,7 @@ def createKnnSolution():
     global model
 
     # epochs are iterations of training and validation of the model
-    epochs = 1
+    epochs = 0
 
     # acquire image data from learningBase
     train_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
@@ -129,7 +129,16 @@ def createKnnSolution():
     
     # compile model by learning context specified
     model.compile(optimizer = opt , loss = 'categorical_crossentropy' , metrics = ["accuracy"])
-
+	
+	# specify standard path for storing ANN-based solution
+    pathKnowledgeBase = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
+    
+    # save solution in hierarchical data-format (HDF5, short h5)
+    model.save(pathKnowledgeBase, save_format="h5")
+    
+    # indicate successful solution storing by CLI output
+    print("...solution has been stored at " + pathKnowledgeBase + " successfully!")
+	
     # train in epochs according to user-input, make epochs_range reusable
     runs = model.fit(x = train_batches, validation_data = valid_batches, epochs = epochs, shuffle = True)
     epochs_range = range(epochs)
@@ -137,15 +146,6 @@ def createKnnSolution():
     # plot the training and validation performance
     plotTrainingAndValidationPerformance(range(epochs), runs.history["accuracy"], runs.history["val_accuracy"], \
                         runs.history["loss"], runs.history["val_loss"])
-
-    # specify standard path for storing ANN-based solution
-    name = "/tmp/"+sender+"/knowledgeBase/currentSolution.h5"
-    
-    # save solution in hierarchical data-format (HDF5, short h5)
-    model.save(name, save_format="h5")
-    
-    # indicate successful solution storing by CLI output
-    print("...solution has been stored at " + name + " successfully!")
     
     return
 
@@ -156,7 +156,7 @@ def main() -> int:
     For instance, limited raspberry resources can be unleashed and energy can be saved.
     """
     
-    createKnnSolution()
+    wireAnnSolution()
     
     return 0
 
