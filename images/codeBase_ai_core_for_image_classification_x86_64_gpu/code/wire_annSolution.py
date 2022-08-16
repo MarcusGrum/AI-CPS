@@ -46,58 +46,18 @@ labels   = ["apple-def","apple-ok",
             "pump-def","pump-ok"]     # default class-labels for example
 model = None
 
-def plotTrainingAndValidationPerformance(epochs, accuracy, val_accuracy, loss, val_loss):
-    """
-    This function creates and stores the (1) accuracy plot and (2) loss plot
-    for training and validation performances and stores them as (a) png and (b) pdf file
-    at the 'learningBase' of docker volume 'ai_system'.
-    """
-    
-    # initialize figure
-    plt.figure(figsize=(15, 15))
-    
-    # characterize accuracy plot
-    plt.subplot(2, 2, 1)
-    plt.plot(epochs, accuracy, label="Training Accuracy")
-    plt.plot(epochs, val_accuracy, label="Validation Accuracy")
-    plt.legend(loc="lower right")
-    plt.title("Training and Validation Accuracy")
-    
-    # characterize loss plot
-    plt.subplot(2, 2, 2)
-    plt.plot(epochs, loss, label="Training Loss")
-    plt.plot(epochs, val_loss, label="Validation Loss")
-    plt.legend(loc="upper right")
-    plt.title("Training and Validation Loss")
-    
-    # indicate performance by showing plot generated (having displays connected)
-    #plt.show()
-    
-    # indicate performance by storing the plot as png and pdf file
-    plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.png')
-    plt.savefig('/tmp/'+sender+'/learningBase/TrainingPerformance.pdf')
-
 def wireAnnSolution():
     """
     This function realizes the following:
     (1) It wires a new ANN on the base of an architecture specified,
-    (2) it loads training material from the 'learningBase' of docker volume 'ai_system',
     (-) -------------------------------------------------,
-    (4) it stores training and validation performance and
+    (-) -------------------------------------------------,
+    (-) ---------------------------------------------- and
     (5) it stores the ANN trained at the 'knowledgeBase' of docker volume 'ai_system'.
     """
     
     # use model that already has been declared initially
     global model
-
-    # epochs are iterations of training and validation of the model
-    epochs = 0
-
-    # acquire image data from learningBase
-    train_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
-    .flow_from_directory(directory = ("/tmp/"+sender+"/learningBase/train"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
-    valid_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
-    .flow_from_directory(directory = ("/tmp/"+sender+"/learningBase/validation"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
 
     # extract images and labels of first batch
     imgs, label = next(train_batches)
@@ -138,14 +98,6 @@ def wireAnnSolution():
     
     # indicate successful solution storing by CLI output
     print("...solution has been stored at " + pathKnowledgeBase + " successfully!")
-	
-    # train in epochs according to user-input, make epochs_range reusable
-    runs = model.fit(x = train_batches, validation_data = valid_batches, epochs = epochs, shuffle = True)
-    epochs_range = range(epochs)
-
-    # plot the training and validation performance
-    plotTrainingAndValidationPerformance(range(epochs), runs.history["accuracy"], runs.history["val_accuracy"], \
-                        runs.history["loss"], runs.history["val_loss"])
     
     return
 

@@ -617,8 +617,6 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
 
 def realize_experiment(numberOfExperiments):
     """
-    - ToDo: Get ANN0
-    - ToDo: Refine ANN on init dataset, too
     - ToDo: KPIs of ANN stored
     - ToDo: Plotting
     """
@@ -671,12 +669,12 @@ def realize_experiment(numberOfExperiments):
 
             for streamId in range(1, 2+1, 1):
                 print("    streamId = " + str(streamId))
-                for iterationId_2 in range(1, 5+1, 1):
+                for iterationId_2 in range(0, 5+1, 1):
                     print("      iterationId_2 = " + str(iterationId_2))
                     if (machineId == 1):
                         if (streamId == 1):
                             learning_base = "marcusgrum/learningbase_banana_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "b"
                             else:
@@ -684,7 +682,7 @@ def realize_experiment(numberOfExperiments):
                                 suffix_3 = suffix_1 + "b"
                         elif (streamId == 2):
                             learning_base = "marcusgrum/learningbase_orange_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "o"
                             else:
@@ -695,7 +693,7 @@ def realize_experiment(numberOfExperiments):
                     elif (machineId == 2):
                         if(streamId == 1):
                             learning_base = "marcusgrum/learningbase_apple_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "a"
                             else:
@@ -703,7 +701,7 @@ def realize_experiment(numberOfExperiments):
                                 suffix_3 = suffix_1 + "a"
                         elif (streamId == 2):
                             learning_base = "marcusgrum/learningbase_orange_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "o"
                             else:
@@ -714,7 +712,7 @@ def realize_experiment(numberOfExperiments):
                     elif (machineId == 3):
                         if(streamId == 1):
                             learning_base = "marcusgrum/learningbase_apple_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "a"
                             else:
@@ -722,7 +720,7 @@ def realize_experiment(numberOfExperiments):
                                 suffix_3 = suffix_1 + "a"
                         elif (streamId == 2):
                             learning_base = "marcusgrum/learningbase_banana_01"
-                            if (iterationId_2 == 1):
+                            if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
                                 suffix_3 = suffix_1 + "b"
                             else:
@@ -734,10 +732,10 @@ def realize_experiment(numberOfExperiments):
                         pass
 
                     # refine ANNs of machine 1,2,3 to create interim state 1-5
-                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
 
                     # apply ANNs created and refined at experiment states specified for machine 1,2,3
                     # ...
