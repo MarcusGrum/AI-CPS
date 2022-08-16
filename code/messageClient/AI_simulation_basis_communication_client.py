@@ -110,7 +110,7 @@ def build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, act
      """
 
      # if architecture = 'x86_64'
-     if (hostArch == 'x86_64'):
+     if (hostArch == 'aarch64') or (hostArch == 'x86_64') or  (hostArch == 'x86_64_gpu'):
           with open(logDirectory+'/'+sender+'-docker-file', 'w') as f:
                f.write('# syntax=docker/dockerfile:1'+'\n')
                f.write('FROM busybox'+'\n')
@@ -523,8 +523,7 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
      # If new knowledgeBase needs to be published to docker's hub, when create or refine scenarios have been finalized:
      if (scenario == 'publish_knnSolution'):
           # 1. specify docker file for knowledgeBase (for preparing publication to docker's hub)
-          build_docker_file_for_publikation_at_dockerhub(
-               scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+          build_docker_file_for_publikation_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
           if (sub_process_method == "sequential"):
                # 2. copy ANN to dockers current build context folder (for preparing publication to docker's hub)
