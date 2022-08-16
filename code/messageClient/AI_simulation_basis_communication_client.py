@@ -540,7 +540,7 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                with open(logDirectory+"/"+sender+"_stdout.txt", "wb") as out, open(logDirectory+"/"+sender+"_stderr.txt", "wb") as err:
                     subprocess.Popen("docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --file "+logDirectory+"/"+sender+"-docker-file --tag marcusgrum/knowledgebase_"+sender+":latest --push  "+logDirectory+"/", shell=True, stdout=out, stderr=err)
 
-     if (scenario == 'publish_knnSolution'):
+     if (scenario == 'realize_knnExperiment'):
           realize_experiment(numberOfExperiments=2)
 
 
