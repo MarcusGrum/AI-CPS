@@ -640,7 +640,7 @@ def realize_experiment(numberOfExperiments):
                     learning_base = "marcusgrum/learningbase_apple_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "a"
+                        suffix_1 = suffix_0 + "_a"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
@@ -648,7 +648,7 @@ def realize_experiment(numberOfExperiments):
                     learning_base = "marcusgrum/learningbase_banana_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "b"
+                        suffix_1 = suffix_0 + "_b"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
@@ -656,7 +656,7 @@ def realize_experiment(numberOfExperiments):
                     learning_base = "marcusgrum/learningbase_orange_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "o"
+                        suffix_1 = suffix_0 + "_o"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
