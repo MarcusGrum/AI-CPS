@@ -87,7 +87,7 @@ def refineKnnSolution():
     global model
 
     # epochs are iterations of training and validation of the model
-    epochs = 10
+    epochs = 1
 
     # acquire image data from learningBase
     train_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
