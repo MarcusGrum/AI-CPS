@@ -663,8 +663,13 @@ if __name__ == '__main__':
      hostName = os.uname()[1]
      hostArch = platform.machine()
      logDirectory = "./logs"  # = $PWD/logs
-     if ("ailabnode" in hostName):
-          hostArch = hostArch + "_gpu"
+     try:
+        subprocess.check_output('nvidia-smi')
+        print('Nvidia GPU detected!')
+        hostArch = hostArch + "_gpu"
+     except Exception:
+        print('No Nvidia GPU in system!')
+        hostArch = hostArch + ""
      if not os.path.exists(logDirectory):
           os.makedirs(logDirectory)
 
