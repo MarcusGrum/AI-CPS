@@ -756,6 +756,9 @@ def realize_experiment(numberOfExperiments):
     - ToDo: Plotting
     """
 
+    maxIterationsInPhase1 = 5
+    maxIterationsInPhase2 = 5
+
     for experimentId in range(1, numberOfExperiments+1, 1):
         print("experimentId = " + str(experimentId))
         for machineId in range(1, 3+1, 1):
@@ -768,7 +771,7 @@ def realize_experiment(numberOfExperiments):
             # wire and train ANNs by refinement to create initial state (while having interim states at preparation) and publish it to docker's hub
             realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
-            for iterationId_1 in range(1, 5+1, 1):
+            for iterationId_1 in range(1, maxIterationsInPhase1+1, 1):
                 print("    iterationId_1 = " + str(iterationId_1))
                 if (machineId == 1):
                     learning_base = "marcusgrum/learningbase_apple_01"
@@ -815,7 +818,7 @@ def realize_experiment(numberOfExperiments):
 
             for streamId in range(1, 2+1, 1):
                 print("    streamId = " + str(streamId))
-                for iterationId_2 in range(0, 5+1, 1):
+                for iterationId_2 in range(0, maxIterationsInPhase2+1, 1):
                     print("      iterationId_2 = " + str(iterationId_2))
                     if (machineId == 1):
                         if (streamId == 1):
@@ -884,14 +887,14 @@ def realize_experiment(numberOfExperiments):
                     realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
                     
                     # evaluate trained / refined state of current iteration with apple dataset
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_a", receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
                     # evaluate trained / refined state of current iteration with banana dataset
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_b", receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"evaluateWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
                     # evaluate trained / refined state of current iteration with orange dataset
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_o", receiver="ReceiverB", sub_process_method="sequential")
-                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_o", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
 
 if __name__ == '__main__':
      """
