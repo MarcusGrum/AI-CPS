@@ -59,9 +59,6 @@ def wireAnnSolution():
     # use model that already has been declared initially
     global model
 
-    # extract images and labels of first batch
-    imgs, label = next(train_batches)
-
     # specify ANN architecture
     model = Sequential([
     

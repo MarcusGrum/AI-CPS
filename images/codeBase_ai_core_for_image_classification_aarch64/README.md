@@ -5,10 +5,19 @@
 
 1. Build docker image from Dockerfile specified.
 
-    ```
-    docker build --tag codebase_ai_core_for_image_classification_aarch64 .
-    ```
+	If you base this image on content of the current directory, execute the following:
 
+    ```
+    docker build --tag marcusgrum/codebase_ai_core_for_image_classification_aarch64 .
+    ```
+	
+	Since you base this image on content outside the current dockerfile context,	
+	switch to parent repository path to execute the following instead:
+	
+	```
+	docker build --tag marcusgrum/codebase_ai_core_for_image_classification_aarch64:latest -f ./images/codebase_ai_core_for_image_classification_aarch64/Dockerfile .
+	```
+	
 1. Have a look on the image created.    
     
     ```

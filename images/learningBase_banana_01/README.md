@@ -7,12 +7,14 @@ This image contains all banana data from 'fruits-fresh-and-rotten-fruits' datase
 ### Build local docker image manually with `Dockerfile`.
 
 1. Build docker image from Dockerfile specified.
-
+	
+	If you base this image on content of the current directory, execute the following:
+	
     ```
     docker build --tag marcusgrum/learningbase_banana_01:latest .
     ```
 	
-	If you base this image on content outside the current dockerfile context,	
+	Since you base this image on content outside the current dockerfile context,	
 	switch to parent repository path to execute the following instead:
 	
 	```

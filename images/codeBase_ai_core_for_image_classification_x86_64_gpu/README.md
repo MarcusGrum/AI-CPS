@@ -5,9 +5,18 @@
 
 1. Build docker image from Dockerfile specified.
 
+    If you base this image on content of the current directory, execute the following:
+
     ```
-    docker build --tag codebase_ai_core_for_image_classification_x86_64_gpu .
+    docker build --tag marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu .
     ```
+	
+	Since you base this image on content outside the current dockerfile context,	
+	switch to parent repository path to execute the following instead:
+	
+	```
+	docker build --tag marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu:latest -f ./images/codebase_ai_core_for_image_classification_x86_64_gpu/Dockerfile .
+	```
 
 1. Have a look on the image created.    
     

@@ -488,6 +488,138 @@ def build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, a
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
+def build_docker_compose_file_for_evaluate_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+     """
+     This functions builds docker-compose file for scenario called evaluate_annSolution
+     and considers variables from message, here.
+     The file is stored at current working directory.
+     """
+
+     # if architecture = 'x86_64'
+     if (hostArch == 'x86_64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.0"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  learning_base_'+sender+':\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
+               f.write('    image: ' + learning_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/' + sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  knowledge_base_'+sender+':\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
+               f.write('    image: ' + knowledge_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/' + sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  code_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    depends_on:'+'\n')
+               f.write('      - "learning_base_'+sender+'"'+'\n')
+               f.write('      - "knowledge_base_'+sender+'"'+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/evaluate_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
+     # if architecture = 'x86_64_gpu'
+     if (hostArch == 'x86_64_gpu'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "2.3"  # the only version where "runtime" option is supported'+'\n')
+               f.write('services:'+'\n')
+               f.write('  learning_base_'+sender+':\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
+               f.write('    image: ' + learning_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/' + sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  knowledge_base_'+sender+':\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
+               f.write('    image: ' + knowledge_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/' + sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  code_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_x86_64_gpu !!!!
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    # Make Docker create the container with NVIDIA Container Toolkit'+'\n')
+               f.write('    # You do not need it if you set nvidia as the default runtime in'+'\n')
+               f.write('    # daemon.json.'+'\n')
+               f.write('    runtime: nvidia'+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    depends_on:'+'\n')
+               f.write('      - "learning_base_'+sender+'"'+'\n')
+               f.write('      - "knowledge_base_'+sender+'"'+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/evaluate_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
+     # if architecture = 'aarch64'
+     if (hostArch == 'aarch64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.9"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  learning_base_'+sender+':\n') # e.g. marcusgrum/learningbase_apple_banana_orange_pump_02
+               f.write('    image: ' + learning_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/learningBase/ && mkdir -p /tmp/' + sender+'/learningBase/ && cp -r /learningBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  knowledge_base_'+sender+':\n') # e.g. marcusgrum/knowledgebase_apple_banana_orange_pump_01
+               f.write('    image: ' + knowledge_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/' + sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  code_base_'+sender+':\n')
+               f.write('    user: root'+'\n') # e.g. marcusgrum/codebase_ai_core_for_image_classification_aarch64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    depends_on:'+'\n')
+               f.write('      - "learning_base_'+sender+'"'+'\n')
+               f.write('      - "knowledge_base_'+sender+'"'+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/evaluate_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
 def build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
      This functions builds docker-compose file for scenario called wire_annSolution
@@ -572,9 +704,11 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
           build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
      if (scenario == 'wire_annSolution'):
           build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'evaluate_annSolution'):
+          build_docker_compose_file_for_evaluate_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
 
      # realize instructions from messages by running docker-compose file created at machine-specific working directory
-     if (scenario == 'apply_annSolution') or (scenario == 'create_annSolution') or (scenario == 'refine_annSolution') or (scenario == 'wire_annSolution'):
+     if (scenario == 'apply_annSolution') or (scenario == 'create_annSolution') or (scenario == 'refine_annSolution') or (scenario == 'wire_annSolution') or (scenario == 'evaluate_annSolution'):
 
           if (sub_process_method == "sequential"):
                # a) by subprocess.run() or by subprocess.call() [depreciated]
@@ -617,7 +751,8 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
 
 def realize_experiment(numberOfExperiments):
     """
-    - ToDo: KPIs of ANN stored
+    This function realizes experiment on continual ANN training and testing on switching datasets.
+    Its request arrives from communication client and it manages the corresponding AI reguests.
     - ToDo: Plotting
     """
 
@@ -627,9 +762,10 @@ def realize_experiment(numberOfExperiments):
             print("  machineId = " + str(machineId))
 
             # Phase 1 - Working on focus dataset
-            ####################################
+            # (from initial state to switching state)
+            #########################################
 
-            # wire and train ANNs by refinement to create initial state while having interim states at preparation
+            # wire and train ANNs by refinement to create initial state (while having interim states at preparation) and publish it to docker's hub
             realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             for iterationId_1 in range(1, 5+1, 1):
@@ -660,12 +796,22 @@ def realize_experiment(numberOfExperiments):
                         suffix_1 = suffix_1
                 else:
                     pass
-                # refine ANNs of machine 1,2,3 to create interim state 1-5
+                # train wired ANNs by refinement to create switching state (while having interim states at preparation) and publish it to docker's hub
                 realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
                 realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
+                # evaluate wired state before first learning iteration with apple, banana and orange dataset
+                if (iterationId_1==1):
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
+                # evaluate trained / refined state of current iteration with apple, banana and orange dataset
+                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
 
             # Phase 2 - Working on new dataset
-            ##################################
+            # (from switching state to final state)
+            #######################################
 
             for streamId in range(1, 2+1, 1):
                 print("    streamId = " + str(streamId))
@@ -731,15 +877,21 @@ def realize_experiment(numberOfExperiments):
                     else:
                         pass
 
-                    # refine ANNs of machine 1,2,3 to create interim state 1-5
+                    # train ANNs of phase 1 by refinement to create final state (while having interim states) and publish it to docker's hub
                     realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
                     realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
                     realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
                     realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
-
-                    # apply ANNs created and refined at experiment states specified for machine 1,2,3
-                    # ...
-
+                    
+                    # evaluate trained / refined state of current iteration with apple dataset
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_a", receiver="ReceiverB", sub_process_method="sequential")
+                    # evaluate trained / refined state of current iteration with banana dataset
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"evaluateWith_b", receiver="ReceiverB", sub_process_method="sequential")
+                    # evaluate trained / refined state of current iteration with orange dataset
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_o", receiver="ReceiverB", sub_process_method="sequential")
+                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evaluateWith_o", receiver="ReceiverB", sub_process_method="sequential")
 
 if __name__ == '__main__':
      """
