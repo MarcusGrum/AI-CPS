@@ -28,7 +28,7 @@ import numpy as np
 import sys
 import tensorflow as tf
 import timeit
-from os import system, name
+from os import system, name, walk
 from tensorflow import keras
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D , MaxPool2D , Flatten , Dropout 
@@ -103,6 +103,9 @@ def evaluateAnnSolution():
     valid_batches = ImageDataGenerator(preprocessing_function = tf.keras.applications.xception.preprocess_input) \
     .flow_from_directory(directory = ("/tmp/"+sender+"/learningBase/validation"), target_size = (IMG_SIZE,IMG_SIZE), classes = labels)
 
+    numberOfTrainFiles = sum([len(files) for r, d, files in walk("/tmp/"+sender+"/learningBase/train")])
+    numberOfTestFiles = sum([len(files) for r, d, files in walk("/tmp/"+sender+"/learningBase/validation")])
+
     # extract images and label of first batch
     imgs, label = next(train_batches)
 
@@ -124,10 +127,14 @@ def evaluateAnnSolution():
         f.write(str(evaluation_trainingResults[0]))
     with open(name+'training_accuracy.txt', 'w') as f:
         f.write(str(evaluation_trainingResults[1]))
+    with open(name+'training_n.txt', 'w') as f:
+        f.write(str(numberOfTrainFiles))
     with open(name+'testing_loss.txt', 'w') as f:
         f.write(str(evaluation_testingResults[0]))
     with open(name+'testing_accuracy.txt', 'w') as f:
         f.write(str(evaluation_testingResults[1]))
+    with open(name+'testing_n.txt', 'w') as f:
+        f.write(str(numberOfTestFiles))
     
     # indicate successful solution storing by CLI output
     print("...solution evaluation has been stored at " + name + " successfully!")
@@ -138,7 +145,7 @@ def openAnnSolution():
     """
     This function opens a pretrained ANN from the 'knowledgeBase' of docker volume 'ai_system'.
     """
-        
+    
     # use global value model (write)
     global model
 
