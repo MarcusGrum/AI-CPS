@@ -786,6 +786,7 @@ def realize_experiment(numberOfExperiments):
     """
     This function realizes experiment on continual ANN training and testing on switching datasets.
     Its request arrives from communication client and it manages the corresponding AI reguests.
+    - ToDo: Collecting KPIs
     - ToDo: Plotting
     """
 
@@ -798,6 +799,10 @@ def realize_experiment(numberOfExperiments):
     numberOfKPIs = 3 # 0 - accuracies, 1 - losses, 2 - n
     trainingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
     testingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
+    
+    # storing and loading these files
+    # trainingKPIs.tofile(logDirectory+'/trainingKPIs.csv',sep=',',format='%10.5f')
+    # trainingKPIsloaded = numpy.fromfile(logDirectory+'/trainingKPIs.csv',sep=',',dtype=float).reshape((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
 
     # access KPIs by...
     #trainingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = 4.3
