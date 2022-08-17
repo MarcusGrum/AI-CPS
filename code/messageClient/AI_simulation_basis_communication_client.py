@@ -749,15 +749,28 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
      if (scenario == 'realize_annExperiment'):
           realize_experiment(numberOfExperiments=2)
 
-def collect_KPIs(trainingKPIs, testingKPIs, containerName, dim_1, dim_2, dim_3):
+def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
     """
-    This function collects KPIs from containers
-    trainingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = 4.3
-    testingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = 4.3
+    This function collects KPIs from containers and copies them to docker's current build context folder.
+    From here, these may be accessed and can be mapped to current KPI collection.
+    The current collection is stored at log directory.
+    Its individual elements can be accessed with dim_1, dim_2, dim_3 and dim_4 by:
+    - trainingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = value
+    - testingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = value
     - dim_4 -> 0 - accuracies, 1 - losses, 2 - n
     """
 
-    path = "/var/lib/docker/volumes/ai_system/_data/"+containerName+"/learningBase/"
+    # copy KPIs to dockers current build context folder (for preparing analysis or publication to docker's hub)
+    subprocess.run("docker run --rm -v $PWD/logs:/host -v ai_system:/ai_system -w /ai_system busybox" + 
+                    " cp /ai_system/"+sender+"/learningBase/training_accuracy.txt /host/"+sender+"_training_accuracy" + 
+                    " cp /ai_system/"+sender+"/learningBase/training_loss.txt /host/"+sender+"_training_loss" + 
+                    " cp /ai_system/"+sender+"/learningBase/training_n.txt /host/"+sender+"_training_n" + 
+                    " cp /ai_system/"+sender+"/learningBase/testing_accuracy.txt /host/"+sender+"_testing_accuracy" + 
+                    " cp /ai_system/"+sender+"/learningBase/testing_loss.txt /host/"+sender+"_testing_loss" + 
+                    " cp /ai_system/"+sender+"/learningBase/testing_n.txt /host/"+sender+"_testing_n",
+                    shell=True)
+
+    path = logDirectory + "/"+sender+"_"
 
     f = open(path + "training_accuracy.txt", "r")
     trainingKPIs[dim_1][dim_2][dim_3][0] = float(f.read())
@@ -777,6 +790,7 @@ def collect_KPIs(trainingKPIs, testingKPIs, containerName, dim_1, dim_2, dim_3):
     f = open(path + "testing_n.txt", "r")
     testingKPIs[dim_1][dim_2][dim_3][2] = float(f.read())
 
+    # store current KPI collection
     trainingKPIs.tofile(logDirectory+'/trainingKPIs.csv',sep=',',format='%10.5f')
     testingKPIs.tofile(logDirectory+'/testingKPIs.csv',sep=',',format='%10.5f')
 
