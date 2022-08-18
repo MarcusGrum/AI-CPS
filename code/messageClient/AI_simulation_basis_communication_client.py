@@ -829,7 +829,7 @@ def realize_experiment(numberOfExperiments):
 
     numberOfKPIs = 3 # 0 - accuracies, 1 - losses, 2 - n
     trainingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
-    testingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
+    testingKPIs  = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
 
     for experimentId in range(1, numberOfExperiments+1, 1):
         print("experimentId = " + str(experimentId))
@@ -884,11 +884,11 @@ def realize_experiment(numberOfExperiments):
                     datasetId=2; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=machineId-1+datasetId)
                 # evaluate trained / refined state of current iteration with apple, banana and orange dataset
                 realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
-                datasetId=0; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=machineId-1+datasetId)
+                datasetId=0; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=machineId-1+datasetId)
                 realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
-                datasetId=1; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=machineId-1+datasetId)
+                datasetId=1; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=machineId-1+datasetId)
                 realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
-                datasetId=2; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=machineId-1+datasetId)
+                datasetId=2; trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=machineId-1+datasetId)
 
             # Phase 2 - Working on new dataset
             # (from switching state to final state)
