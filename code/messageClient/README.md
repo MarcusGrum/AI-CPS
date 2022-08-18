@@ -32,7 +32,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 #### Proceeding
 
-<img src="../../documentation/ExperimentProceeding.png" height="1000" />
+<img src="../../documentation/ExperimentProceeding.png" height="600" />
 
 #### KPIs
 
