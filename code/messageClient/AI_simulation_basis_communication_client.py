@@ -789,6 +789,8 @@ def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
 
     path = logDirectory + "/"+sender+"_"
 
+    print('          current dimensions:' + str(dim_1) + str(dim_2) + str(dim_3))
+
     f = open(path + "training_accuracy.txt", "r")
     trainingKPIs[dim_1][dim_2][dim_3][0] = float(f.read())
 
@@ -839,12 +841,12 @@ def realize_experiment(maxNumberOfExperiments):
             # Phase 1 - Working on focus dataset
             # (from initial state to switching state)
             #########################################
-
+            print("    enterint phase 1...")
             # wire and train ANNs by refinement to create initial state (while having interim states at preparation) and publish it to docker's hub
             realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             for iterationId_1 in range(1, maxIterationsInPhase1+1, 1):
-                print("    iterationId_1 = " + str(iterationId_1))
+                print("      iterationId_1 = " + str(iterationId_1))
                 if (machineId == 1):
                     learning_base = "marcusgrum/learningbase_apple_01"
                     if (iterationId_1 == 1):
@@ -882,9 +884,9 @@ def realize_experiment(maxNumberOfExperiments):
                     # maybe publish evaluation containers, too?
                     # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
                     for streamId in range(1, maxStreams+1, 1):
-                        print("    streamId = " + str(streamId))
+                        print("        streamId = " + str(streamId))
                         for datasetId in range(0, maxValidationSets, 1):
-                            print("      datasetId = " + str(datasetId))
+                            print("          datasetId = " + str(datasetId))
                             trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                             trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                             trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
@@ -895,9 +897,9 @@ def realize_experiment(maxNumberOfExperiments):
                 # maybe publish evaluation containers, too?
                 # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
                 for streamId in range(1, maxStreams+1, 1):
-                    print("    streamId = " + str(streamId))
+                    print("        streamId = " + str(streamId))
                     for datasetId in range(0, maxValidationSets, 1):
-                        print("      datasetId = " + str(datasetId))
+                        print("          datasetId = " + str(datasetId))
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
@@ -906,11 +908,11 @@ def realize_experiment(maxNumberOfExperiments):
             # Phase 2 - Working on new dataset
             # (from switching state to final state)
             #######################################
-
+            print("    entering phase 2...")
             for streamId in range(1, maxStreams+1, 1):
-                print("    streamId = " + str(streamId))
+                print("      streamId = " + str(streamId))
                 for iterationId_2 in range(0, maxIterationsInPhase2+1, 1):
-                    print("      iterationId_2 = " + str(iterationId_2))
+                    print("        iterationId_2 = " + str(iterationId_2))
                     if (machineId == 1):
                         if (streamId == 1):
                             learning_base = "marcusgrum/learningbase_banana_01"
@@ -982,7 +984,7 @@ def realize_experiment(maxNumberOfExperiments):
                     # maybe publish evaluation containers, too?
                     # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
                     for datasetId in range(0, maxValidationSets, 1):
-                        print("        datasetId = " + str(datasetId))
+                        print("          datasetId = " + str(datasetId))
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
