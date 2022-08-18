@@ -17,6 +17,23 @@ import os
 import platform
 import numpy
 
+def load_data_fromfile(path):
+    """
+    This functions loads csv data from the 'path' and returns it.
+    Remember, the data returned needs to be reshaped because it is flat.
+    E.g. by data.reshape((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
+    """
+
+    data = numpy.fromfile(path,sep=',',dtype=float)
+
+    return data
+
+def save_data_tofile(numpyArray, path):
+    """
+    This functions saves the data of variable 'numpyArray to the 'path'.
+    """
+
+    numpyArray.tofile(path,sep=',',format='%10.5f')
 
 def load_data_from_CsvFile(path):
     """
@@ -791,8 +808,8 @@ def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
     testingKPIs[dim_1][dim_2][dim_3][2] = float(f.read())
 
     # store current KPI collection
-    trainingKPIs.tofile(logDirectory+'/trainingKPIs.csv',sep=',',format='%10.5f')
-    testingKPIs.tofile(logDirectory+'/testingKPIs.csv',sep=',',format='%10.5f')
+    save_data_tofile(numpyArray=trainingKPIs, path=logDirectory+'/trainingKPIs.csv')
+    save_data_tofile(numpyArray=testingKPIs, path=logDirectory+'/testingKPIs.csv')
 
     return trainingKPIs, testingKPIs
 
@@ -813,14 +830,6 @@ def realize_experiment(numberOfExperiments):
     numberOfKPIs = 3 # 0 - accuracies, 1 - losses, 2 - n
     trainingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
     testingKPIs = numpy.zeros((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
-    
-    # storing and loading these files
-    # trainingKPIs.tofile(logDirectory+'/trainingKPIs.csv',sep=',',format='%10.5f')
-    # trainingKPIsloaded = numpy.fromfile(logDirectory+'/trainingKPIs.csv',sep=',',dtype=float).reshape((numberOfExperiments, maxIterationsInPhase1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, numberOfKPIs))
-
-    # access KPIs by...
-    #trainingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = 4.3
-    #testingKPIs[experimentId-1][iterationId_1-1+iterationId_2][machineId-1+datasetId+streamId-1][kindOfKPI] = 4.3
 
     for experimentId in range(1, numberOfExperiments+1, 1):
         print("experimentId = " + str(experimentId))

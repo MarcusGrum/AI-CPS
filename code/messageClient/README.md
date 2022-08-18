@@ -1,4 +1,4 @@
-# Message Client
+# Dealing with the python message client
 
 This script initiates the communication client and manages the corresponding AI reguests.
 
