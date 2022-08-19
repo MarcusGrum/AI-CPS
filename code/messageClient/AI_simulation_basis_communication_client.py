@@ -17,11 +17,25 @@ import os
 import platform
 import numpy
 
-#import experiment01
+# import experiments
 import sys
 sys.path.insert(0, '../experiments')
 import experiment01
 
+# specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
+global hostName, hostArch, logDirectory
+hostName = os.uname()[1]
+hostArch = platform.machine()
+logDirectory = "./logs"  # = $PWD/logs
+try:
+    subprocess.check_output('nvidia-smi')
+    print('Nvidia GPU detected!')
+    hostArch = hostArch + "_gpu"
+except Exception:
+    print('No Nvidia GPU in system!')
+    hostArch = hostArch + ""
+if not os.path.exists(logDirectory):
+    os.makedirs(logDirectory)
 
 def load_data_fromfile(path):
     """
@@ -778,19 +792,6 @@ if __name__ == '__main__':
      and manages the corresponding AI reguests.
      - ToDo: Pull images for having most recent updates and having the containers at all...
      """
-     global hostName, hostArch, logDirectory
-     hostName = os.uname()[1]
-     hostArch = platform.machine()
-     logDirectory = "./logs"  # = $PWD/logs
-     try:
-        subprocess.check_output('nvidia-smi')
-        print('Nvidia GPU detected!')
-        hostArch = hostArch + "_gpu"
-     except Exception:
-        print('No Nvidia GPU in system!')
-        hostArch = hostArch + ""
-     if not os.path.exists(logDirectory):
-          os.makedirs(logDirectory)
 
      # specify client for messaging
      client = mqtt.Client()
