@@ -6,30 +6,40 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 ## Getting-Started
 
+### ...via message client remotely
+
 1. Start the `message broker`. Further details can be found at the corresponding `Readme.md`.
 
 1. Start the `messaging client` by
 
     ```
-    python3 AI_simulation_basis_communication_client.py
+    python3 ../messageClient/AI_simulation_basis_communication_client.py
     ```
 
-1. Initiate a request, which for instance can come from an Industry 4.0 production system, a modeling software or manually.
+1. Initiate `realize_annExperiment` request, which for instance can come from an Industry 4.0 production system, a modeling software or manually.
 
-	```
+    ```
     mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=realize_annExperiment, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "localhost" -p 1883
     ```
 
-## AI Requests
+### ...manually
 
-### 1. wire_annSolution
+1. Start the script by
 
-### 2. create_annSolution
+    ```
+    python3 experiment01.py
+    ```
 
-### 3. refine_annSolution
+## Experiments
 
-### 4. apply_annSolution
+### Experiment01
 
-### 5. evaluate_annSolution
+#### Proceeding
 
-### 6. realize_annExperiment
+<img src="../../documentation/ExperimentProceeding.png" height="600" />
+
+#### KPIs
+
+KPIs collected by the experiment can be found as follows:
+
+<img src="../../documentation/ExperimentKpiCollection.png" height="600" />
