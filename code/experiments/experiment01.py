@@ -1,6 +1,7 @@
 """
-A little script to serve as communication client within the CoNM environment.
-When requested, it initiates the corresponding AI activation via docker compose files.
+A little script to realize an experiment,
+which is either started by communication client within the CoNM environment or manually.
+It realizes experiments on continual ANN training and testing on switching datasets.
 Copyright (c) 2022 Marcus Grum
 """
 
@@ -18,9 +19,14 @@ import platform
 import numpy
 import matplotlib.pyplot as plt
 
+# import functions for experiment realization
 import sys
 sys.path.insert(0, '../messageClient')
 import AI_simulation_basis_communication_client as aiClient
+
+# specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
+global logDirectory
+logDirectory = "./../messageClient/logs"
 
 def load_data_fromfile(path):
     """
@@ -172,9 +178,6 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
     (3) overall plots averaging the same types of averaged experiment runs
         (Bias / Manipulation / Baseline)
     """
-
-    global logDirectory
-    logDirectory = "./../messageClient/logs"
 
     # 0 - accuracies, 1 - losses, 2 - n
     trainingKPIs = load_data_fromfile(path=logDirectory+'/trainingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
@@ -567,7 +570,7 @@ def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
 
 def realize_experiment():
     """
-    This function realizes experiment on continual ANN training and testing on switching datasets.
+    This function realizes experiments on continual ANN training and testing on switching datasets.
     Its request arrives from communication client and it manages the corresponding AI reguests.
     """
 
@@ -596,8 +599,8 @@ def realize_experiment():
             #########################################
             if verbose : print("      enterint phase 1...")
             # wire and train ANNs by refinement to create initial state (while having interim states at preparation) and publish it to docker's hub
-#            aiClient.realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
-#            aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+##            aiClient.realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+##            aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             for iterationId_1 in range(1, maxIterationsInPhase1+1, 1):
                 print("        iterationId_1 = " + str(iterationId_1))
                 if (machineId == 1):
