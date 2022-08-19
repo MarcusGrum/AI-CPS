@@ -877,35 +877,45 @@ def realize_experiment(maxNumberOfExperiments):
                 # train wired ANNs by refinement to create switching state (while having interim states at preparation) and publish it to docker's hub
 ##                realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
 ##                realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
-                # evaluate wired state before first learning iteration with apple, banana and orange dataset
+                
+                # carry out testing cases for initial testing of wired ANN
                 if (iterationId_1==1):
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
-                    # maybe publish evaluation containers, too?
-                    # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
                     for streamId in range(1, maxStreams+1, 1):
                         print("          streamId = " + str(streamId))
                         for datasetId in range(0, maxValidationSets, 1):
                             print("            datasetId = " + str(datasetId))
-                            trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                            trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                            trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                # evaluate trained / refined state of current iteration with apple, banana and orange dataset
-#                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
-#                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
-#                realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
-                # maybe publish evaluation containers, too?
-                # ...
-                # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
+                            if (datasetId == 0):
+                                sufsuffix_0 = "_evalWith_a"
+                            elif (datasetId == 1):
+                                sufsuffix_0 = "_evalWith_b"
+                            elif (datasetId == 2):
+                                sufsuffix_0 = "_evalWith_o"
+                            else:
+                                pass
+                            # evaluate wired state before first learning iteration with apple, banana and orange dataset
+#                           realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+sufsuffix_0, receiver="ReceiverB", sub_process_method="sequential")
+                            # maybe publish evaluation containers, too?
+                            # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
+                            trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0+sufsuffix_0, dim_1=experimentId-1, dim_2=iterationId_1-1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
+                # carry out testing cases
                 for streamId in range(1, maxStreams+1, 1):
                     print("          streamId = " + str(streamId))
                     for datasetId in range(0, maxValidationSets, 1):
                         print("            datasetId = " + str(datasetId))
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-            
+                        if (datasetId == 0):
+                            sufsuffix_0 = "_evalWith_a"
+                        elif (datasetId == 1):
+                            sufsuffix_0 = "_evalWith_b"
+                        elif (datasetId == 2):
+                            sufsuffix_0 = "_evalWith_o"
+                        else:
+                            pass
+                        # evaluate trained / refined state of current iteration with apple, banana and orange dataset
+#                       realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+sufsuffix_0, receiver="ReceiverB", sub_process_method="sequential")
+                        # maybe publish evaluation containers, too?
+                        # ...
+                        # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
+                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1+sufsuffix_0, dim_1=experimentId-1, dim_2=iterationId_1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
 
             # Phase 2 - Working on new dataset
             # (from switching state to final state)
@@ -979,19 +989,24 @@ def realize_experiment(maxNumberOfExperiments):
 ##                    realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2)+suffix_2, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
 ##                    realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, receiver="ReceiverB", sub_process_method="sequential")
                     
-                    # evaluate trained / refined state of current iteration with apple, banana and orange dataset
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_a", receiver="ReceiverB", sub_process_method="sequential")
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_banana_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_b", receiver="ReceiverB", sub_process_method="sequential")
-#                    realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_orange_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_o", receiver="ReceiverB", sub_process_method="sequential")
-                    # maybe publish evaluation containers, too?
-                    # ...
-                    # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
+                    # carry out testing cases
                     for datasetId in range(0, maxValidationSets, 1):
                         print("            datasetId = " + str(datasetId))
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_a", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_b", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+"_evalWith_o", dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
-    
+                        if (datasetId == 0):
+                            sufsuffix_0 = "_evalWith_a"
+                        elif (datasetId == 1):
+                            sufsuffix_0 = "_evalWith_b"
+                        elif (datasetId == 2):
+                            sufsuffix_0 = "_evalWith_o"
+                        else:
+                            pass
+                        # evaluate trained / refined state of current iteration with apple, banana and orange dataset
+#                       realize_scenario(scenario="evaluate_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="marcusgrum/learningbase_apple_01", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+sufsuffix_0, receiver="ReceiverB", sub_process_method="sequential")
+                        # maybe publish evaluation containers, too?
+                        # ...
+                        # collect KPIs and take care for adequate duplication for redundant runs (e.g. phase 1 of AB and AO)
+                        trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+sufsuffix_0, dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
+                        
     # create a visual overview over all experiment runs
     # ...
 
