@@ -506,7 +506,7 @@ The third CLI represents a machine that is activated by messages in order to rea
 
 1. Release one of the remote requests shown before and face AI case realization.
 
-#### C) Submit ANN requests from remote
+### C) Submit ANN requests from remote
 
 1. Initiate example `apply_knnSolution` from remote CLI:
 
