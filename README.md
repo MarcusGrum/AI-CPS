@@ -65,7 +65,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 1. Test your architecture by `uname -a`.
 
-### 1.2) Set up any kind of linux-based system
+#### 1.2) Set up any kind of linux-based system
 
 Please follow installation details of [AiLab Installation Guide](https://github.com/MarcusGrum/AI-Lab).
 This shows the installation of numerous of the required tools.
@@ -231,9 +231,9 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     docker exec 37eb7158877c python3 /home/ubuntu/knowledgeBases/tensorflowWorkDir/testScript.py
     ``` 
 
-### 3.2) Set up tensorflow at mac
+#### 3.2) Set up tensorflow at mac
 
-#### Use tensorflow container to run in an interactive bash at mac    
+##### Use tensorflow container to run in an interactive bash at mac    
     
 1. Start container.   
     
@@ -250,7 +250,7 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     
     For further information, have a look on [Access an NVIDIA GPU Information Section](https://docs.docker.com/engine/reference/commandline/run/#access-an-nvidia-gpu).
     
-#### Use tensorflow container to run a small program at mac
+##### Use tensorflow container to run a small program at mac
 
 1. Run tensorflow docker container and execute a small example program.
 
@@ -258,7 +258,7 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     docker run -it tensorflow/tensorflow python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     ```
 
-#### Use tensorflow container to run a script at mac
+##### Use tensorflow container to run a script at mac
 
 1. Run tensorflow docker container and execute a small example script.
 
@@ -279,7 +279,7 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     python3 ./testScript.py
     ```
     
-### 3.3) Build individual tensorflow containers and deploy them
+#### 3.3) Build individual tensorflow containers and deploy them
 
 1. Find useful links, here:
 
@@ -528,6 +528,10 @@ The third CLI represents a machine that is activated by messages in order to rea
 
 ## Application examples
 
+### Realize experiments
+
+Examples can be found at this repository at `./code/experiments`.
+
 ### EV3-Based Industry4.0-Production-System
 
 For instance, you can base an entire cyber-physical production system, 
@@ -545,7 +549,3 @@ such as the Research and Application Center Industry 4.0 (RACI),
 on the basis of AI-CPS.
 
 <img src="./documentation/UMLsequenceDiagram.png" height="600" />
-
-### Realize experiments
-
-Examples can be found at this repository at `./code/experiments`.
