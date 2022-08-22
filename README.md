@@ -17,7 +17,11 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 ## Getting Started
 
-### Set up raspberry via terminal
+### 1) Set up operating system
+
+#### 1.1) Set up OS at raspberry
+
+##### Set up OS at raspberry via terminal
 
 1. Download and install recent OS, e.g. `raspberry Pi OS Lite buster 12.02.2020`, on sd card via laptop.
 
@@ -27,7 +31,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 1. Put SD card into raspberry and start device.
 
-### Alternatively, set up device via Raspberry Pi Imager
+##### Alternatively, set up device via Raspberry Pi Imager
 
 1. Download and install Raspberry Pi Imager (e.g. v1.7.2) from [Raspberry Pi OS Page](https://www.raspberrypi.com/software/).
 
@@ -37,7 +41,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 1. Put SD card into raspberry and start device.
 
-### Log in to your raspberry
+##### Log in to your raspberry
 
 1. Change default password.
 
@@ -61,7 +65,15 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 1. Test your architecture by `uname -a`.
 
-### Set up docker at raspberry
+### 1.2) Set up any kind of linux-based system
+
+Please follow installation details of [AiLab Installation Guide](https://github.com/MarcusGrum/AI-Lab).
+This shows the installation of numerous of the required tools.
+Hence, the following just shows a raspberry focus and some extra commands.
+
+### 2) Set up docker
+
+#### 2.1) Set up docker at raspberry
 
 This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo).
 
@@ -127,7 +139,27 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
 	docker volume create ai_system
 	```
 
-### Set up tensorflow at raspberry
+#### 2.2) Set up docker at mac
+
+This is based on the [Docker Installation Guide](https://docs.docker.com/desktop/mac/install/).
+
+1. Download recent `.dmg` file called `Docker Desktop for Mac` and install it.
+
+1. Run Hello World Container for testing Docker installation.
+
+    ```
+    docker run hello-world
+    ```
+
+1. Create docker volume `ai_system` for using mechanisms of this repository:
+
+	```
+	docker volume create ai_system
+	```
+
+### 3) Set up tensorflow
+
+#### 3.1) Set up tensorflow at raspberry
     
 1. Find useful links, here:
 
@@ -144,26 +176,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     https://www.raspberrypi.com/products/raspberry-pi-high-quality-camera/
     ```
 
-### Set up MQTT at raspberry
-
-1. Install MQTT library:
-
-   ```
-   pip3 install paho-mqtt
-   ```
-
-#### Build own tensorflow containers and deploy them
-
-1. Find useful links, here:
-
-    ```
-    https://github.com/tensorflow/build
-    https://medium.com/tensorflow/tensorflow-1-9-officially-supports-the-raspberry-pi-b91669b0aa0
-    https://www.tensorflow.org/install/docker
-    https://github.com/tensorflow/build/tree/master/raspberry_pi_builds
-    ```
-
-#### Use tensorflow container to run in an interactive bash at raspberry
+##### Use tensorflow container to run in an interactive bash at raspberry
     
 1. Start container that provides all (SciPi, Matplotlib, etc.).
 
@@ -177,7 +190,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     docker run --rm -it francoisgervais/tensorflow:2.1.0-cp35 bash
     ```
     
-#### Use tensorflow container to run a small program at raspberry
+##### Use tensorflow container to run a small program at raspberry
 
 1. Run tensorflow docker container and execute a small example program.
 
@@ -185,7 +198,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     docker run -it armswdev/tensorflow-arm-neoverse python3 -c "import tensorflow as tf; print(tf.__version__); print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     ```
 
-#### Use tensorflow container to run a script at raspberry
+###### Use tensorflow container to run a script at raspberry
 
 1. Run tensorflow docker container and execute a small example script.
 
@@ -196,7 +209,7 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     python3 /home/ubuntu/knowledgeBases/testScript.py
     ```
 
-#### Use tensorflow container to run in the background and initiate script execution at raspberry   
+###### Use tensorflow container to run in the background and initiate script execution at raspberry   
    
 1. Run tensorflow docker container in background.
 
@@ -217,27 +230,9 @@ This is based on the [Docker Installation Guide](https://dev.to/elalemanyo/how-t
     ```
     docker exec 37eb7158877c python3 /home/ubuntu/knowledgeBases/tensorflowWorkDir/testScript.py
     ``` 
-   
-### Set up docker at mac
 
-This is based on the [Docker Installation Guide](https://docs.docker.com/desktop/mac/install/).
+### 3.2) Set up tensorflow at mac
 
-1. Download recent `.dmg` file called `Docker Desktop for Mac` and install it.
-
-1. Run Hello World Container for testing Docker installation.
-
-    ```
-    docker run hello-world
-    ```
-
-1. Create docker volume `ai_system` for using mechanisms of this repository:
-
-	```
-	docker volume create ai_system
-	```
-    
-### Set up tensorflow at mac  
-    
 #### Use tensorflow container to run in an interactive bash at mac    
     
 1. Start container.   
@@ -284,7 +279,137 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     python3 ./testScript.py
     ```
     
-#### Install relevant content manually
+### 3.3) Build individual tensorflow containers and deploy them
+
+1. Find useful links, here:
+
+    ```
+    https://github.com/tensorflow/build
+    https://medium.com/tensorflow/tensorflow-1-9-officially-supports-the-raspberry-pi-b91669b0aa0
+    https://www.tensorflow.org/install/docker
+    https://github.com/tensorflow/build/tree/master/raspberry_pi_builds
+    ```
+
+1. Find individual instructions at corresponding readmes of this repository.
+    
+### 4) Set up MQTT
+
+#### 4.1) Set up MQTT at raspberry
+
+1. Install MQTT library:
+
+   ```
+   pip3 install paho-mqtt
+   ```
+
+#### 4.2) Set up MQTT at mac
+
+1. Install MQTT library:
+
+   ```
+   pip3 install paho-mqtt
+   ```
+
+#### 4.3) Set up MQTT at linux
+
+1. Install pip3 for installing MQTT library:
+
+   ```
+   sudo apt install python3-pip
+   ```
+
+1. Install MQTT library for communication client:
+
+   ```
+   pip3 install paho-mqtt
+   ```
+
+1. Install mosquitto server for MQTT broker:
+
+	```
+	sudo apt-get install mosquitto
+	```
+
+#### 4.4) Test MQTT installation
+
+1. Start MQTT server at first CLI for managing communication:
+
+	For Mac:
+	
+    ```
+    /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf    
+    ```
+
+	For Ubuntu:
+	
+	```
+	mosquitto -v
+	```
+	
+	or
+	
+	```
+	sudo /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+	```	
+	
+	You can stop broker server by one of the following lines:
+	
+	```
+	sudo service mosquitto stop
+	sudo systemctl stop mosquitto.service
+	```
+
+	If you want to see verbose information, which is not displayed at CLI when broker is started as service,
+	have a look on the corresponding log file:
+	
+	```
+	sudo tail -n20 -f /var/log/mosquitto/mosquitto.log
+	```
+
+1. If desired, subscribe from second CLI for displaying all messages:
+
+    ```
+    mosquitto_sub -t "#" -v -u testuser
+    ```
+    
+Here, relevant tags represent as follows:
+
+- `h`: mqtt host to connect to. Defaults to localhost.
+- `p`: network port to connect to. Defaults to 1883 for plain MQTT and 8883 for MQTT over TLS.
+- `t`: mqtt topic to subscribe to. May be repeated multiple times.
+- `u`: provide a username.
+- `P`: provide a password.
+- `v`: print published messages verbosely.
+
+Alternatively, consider testing at world-wide, public test server:
+
+    ```
+	mosquitto_sub -t "CoNM/workflow_system" -v -u testuser -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Start `AI_simulation_basis_communication_client.py` from a third CLI:
+
+    ```
+    python AI_simulation_basis_communication_client.py
+    ```
+
+1. Send message manually from fourth CLI:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "This is a test message."
+    ```
+    
+Alternatively, consider testing at world-wide, public test server:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please do manaul test instruction mxy." -h "test.mosquitto.org" -p 1883
+    ```
+    
+Face communication management throughout the process at first CLI being the `message broker`.
+Relevant messages from subscriptions e.g. can be seen at the second CLI representing a machine being a `mqtt client`.
+The third CLI represents a machine that is activated by messages in order to realize any kind of complex, algorithmic procedures.
+
+### 5) Install relevant content manually
 
 1. If further packages are required, you might install them from inside the container.
 
@@ -297,7 +422,9 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
     Of course, you can prepare an corresponding image providing packages required.
     For a quick testing, this is okay.
 
-### Deploy relevant files from desktop to raspberry 
+## Use Cases
+
+### A) Deploy relevant files from desktop to raspberry 
 
 #### Deploy relevant files via terminal and scp command.
     
@@ -360,135 +487,8 @@ This is based on the [Docker Installation Guide](https://docs.docker.com/desktop
 
 1. Follow individual readme files of `image` and `scenario` folders.
 
-### Set up MQTT at mac
 
-1. Install MQTT library:
-
-   ```
-   pip3 install paho-mqtt
-   ```
-
-### Set up MQTT at linux
-
-1. Install pip3 for installing MQTT library:
-
-   ```
-   sudo apt install python3-pip
-   ```
-
-1. Install MQTT library for communication client:
-
-   ```
-   pip3 install paho-mqtt
-   ```
-
-1. Install mosquitto server for MQTT broker:
-
-	```
-	sudo apt-get install mosquitto
-	```
-
-#### Test MQTT installation
-
-1. Start MQTT server at first CLI for managing communication:
-
-	For Mac:
-	
-    ```
-    /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf    
-    ```
-
-	For Ubuntu:
-	
-	```
-	mosquitto -v
-	```
-	
-	or
-	
-	```
-	sudo /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
-	```	
-	
-	You can stop broker server by one of the following lines:
-	
-	```
-	sudo service mosquitto stop
-	sudo systemctl stop mosquitto.service
-	```
-
-	If you want to see verbose information, which is not displayed at CLI when broker is started as service,
-	have a look on the corresponding log file:
-	
-	```
-	sudo tail -n20 -f /var/log/mosquitto/mosquitto.log
-	```
-
-
-1. If desired, subscribe from second CLI for displaying all messages:
-
-    ```
-    mosquitto_sub -t "#" -v -u testuser
-    ```
-    
-Here, relevant tags represent as follows:
-
-- `h`: mqtt host to connect to. Defaults to localhost.
-- `p`: network port to connect to. Defaults to 1883 for plain MQTT and 8883 for MQTT over TLS.
-- `t`: mqtt topic to subscribe to. May be repeated multiple times.
-- `u`: provide a username.
-- `P`: provide a password.
-- `v`: print published messages verbosely.
-
-Alternatively, consider testing at world-wide, public test server:
-
-    ```
-	mosquitto_sub -t "CoNM/workflow_system" -v -u testuser -h "test.mosquitto.org" -p 1883
-    ```
-
-1. Start `AI_simulation_basis_communication_client.py` from a third CLI:
-
-    ```
-    python AI_simulation_basis_communication_client.py
-    ```
-
-1. Send message manually from fourth CLI:
-
-    ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "This is a test message."
-    ```
-    
-Alternatively, consider testing at world-wide, public test server:
-
-    ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please do manaul test instruction mxy." -h "test.mosquitto.org" -p 1883
-    ```
-    
-Face communication management throughout the process at first CLI being the `message broker`.
-Relevant messages from subscriptions e.g. can be seen at the second CLI representing a machine being a `mqtt client`.
-The third CLI represents a machine that is activated by messages in order to realize any kind of complex, algorithmic procedures.
-
-#### Test installation from remote
-
-1. Initiate example `apply_knnSolution` from remote:
-
-    ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-    ```
-
-1. Initiate example `create_knnSolution` from remote:
-    
-    ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-    ```
-
-1. Initiate example `refine_knnSolution` from remote:   
- 
-    ```
-    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-    ```
-
-### Test installation of individual components
+### B) Test installation of individual components
 
 1. Test AI container manually:
 
@@ -505,6 +505,26 @@ The third CLI represents a machine that is activated by messages in order to rea
 	```
 
 1. Release one of the remote requests shown before and face AI case realization.
+
+#### C) Submit ANN requests from remote
+
+1. Initiate example `apply_knnSolution` from remote CLI:
+
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=apply_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Initiate example `create_knnSolution` from remote CLI:
+    
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=create_knnSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
+
+1. Initiate example `refine_knnSolution` from remote CLI:   
+ 
+    ```
+    mosquitto_pub -t "CoNM/workflow_system" -u testuser -m "Please realize the following AI case: scenario=refine_knnSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+    ```
 
 ## Application examples
 
@@ -525,3 +545,7 @@ such as the Research and Application Center Industry 4.0 (RACI),
 on the basis of AI-CPS.
 
 <img src="./documentation/UMLsequenceDiagram.png" height="600" />
+
+### Realize experiments
+
+Examples can be found at this repository at `./code/experiments`.
