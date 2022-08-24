@@ -592,7 +592,7 @@ def realize_experiment():
     for experimentId in range(1, maxNumberOfExperiments+1, 1):
         if verbose : print("  experimentId = " + str(experimentId))
         for machineId in range(1, maxMachines+1, 1):
-            print("    machineId = " + str(machineId))
+            if verbose : print("    machineId = " + str(machineId))
 
             # Phase 1 - Working on focus dataset
             # (from initial state to switching state)
@@ -602,7 +602,7 @@ def realize_experiment():
             aiClient.realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             for iterationId_1 in range(1, maxIterationsInPhase1+1, 1):
-                print("        iterationId_1 = " + str(iterationId_1))
+                if verbose : print("        iterationId_1 = " + str(iterationId_1))
                 if (machineId == 1):
                     learning_base = "marcusgrum/learningbase_apple_01"
                     if (iterationId_1 == 1):
@@ -636,9 +636,9 @@ def realize_experiment():
                 # carry out testing cases for initial testing of wired ANN
                 if (iterationId_1==1):
                     for streamId in range(1, maxStreams+1, 1):
-                        print("          streamId = " + str(streamId))
+                        if verbose : print("          streamId = " + str(streamId))
                         for datasetId in range(0, maxValidationSets, 1):
-                            print("            datasetId = " + str(datasetId))
+                            if verbose : print("            datasetId = " + str(datasetId))
                             if (datasetId == 0):
                                 sufsuffix_0 = "_evalWith_a"
                                 evaluation_base="marcusgrum/learningbase_apple_01"
@@ -659,7 +659,7 @@ def realize_experiment():
                 for streamId in range(1, maxStreams+1, 1):
                     if verbose : print("          streamId = " + str(streamId))
                     for datasetId in range(0, maxValidationSets, 1):
-                        print("            datasetId = " + str(datasetId))
+                        if verbose : print("            datasetId = " + str(datasetId))
                         if (datasetId == 0):
                             sufsuffix_0 = "_evalWith_a"
                             evaluation_base="marcusgrum/learningbase_apple_01"
