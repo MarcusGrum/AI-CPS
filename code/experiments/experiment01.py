@@ -531,7 +531,7 @@ def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
     verbose = False
 
     # copy KPIs to dockers current build context folder (for preparing analysis or publication to docker's hub)
-    subprocess.run("docker run --rm -v $PWD/logs:/host -v ai_system:/ai_system -w /ai_system busybox /bin/sh -c " + "'"
+    subprocess.run("docker run --rm -v $PWD/../messageClient/logs:/host -v ai_system:/ai_system -w /ai_system busybox /bin/sh -c " + "'"
                     + " cp /ai_system/"+sender+"/learningBase/training_accuracy.txt /host/"+sender+"_training_accuracy.txt" 
                     + " && cp /ai_system/"+sender+"/learningBase/training_loss.txt /host/"+sender+"_training_loss.txt"
                     + " && cp /ai_system/"+sender+"/learningBase/training_n.txt /host/"+sender+"_training_n.txt"
