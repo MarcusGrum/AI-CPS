@@ -784,13 +784,17 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                     subprocess.Popen("docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --file "+logDirectory+"/"+sender+"-docker-file --tag marcusgrum/knowledgebase_"+sender+":latest --push  "+logDirectory+"/", shell=True, stdout=out, stderr=err)
 
      if (scenario == 'realize_annExperiment'):
-          experiment01.realize_experiment()
+          # comment out to keep current results and avoid accidental activation
+          #experiment01.realize_experiment()
+          pass
 
 if __name__ == '__main__':
      """
      This function initiates communication client
      and manages the corresponding AI reguests.
-     - ToDo: Pull images for having most recent updates and having the containers at all...
+     - Optional ToDo: Pull images for having most recent updates. 
+                      Current code assumes images to be static (not changing over time).
+                      If continual changes occure, a new AI case (and corresponding images) are released.
      """
 
      # specify client for messaging

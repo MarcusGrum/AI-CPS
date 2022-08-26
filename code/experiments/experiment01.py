@@ -10,6 +10,7 @@ __author__ = 'Marcus Grum, marcus.grum@uni-potsdam.de'
 # SPDX-FileCopyrightText: 2022 Marcus Grum <marcus.grum@uni-potsdam.de>
 
 import subprocess
+from unicodedata import decimal
 import paho.mqtt.client as mqtt
 from multiprocessing import Process, Queue, current_process, freeze_support
 import time
@@ -775,10 +776,425 @@ def realize_experiment():
     # create a visual overview over all experiment runs
     realize_experiment_plotting(maxNumberOfExperiments = maxNumberOfExperiments, maxIterationsInPhase1 = maxIterationsInPhase1, maxIterationsInPhase2 = maxIterationsInPhase2, maxMachines = maxMachines, maxValidationSets = maxValidationSets, maxStreams = maxStreams, maxNumberOfKPIs = maxNumberOfKPIs)
 
+def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
+    """
+    This function separates individual KPI typess for this experiment and stores each KPI summary at log directory.
+    KPI types, we can find for the following types of levels:
+    (-) individual plots per experiment run
+        (AB for run 1 / 2 / ... / maxNumberOfExperiments)
+    (-) average plots over all experiment runs
+        (AB / AO / BA / BO / OA / OB)
+    (x) overall plots averaging the same types of averaged experiment runs
+        (Bias / Manipulation / Baseline)
+    """
+
+    # storing KPIs
+    path = logDirectory + "/Average_Over_All_Experiments_"
+
+    # 0 - accuracies, 1 - losses, 2 - n
+    trainingKPIs = load_data_fromfile(path=logDirectory+'/trainingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
+    testingKPIs = load_data_fromfile(path=logDirectory+'/testingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
+
+    # Build plot for sum over bias / manipulation / baseline
+    print('separating KPIs over all biases, manipulations and baselines...')
+    training_accuracy_bias_mu = (
+        numpy.mean(trainingKPIs[:, :, 0, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 3, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_bias_mu)], path+"training_accuracy_bias_mu")
+    testing_accuracy_bias_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 3, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_bias_mu)], path+"testing_accuracy_bias_mu")
+    training_loss_bias_mu = (
+        numpy.mean(trainingKPIs[:, :, 0, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 3, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_bias_mu)], path+"training_loss_bias_mu")
+    testing_loss_bias_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 3, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_bias_mu)], path+"testing_loss_bias_mu")
+    training_N_bias_mu = (
+        numpy.mean(trainingKPIs[:, :, 0, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 3, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_bias_mu)], path+"training_N_bias_mu")
+    testing_N_bias_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 3, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_bias_mu)], path+"testing_N_bias_mu")
+    training_accuracy_bias_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 3, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_bias_standardDeviation)], path+"training_accuracy_bias_standardDeviation")
+    testing_accuracy_bias_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 3, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_bias_standardDeviation)], path+"testing_accuracy_bias_standardDeviation")
+    training_loss_bias_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 3, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_bias_standardDeviation)], path+"training_loss_bias_standardDeviation")
+    testing_loss_bias_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 3, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_bias_standardDeviation)], path+"testing_loss_bias_standardDeviation")
+    training_N_bias_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 3, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_bias_standardDeviation)], path+"training_N_bias_standardDeviation")
+    testing_N_bias_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 3, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_bias_standardDeviation)], path+"testing_N_bias_standardDeviation")
+
+    # manipulation-based validation
+    training_accuracy_manipulation_mu = (
+        numpy.mean(trainingKPIs[:, :, 1, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 6, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 12, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_manipulation_mu)], path+"training_accuracy_manipulation_mu")
+    testing_accuracy_manipulation_mu = (
+        numpy.mean(testingKPIs[:, :, 1, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 6, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 12, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_manipulation_mu)], path+"testing_accuracy_manipulation_mu")
+    training_loss_manipulation_mu = (
+        numpy.mean(trainingKPIs[:, :, 1, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 6, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 12, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_manipulation_mu)], path+"training_loss_manipulation_mu")
+    testing_loss_manipulation_mu = (
+        numpy.mean(testingKPIs[:, :, 1, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 6, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 12, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_manipulation_mu)], path+"testing_loss_manipulation_mu")
+    training_N_manipulation_mu = (
+        numpy.mean(trainingKPIs[:, :, 1, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 6, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 12, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_manipulation_mu)], path+"training_N_manipulation_mu")
+    testing_N_manipulation_mu = (
+        numpy.mean(testingKPIs[:, :, 1, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 6, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 12, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_manipulation_mu)], path+"testing_N_manipulation_mu")
+    training_accuracy_manipulation_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 1, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 6, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 12, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_manipulation_standardDeviation)], path+"training_accuracy_manipulation_standardDeviation")
+    testing_accuracy_manipulation_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 1, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 6, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 12, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_manipulation_standardDeviation)], path+"testing_accuracy_manipulation_standardDeviation")
+    training_loss_manipulation_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 1, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 6, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 12, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_manipulation_standardDeviation)], path+"training_loss_manipulation_standardDeviation")
+    testing_loss_manipulation_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 1, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 6, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 12, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_manipulation_standardDeviation)], path+"testing_loss_manipulation_standardDeviation")
+    training_N_manipulation_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 1, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 6, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 12, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_manipulation_standardDeviation)], path+"training_N_manipulation_standardDeviation")
+    testing_N_manipulation_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 1, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 6, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 12, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_manipulation_standardDeviation)], path+"testing_N_manipulation_standardDeviation")
+
+    # baseline-based validation
+    training_accuracy_baseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 2, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 4, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 8, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 9, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 13, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_baseline_mu)], path+"training_accuracy_baseline_mu")
+    testing_accuracy_baseline_mu = (
+        numpy.mean(testingKPIs[:, :, 2, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 4, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 8, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 9, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_baseline_mu)], path+"testing_accuracy_baseline_mu")
+    training_loss_baseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 2, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 4, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 8, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 9, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 13, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_baseline_mu)], path+"training_loss_baseline_mu")
+    testing_loss_baseline_mu = (
+        numpy.mean(testingKPIs[:, :, 2, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 4, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 8, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 9, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_baseline_mu)], path+"testing_loss_baseline_mu")
+    training_N_baseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 2, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 4, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 8, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 9, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 13, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_baseline_mu)], path+"training_N_baseline_mu")
+    testing_N_baseline_mu = (
+        numpy.mean(testingKPIs[:, :, 2, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 4, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 8, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 9, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_baseline_mu)], path+"testing_N_baseline_mu")
+    training_accuracy_baseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 2, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 4, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 8, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 9, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_accuracy_baseline_standardDeviation)], path+"training_accuracy_baseline_standardDeviation")
+    testing_accuracy_baseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 2, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 4, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 8, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 9, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 0], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_accuracy_baseline_standardDeviation)], path+"testing_accuracy_baseline_standardDeviation")
+    training_loss_baseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 2, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 4, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 8, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 9, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_loss_baseline_standardDeviation)], path+"training_loss_baseline_standardDeviation")
+    testing_loss_baseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 2, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 4, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 8, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 9, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 1], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_loss_baseline_standardDeviation)], path+"testing_loss_baseline_standardDeviation")
+    training_N_baseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 2, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 4, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 8, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 9, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(training_N_baseline_standardDeviation)], path+"training_N_baseline_standardDeviation")
+    testing_N_baseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 2, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 4, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 8, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 9, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 2], axis=0)
+    ) / 6
+    save_data_to_CsvFile([list(testing_N_baseline_standardDeviation)], path+"testing_N_baseline_standardDeviation")
+
+    # Overview-specific KPIs
+    rows = len(testing_N_baseline_standardDeviation)
+    columns = 3 * 3 # (mu, std, n) * (bias, manipulation, baseline)
+    decimals = 3
+    training_overview_accuracy = numpy.zeros((rows,columns))
+    training_overview_loss = numpy.zeros((rows,columns))
+    testing_overview_accuracy = numpy.zeros((rows,columns))
+    testing_overview_loss = numpy.zeros((rows,columns))
+    for i in range(rows):
+        # create training overview in terms of accuracy
+        training_overview_accuracy[i,0]  = numpy.around(training_accuracy_bias_mu[i], decimals = decimals)
+        training_overview_accuracy[i,1]  = numpy.around(training_accuracy_bias_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,2]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
+        training_overview_accuracy[i,3]  = numpy.around(training_accuracy_manipulation_mu[i], decimals = decimals)
+        training_overview_accuracy[i,4]  = numpy.around(training_accuracy_manipulation_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,5]  = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
+        training_overview_accuracy[i,6]  = numpy.around(training_accuracy_baseline_mu[i], decimals = decimals)
+        training_overview_accuracy[i,7]  = numpy.around(training_accuracy_baseline_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,8]  = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+
+        # create training overview in terms of loss
+        training_overview_loss[i,0]  = numpy.around(training_loss_bias_mu[i], decimals = decimals)
+        training_overview_loss[i,1]  = numpy.around(training_loss_bias_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,2]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
+        training_overview_loss[i,3]  = numpy.around(training_loss_manipulation_mu[i], decimals = decimals)
+        training_overview_loss[i,4]  = numpy.around(training_loss_manipulation_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,5]  = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
+        training_overview_loss[i,6]  = numpy.around(training_loss_baseline_mu[i], decimals = decimals)
+        training_overview_loss[i,7]  = numpy.around(training_loss_baseline_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,8]  = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+
+        # create testing overview in terms of accuracy
+        testing_overview_accuracy[i,0]  = numpy.around(testing_accuracy_bias_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,1]  = numpy.around(testing_accuracy_bias_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,2]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,3]  = numpy.around(testing_accuracy_manipulation_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,4]  = numpy.around(testing_accuracy_manipulation_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,5]  = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,6]  = numpy.around(testing_accuracy_baseline_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,7]  = numpy.around(testing_accuracy_baseline_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,8]  = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+
+        # create testing overview in terms of loss
+        testing_overview_loss[i,0]  = numpy.around(testing_loss_bias_mu[i], decimals = decimals)
+        testing_overview_loss[i,1]  = numpy.around(testing_loss_bias_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,2]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
+        testing_overview_loss[i,3]  = numpy.around(testing_loss_manipulation_mu[i], decimals = decimals)
+        testing_overview_loss[i,4]  = numpy.around(testing_loss_manipulation_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,5]  = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
+        testing_overview_loss[i,6]  = numpy.around(testing_loss_baseline_mu[i], decimals = decimals)
+        testing_overview_loss[i,7]  = numpy.around(testing_loss_baseline_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,8]  = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+
+    # store overview KPIs
+    save_data_to_CsvFile([list(training_overview_accuracy)][0], path+"training_overview_accuracy")
+    save_data_to_CsvFile([list(training_overview_loss)][0], path+"training_overview_loss")
+    save_data_to_CsvFile([list(testing_overview_accuracy)][0], path+"testing_overview_accuracy")
+    save_data_to_CsvFile([list(testing_overview_loss)][0], path+"testing_overview_loss")
 
 if __name__ == '__main__':
     
-    # when script is started manually, initiate experiment
-    realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
+    # when script is started manually, initiate experiment incl. plotting
+    #realize_experiment()
 
+    # when script is started manually, initiate plotting
+    #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
 
+    # when script is started manually, initiate KPI separation for storing in individual files
+    #summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
+
+    # comment out to keep current results and avoid accidental activation
+    pass
