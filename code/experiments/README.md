@@ -13,7 +13,7 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 1. Start the `messaging client` by
 
     ```
-    python3 ../messageClient/AI_simulation_basis_communication_client.py
+    python3 ../../messageClient/AI_simulation_basis_communication_client.py
     ```
 
 1. Initiate `realize_annExperiment` request, which for instance can come from an Industry 4.0 production system, a modeling software or manually.
@@ -36,10 +36,31 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 #### Proceeding
 
-<img src="../../documentation/ExperimentProceeding.png" height="600" />
+<img src="../../documentation/Experiment01_Proceeding.png" height="600" />
 
 #### KPIs
 
 KPIs collected by the experiment can be found as follows:
 
-<img src="../../documentation/ExperimentKpiCollection.png" height="600" />
+<img src="../../documentation/Experiment01_KpiCollection.png" height="600" />
+
+#### Results
+
+Results of this experiment can be found at the following path:
+
+    ```
+    repository/documentation/experiment01/
+    ```
+
+Here, one can find KPIs collected as well as plots generated.
+For instance, the overview plot shows accuracies and losses of training and testing courses.
+
+<img src="../../documentation/experiment01/plots/Plot_Average_Over_All_Experiments.png" height="600" />
+
+Here, one can see that bias is learnt successfully and forgotten successfully after learning base has changed.
+After the change of the learning base, focused product type is learnt successfully.
+Since learnt and unlearnt / forgotten knowledge base can be distinguished clearly separable (faced with non-overlapping standard deviations),
+one can recognize this mechanism as effective approach to unlearn or intentionally forget in ANNs.
+This can be seen at all, training and testing runs as well as accuracy and loss metrics.
+
+A publication about this is in progress.
