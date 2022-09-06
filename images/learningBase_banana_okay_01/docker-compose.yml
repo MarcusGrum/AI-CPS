@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  learning_base:
+    build: .
+    image: marcusgrum/learningbase_banana_okay_01
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/learningBase/ && cp -r /learningBase/ /tmp/;
+volumes:
+  ai_system:
+    external: true
