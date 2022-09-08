@@ -21,6 +21,7 @@ Based on the pictures
 different blurring levels have been tested for experimentation.
 
 Some impressions can be seen in the following.
+For instance, the variations of Sigma effect a non-blurred (initial) picture as the following table shows.
 
 <table>
   <tr>
@@ -29,51 +30,51 @@ Some impressions can be seen in the following.
   </tr>
   <tr>
     <td>No blurring (initial picture)</td>
-    <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="200" /></td>
   </tr>
   <tr>
     <td>0.03</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.03.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.03.png" height="200" /></td>
   </tr>
   <tr>
     <td>0.3</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.30.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.30.png" height="200" /></td>
   </tr>
   <tr>
     <td>3</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma3.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma3.png" height="200" /></td>
   </tr>
   <tr>
     <td>4</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma4.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma4.png" height="200" /></td>
   </tr>
   <tr>
     <td>5</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma5.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma5.png" height="200" /></td>
   </tr>
   <tr>
     <td>6</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="200" /></td>
   </tr>
   <tr>
     <td>9</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma9.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma9.png" height="200" /></td>
   </tr>
   <tr>
     <td>12</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma12.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma12.png" height="200" /></td>
   </tr>
   <tr>
     <td>15</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma15.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma15.png" height="200" /></td>
   </tr>
   <tr>
     <td>30</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma30.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma30.png" height="200" /></td>
   </tr>
   <tr>
     <td>300</td>
-    <td><img src="./Figure_apple_ok_1_blurredWithSigma300.png" height="300" /></td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma300.png" height="200" /></td>
   </tr>
  </table>
 
@@ -82,9 +83,28 @@ that hardly can be used to distinguish fresh and rotten apples.
 At least, that's the human perspective.
 Let's see inhowfar ANNs are challenged by this.
 
-![alt-text-1](Figure_apple_ok_1_nonBlurred.png "title-1") ![alt-text-2](Figure_apple_ok_1_blurredWithSigma6.png "title-2")
+In order to get some impressions, the following shows some picture examples for blurred (challenged) classification.
 
-<img src="./Figure_apple_ok_1_nonBlurred.png" height="100" /> <img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="100" />
+<table>
+  <tr>
+     <td>Picture</td>
+     <td>Correct classification</td>
+  </tr>
+  <tr>
+     <td><img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="300" /></td>
+     <td>okay</td>
+  </tr>
+  <tr>
+     <td><img src="./Figure_apple_def_1_blurredWithSigma6.png" height="300" /></td>
+     <td>defect</td>
+  </tr>
+  <tr>
+     <td><img src="./Figure_apple_def_2_blurredWithSigma6.png" height="300" /></td>
+     <td>defect</td>
+  </tr>
+</table>
+
+
 
 Please remark: Larger sigma values may remove more noise, which is beneficial.
 But larger sigma values will also remove detail from an image, which is a challenge.
