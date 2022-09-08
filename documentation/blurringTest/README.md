@@ -31,5 +31,7 @@ Let's see inhowfar ANNs are challenged by this.
 
 ![alt-text-1](Figure_apple_ok_1_nonBlurred.png "title-1") ![alt-text-2](Figure_apple_ok_1_blurredWithSigma6.png "title-2")
 
+<img src="./Figure_apple_ok_1_nonBlurred.png" height="100" /> <img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="100" />
+
 Please remark: Larger sigma values may remove more noise, which is beneficial.
 But larger sigma values will also remove detail from an image, which is a challenge.
