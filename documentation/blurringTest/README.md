@@ -108,7 +108,7 @@ In order to get some impressions, the following shows some picture examples for 
   </tr>
 </table>
 
-
+Let's see inhowfar this kind of blurring and removed details challenge the ANN trained...
 
 Please remark: Larger sigma values may remove more noise, which is beneficial.
 But larger sigma values will also remove detail from an image, which is a challenge.
