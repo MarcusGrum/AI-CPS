@@ -24,12 +24,56 @@ Some impressions can be seen in the following.
 
 <table>
   <tr>
-     <td>Sigma</td>
+     <td>Sigma used for Gaussian blurring</td>
      <td>Picture</td>
   </tr>
   <tr>
-    <td>None</td>
-    <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="100" /></td>
+    <td>No blurring (initial picture)</td>
+    <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>0.03</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.03.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>0.3</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma0.30.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma3.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma4.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma5.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma9.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma12.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma15.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>30</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma30.png" height="300" /></td>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td><img src="./Figure_apple_ok_1_blurredWithSigma300.png" height="300" /></td>
   </tr>
  </table>
 
