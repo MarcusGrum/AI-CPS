@@ -20,10 +20,16 @@ Based on the pictures
 `rotated_by_15_Screen Shot 2018-06-07 at 2.15.34 PM.png`,
 different blurring levels have been tested for experimentation.
 
+Some impressions can be seen in the following.
+
+
+
 The expert panel decided for `sigma=6`resulting in pictures 
 that hardly can be used to distinguish fresh and rotten apples.
 At least, that's the human perspective.
 Let's see inhowfar ANNs are challenged by this.
+
+![alt-text-1](Figure_apple_ok_1_nonBlurred.png "title-1") ![alt-text-2](Figure_apple_ok_1_blurredWithSigma6.png "title-2")
 
 Please remark: Larger sigma values may remove more noise, which is beneficial.
 But larger sigma values will also remove detail from an image, which is a challenge.
