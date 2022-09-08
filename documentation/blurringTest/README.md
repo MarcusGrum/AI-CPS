@@ -22,7 +22,16 @@ different blurring levels have been tested for experimentation.
 
 Some impressions can be seen in the following.
 
-
+<table>
+  <tr>
+     <td>Sigma</td>
+     <td>Picture</td>
+  </tr>
+  <tr>
+    <td>None</td>
+    <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="100" /></td>
+  </tr>
+ </table>
 
 The expert panel decided for `sigma=6`resulting in pictures 
 that hardly can be used to distinguish fresh and rotten apples.
