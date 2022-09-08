@@ -87,18 +87,22 @@ In order to get some impressions, the following shows some picture examples for 
 
 <table>
   <tr>
-     <td>Picture</td>
+     <td>Original picture</td>
+     <td>Blurred picture</td>
      <td>Correct classification</td>
   </tr>
   <tr>
+     <td><img src="./Figure_apple_ok_1_nonBlurred.png" height="300" /></td>
      <td><img src="./Figure_apple_ok_1_blurredWithSigma6.png" height="300" /></td>
      <td>okay</td>
   </tr>
   <tr>
+     <td><img src="./Figure_apple_def_1_nonBlurred.png" height="300" /></td>
      <td><img src="./Figure_apple_def_1_blurredWithSigma6.png" height="300" /></td>
      <td>defect</td>
   </tr>
   <tr>
+     <td><img src="./Figure_apple_def_2_nonBlurred.png" height="300" /></td>
      <td><img src="./Figure_apple_def_2_blurredWithSigma6.png" height="300" /></td>
      <td>defect</td>
   </tr>
