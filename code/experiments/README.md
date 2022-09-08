@@ -55,7 +55,7 @@ Results of this experiment can be found at the following path:
 Here, one can find KPIs collected as well as plots generated.
 For instance, the overview plot shows accuracies and losses of training and testing courses.
 
-<img src="../../documentation/experiment01/plots/Plot_Average_Over_All_Experiments.png" height="600" />
+<img src="../../documentation/experiment01/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
 
 Here, one can see that bias is learnt successfully and forgotten successfully after learning base has changed.
 After the change of the learning base, focused product type is learnt successfully.

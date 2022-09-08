@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  activation_base:
+    build: .
+    image: marcusgrum/activationbase_apple_blurred_okay_04
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/activationBase/ && cp -r /activationBase/ /tmp/;
+volumes:
+  ai_system:
+    external: true

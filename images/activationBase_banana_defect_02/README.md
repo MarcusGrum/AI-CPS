@@ -1,7 +1,7 @@
 
 # Dealing with this local image
 
-The current activation refers to image called `rotated_by_15_Screen Shot 2018-06-12 at 8.47.28 PM.png`.
+The current activation refers to image called `rotated_by_15_Screen Shot 2018-06-12 at 8.48.18 PM.png`.
 
 ## Build local docker image manually with `Dockerfile` for Over-The-Air-Deployment of relevant data.
 

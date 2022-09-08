@@ -2,7 +2,7 @@ version: "3.9"
 services:
   activation_base:
     build: .
-    image: marcusgrum/activationbase_apple_okay_01
+    image: marcusgrum/activationbase_orange_okay_05
     volumes:
        - ai_system:/tmp
     command:

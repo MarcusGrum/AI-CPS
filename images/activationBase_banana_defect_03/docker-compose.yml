@@ -2,7 +2,7 @@ version: "3.9"
 services:
   activation_base:
     build: .
-    image: marcusgrum/activationbase_apple_defect_01
+    image: marcusgrum/activationbase_banana_defect_03
     volumes:
        - ai_system:/tmp
     command:
