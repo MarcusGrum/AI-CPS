@@ -578,7 +578,7 @@ def realize_experiment():
     verbose = False
 
     # specify meta-parameters for experiment realization
-    maxNumberOfExperiments = 2
+    maxNumberOfExperiments = 2 # 10
     maxIterationsInPhase1 = 5
     maxIterationsInPhase2 = 5
     maxMachines = 3
@@ -778,7 +778,7 @@ def realize_experiment():
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
-    This function separates individual KPI typess for this experiment and stores each KPI summary at log directory.
+    This function separates individual KPI types for this experiment and stores each KPI summary at log directory.
     KPI types, we can find for the following types of levels:
     (-) individual plots per experiment run
         (AB for run 1 / 2 / ... / maxNumberOfExperiments)
@@ -1185,6 +1185,148 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
     save_data_to_CsvFile([list(testing_overview_accuracy)][0], path+"testing_overview_accuracy")
     save_data_to_CsvFile([list(testing_overview_loss)][0], path+"testing_overview_loss")
 
+def summarize_KPI_for_statistics(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
+    """
+    This function collects individual KPIs for this experiment in input output format and stores the collection at log directory.
+    KPI types, we can find for the following types of levels:
+    (x) individual data entries per experiment run
+        (AB for run 1 / 2 / ... / maxNumberOfExperiments)
+    (-) average entries over all experiment runs
+        (AB / AO / BA / BO / OA / OB)
+    (-) overall entries averaging the same types of averaged experiment runs
+        (Bias / Manipulation / Baseline)
+    """
+
+    # storing KPIs
+    path = logDirectory + "/All_Experiments_"
+
+    # 0 - accuracies, 1 - losses, 2 - n
+    trainingKPIs = load_data_fromfile(path=logDirectory+'/trainingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
+    testingKPIs = load_data_fromfile(path=logDirectory+'/testingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
+
+    statistical_raw_data = [["PrimaryId", "Input_TestObject", "Input_LearningIteration", "Input_Experiment", "Input_Machine", "Input_Dataset", "Input_Function", "Input_LearningPhase", "Input_DataEntries", "Output_Accuracy", "Output_Loss"]]
+    primaryId = 0
+    verbose = False
+    
+    #
+    if verbose : print(statistical_raw_data)
+    for current_testObjectId in range(trainingKPIs.shape[0]):
+        for current_learningIterationId in range(trainingKPIs.shape[1]):
+            for current_experimentTypeId in range(trainingKPIs.shape[2]):
+                #for current_kpiTypeId in range(trainingKPIs.shape[3]):
+                    # characterizing the experiment type
+                    if(current_experimentTypeId == 0):
+                        current_experiment = 'AB'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'apple'
+                        current_function   = 'Bias'
+                    elif(current_experimentTypeId == 1):
+                        current_experiment = 'AB'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'banana'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 2):
+                        current_experiment = 'AB'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'orange'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 3):
+                        current_experiment = 'AO'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'apple'
+                        current_function   = 'Bias'
+                    elif(current_experimentTypeId == 4):
+                        current_experiment = 'AO'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'banana'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 5):
+                        current_experiment = 'AO'
+                        current_machine    = 'Machine_1'
+                        current_dataset    = 'orange'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 6):
+                        current_experiment = 'BA'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'apple'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 7):
+                        current_experiment = 'BA'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'banana'
+                        current_function   = 'Bias'
+                    elif(current_experimentTypeId == 8):
+                        current_experiment = 'BA'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'orange'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 9):
+                        current_experiment = 'BO'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'apple'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 10):
+                        current_experiment = 'BO'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'banana'
+                        current_function   = 'Bias'
+                    elif(current_experimentTypeId == 11):
+                        current_experiment = 'BO'
+                        current_machine    = 'Machine_2'
+                        current_dataset    = 'orange'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 12):
+                        current_experiment = 'OA'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'apple'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 13):
+                        current_experiment = 'OA'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'banana'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 14):
+                        current_experiment = 'OA'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'orange'
+                        current_function   = 'Bias'
+                    elif(current_experimentTypeId == 15):
+                        current_experiment = 'OB'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'apple'
+                        current_function   = 'Baseline'
+                    elif(current_experimentTypeId == 16):
+                        current_experiment = 'OB'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'banana'
+                        current_function   = 'Manipulation'
+                    elif(current_experimentTypeId == 17):
+                        current_experiment = 'OB'
+                        current_machine    = 'Machine_3'
+                        current_dataset    = 'orange'
+                        current_function   = 'Bias'
+                    for i in range(2):
+                        # learning phase characterization
+                        if(i == 0):
+                            current_learningPhase = 'training'
+                            current_accuracy      = trainingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 0]
+                            current_loss          = trainingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 1]
+                            current_dataEntries   = trainingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 2]
+                        elif(i == 1):
+                            current_learningPhase = 'testing'
+                            current_accuracy      = testingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 0]
+                            current_loss          = testingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 1]
+                            current_dataEntries   = testingKPIs[current_testObjectId, current_learningIterationId, current_experimentTypeId, 2]
+                               
+                        # collecting KPIs of current run
+                        current_dataPoint = [primaryId, current_testObjectId, current_learningIterationId, current_experiment, current_machine, current_dataset, current_function, current_learningPhase, current_dataEntries, current_accuracy, current_loss]
+                        statistical_raw_data.append(current_dataPoint)
+                        if verbose : print(current_dataPoint)
+                        primaryId = primaryId + 1
+
+    # store KPIs collected for on-building statistical analyses
+    save_data_to_CsvFile(list(statistical_raw_data), path+"statistical_raw_data")
+
 if __name__ == '__main__':
     
     # when script is started manually, initiate experiment incl. plotting
@@ -1195,6 +1337,9 @@ if __name__ == '__main__':
 
     # when script is started manually, initiate KPI separation for storing in individual files
     #summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
+
+    # when script is started manually, initiate KPI separation for storing in individual files
+    #summarize_KPI_for_statistics(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
 
     # comment out to keep current results and avoid accidental activation
     pass

@@ -31,7 +31,7 @@ services:
     - "-c"
     - |
       rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
-      python3 /tmp/codeBase/apply_annSolution.py;
+      python3 /tmp/codeBase/apply_annSolution.py senderA receiverB;
 volumes:
   ai_system:
     external: true
