@@ -20,7 +20,7 @@ import numpy
 # import experiments
 import sys
 sys.path.insert(0, '../experiments')
-import experiment01#, experiment02, experiment03, experiment04
+import experiment01
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global hostName, hostArch, logDirectory
@@ -290,6 +290,7 @@ def build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, ac
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
+
 def build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
      This functions builds docker-compose file for scenario called create_annSolution
@@ -391,6 +392,7 @@ def build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, a
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
+
 
 def build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
@@ -784,9 +786,6 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
      if (scenario == 'realize_annExperiment'):
           # comment out to keep current results and avoid accidental activation
           #experiment01.realize_experiment()
-          #experiment02.realize_experiment()
-          #experiment03.realize_experiment()
-          #experiment04.realize_experiment()
           pass
 
 if __name__ == '__main__':
