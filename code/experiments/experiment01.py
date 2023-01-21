@@ -156,7 +156,7 @@ def plotEvaluationPerformance(
     plt.axvline(x=5, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=11, ymin=0., ymax=1., linestyle='dotted')
     plt.legend(loc="upper left")
-    plt.title("Evaluation on Training Material as Loss \n at " + title_plots)
+    plt.title("Evaluation on Testing Material as Loss \n at " + title_plots)
     
     # indicate performance by showing plot generated (having displays connected)
     #plt.show()
