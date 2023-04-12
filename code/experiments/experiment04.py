@@ -2,8 +2,8 @@
 A little script to realize an experiment,
 which is either started by communication client within the CoNM environment or manually.
 It realizes experiments on continual ANN training and testing on switching datasets.
-For instance, it simulates the manipulation of CPS knowledge base by process change: product change (in context of continual learning and training data manipulation).
-Copyright (c) 2022 Marcus Grum
+For instance, it simulates the manipulation of CPS knowledge base by process change: product refinement (in context of continual learning and training data manipulation).
+Copyright (c) 2023 Marcus Grum
 """
 
 __author__ = 'Marcus Grum, marcus.grum@uni-potsdam.de'
@@ -28,7 +28,7 @@ import AI_simulation_basis_communication_client as aiClient
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global logDirectory
-logDirectory = "./../messageClient/logs"#/experiment01"
+logDirectory = "./../messageClient/logs"#/experiment04"
 
 def load_data_fromfile(path):
     """
@@ -196,19 +196,19 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                 print("      streamId = " + str(streamId))
                 dim_3 = ((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)
                 if(streamId==1):
-                        if(machineId==1):
-                            prefix = "AB"
-                        elif(machineId==2):
-                            prefix = "BA"
-                        elif(machineId==3):
-                            prefix = "OA"
+                    if(machineId==1):
+                        prefix = "AAok"
+                    elif(machineId==2):
+                        prefix = "BBok"
+                    elif(machineId==3):
+                        prefix = "OOok"
                 elif(streamId==2):
-                        if(machineId==1):
-                            prefix = "AO"
-                        elif(machineId==2):
-                            prefix = "BO"
-                        elif(machineId==3):
-                            prefix = "OB"
+                    if(machineId==1):
+                        prefix = "AAdef"
+                    elif(machineId==2):
+                        prefix = "BBdef"
+                    elif(machineId==3):
+                        prefix = "OOdef"
                 plotEvaluationPerformance(
                         title_plots = "Experiment Number " + str(experimentId) + " with Focus " + prefix,
                         iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
@@ -242,18 +242,18 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             dim_3 = ((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)
             if(streamId==1):
                 if(machineId==1):
-                        prefix = "AB"
+                    prefix = "AAok"
                 elif(machineId==2):
-                        prefix = "BA"
+                    prefix = "BBok"
                 elif(machineId==3):
-                        prefix = "OA"
+                    prefix = "OOok"
             elif(streamId==2):
                 if(machineId==1):
-                        prefix = "AO"
+                    prefix = "AAdef"
                 elif(machineId==2):
-                        prefix = "BO"
+                    prefix = "BBdef"
                 elif(machineId==3):
-                        prefix = "OB"
+                    prefix = "OOdef"
             plotEvaluationPerformance(
                 title_plots = "Experiment Number All" + " with Focus " + prefix,
                 iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
@@ -370,7 +370,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.std(testingKPIs[:,:,17,1], axis=0)
             ) / 6,
         # manipulation-based validation
-        title_plot2 = "Manipulation",
+        title_plot2 = "Baseline1",
         training_accuracy_plot2 =
             (
             numpy.mean(trainingKPIs[:,:,1,0], axis=0)
@@ -444,7 +444,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.std(testingKPIs[:,:,16,1], axis=0)
             ) / 6,
         # baseline-based validation
-        title_plot3 = "Baseline",
+        title_plot3 = "Baseline2",
         training_accuracy_plot3 =
             (
             numpy.mean(trainingKPIs[:,:,2,0], axis=0)
@@ -601,8 +601,9 @@ def realize_experiment():
             #########################################
             if verbose : print("      enterint phase 1...")
             # wire and train ANNs by refinement to create initial state (while having interim states at preparation) and publish it to docker's hub
-            aiClient.realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
-            aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+            #do not create new ANNs, but consider initial ANNs form experiment01, so that the ANN evolution is comparable
+            #aiClient.realize_scenario(scenario="wire_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
+            #aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="-", activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base="-", sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration0", receiver="ReceiverB", sub_process_method="sequential")
             for iterationId_1 in range(1, maxIterationsInPhase1+1, 1):
                 if verbose : print("        iterationId_1 = " + str(iterationId_1))
                 if (machineId == 1):
@@ -632,8 +633,9 @@ def realize_experiment():
                 else:
                     pass
                 # train wired ANNs by refinement to create switching state (while having interim states at preparation) and publish it to docker's hub
-                aiClient.realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
-                aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
+                #do not refine ANNs, but consider initial ANNs form experiment01, so that the ANN evolution is comparable
+                #aiClient.realize_scenario(scenario="refine_annSolution", knowledge_base="marcusgrum/knowledgebase_experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1-1)+suffix_0, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
+                #aiClient.realize_scenario(scenario="publish_annSolution", knowledge_base="marcusgrum/experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, activation_base="-", code_base="marcusgrum/codebase_ai_core_for_image_classification", learning_base=learning_base, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1)+suffix_1, receiver="ReceiverB", sub_process_method="sequential")
                 
                 # carry out testing cases for initial testing of wired ANN
                 if (iterationId_1==1):
@@ -691,59 +693,59 @@ def realize_experiment():
                     if verbose : print("          iterationId_2 = " + str(iterationId_2))
                     if (machineId == 1):
                         if (streamId == 1):
-                            learning_base = "marcusgrum/learningbase_banana_01"
+                            learning_base = "marcusgrum/learningbase_apple_okay_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "b"
+                                suffix_3 = suffix_1 + "aokay"
                             else:
-                                suffix_2 = suffix_1 + "b"
-                                suffix_3 = suffix_1 + "b"
+                                suffix_2 = suffix_1 + "aokay"
+                                suffix_3 = suffix_1 + "aokay"
                         elif (streamId == 2):
-                            learning_base = "marcusgrum/learningbase_orange_01"
+                            learning_base = "marcusgrum/learningbase_apple_defect_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "o"
+                                suffix_3 = suffix_1 + "adefect"
                             else:
-                                suffix_2 = suffix_1 + "o"
-                                suffix_3 = suffix_1 + "o"
+                                suffix_2 = suffix_1 + "adefect"
+                                suffix_3 = suffix_1 + "adefect"
                         else:
                             pass
                     elif (machineId == 2):
                         if(streamId == 1):
-                            learning_base = "marcusgrum/learningbase_apple_01"
+                            learning_base = "marcusgrum/learningbase_banana_okay_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "a"
+                                suffix_3 = suffix_1 + "bokay"
                             else:
-                                suffix_2 = suffix_1 + "a"
-                                suffix_3 = suffix_1 + "a"
+                                suffix_2 = suffix_1 + "bokay"
+                                suffix_3 = suffix_1 + "bokay"
                         elif (streamId == 2):
-                            learning_base = "marcusgrum/learningbase_orange_01"
+                            learning_base = "marcusgrum/learningbase_banana_defect_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "o"
+                                suffix_3 = suffix_1 + "bdefect"
                             else:
-                                suffix_2 = suffix_1 + "o"
-                                suffix_3 = suffix_1 + "o"
+                                suffix_2 = suffix_1 + "bdefect"
+                                suffix_3 = suffix_1 + "bdefect"
                         else:
                             pass
                     elif (machineId == 3):
                         if(streamId == 1):
-                            learning_base = "marcusgrum/learningbase_apple_01"
+                            learning_base = "marcusgrum/learningbase_orange_okay_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "a"
+                                suffix_3 = suffix_1 + "ookay"
                             else:
-                                suffix_2 = suffix_1 + "a"
-                                suffix_3 = suffix_1 + "a"
+                                suffix_2 = suffix_1 + "ookay"
+                                suffix_3 = suffix_1 + "ookay"
                         elif (streamId == 2):
-                            learning_base = "marcusgrum/learningbase_banana_01"
+                            learning_base = "marcusgrum/learningbase_orange_defect_01"
                             if (iterationId_2 == 0):
                                 suffix_2 = suffix_1
-                                suffix_3 = suffix_1 + "b"
+                                suffix_3 = suffix_1 + "odefect"
                             else:
-                                suffix_2 = suffix_1 + "b"
-                                suffix_3 = suffix_1 + "b"
+                                suffix_2 = suffix_1 + "odefect"
+                                suffix_3 = suffix_1 + "odefect"
                         else:
                             pass
                     else:
