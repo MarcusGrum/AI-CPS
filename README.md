@@ -530,7 +530,17 @@ The third CLI represents a machine that is activated by messages in order to rea
 
 ### Realize experiments
 
-Examples can be found at this repository at `./code/experiments`.
+Experiment examples can be found at this repository at `./code/experiments`.
+
+For instance, ...
+
+- `experiment01` simulates the manipulation of CPS knowledge base by process change: product change (in context of continual learning and training data manipulation),
+
+- `experiment02` ...
+
+- `experiment03` ...
+
+- `experiment04` ... . 
 
 ### EV3-Based Industry4.0-Production-System
 
