@@ -778,7 +778,7 @@ def realize_experiment():
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+sufsuffix_0, dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
     
     # create a visual overview over all experiment runs
-    realize_experiment_plotting(maxNumberOfExperiments = maxNumberOfExperiments, maxIterationsInPhase1 = maxIterationsInPhase1, maxIterationsInPhase2 = maxIterationsInPhase2, maxMachines = maxMachines, maxValidationSets = maxValidationSets, maxStreams = maxStreams, maxNumberOfKPIs = maxNumberOfKPIs)
+    #realize_experiment_plotting(maxNumberOfExperiments = maxNumberOfExperiments, maxIterationsInPhase1 = maxIterationsInPhase1, maxIterationsInPhase2 = maxIterationsInPhase2, maxMachines = maxMachines, maxValidationSets = maxValidationSets, maxStreams = maxStreams, maxNumberOfKPIs = maxNumberOfKPIs)
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
@@ -1192,7 +1192,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
 if __name__ == '__main__':
     
     # when script is started manually, initiate experiment incl. plotting
-    #realize_experiment()
+    realize_experiment()
 
     # when script is started manually, initiate plotting
     #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
