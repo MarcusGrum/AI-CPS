@@ -29,7 +29,7 @@ import AI_simulation_basis_communication_client as aiClient
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global logDirectory
-logDirectory = "./../messageClient/logs"#/experiment03"
+logDirectory = "./../messageClient/logs"
 
 def load_data_fromfile(path):
     """

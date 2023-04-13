@@ -28,7 +28,7 @@ import AI_simulation_basis_communication_client as aiClient
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global logDirectory
-logDirectory = "./../messageClient/logs"#/experiment02"
+logDirectory = "./../messageClient/logs"
 
 def load_data_fromfile(path):
     """
@@ -610,7 +610,7 @@ def realize_experiment():
                     learning_base = "marcusgrum/learningbase_apple_banana_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "_a&b"
+                        suffix_1 = suffix_0 + "_aandb"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
@@ -618,7 +618,7 @@ def realize_experiment():
                     learning_base = "marcusgrum/learningbase_apple_orange_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "_a&o"
+                        suffix_1 = suffix_0 + "_aando"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
@@ -626,7 +626,7 @@ def realize_experiment():
                     learning_base = "marcusgrum/learningbase_banana_orange_01"
                     if (iterationId_1 == 1):
                         suffix_0 = ""
-                        suffix_1 = suffix_0 + "_b&o"
+                        suffix_1 = suffix_0 + "_bando"
                     else:
                         suffix_0 = suffix_1
                         suffix_1 = suffix_1
@@ -1190,7 +1190,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
 if __name__ == '__main__':
     
     # when script is started manually, initiate experiment incl. plotting
-    #realize_experiment()
+    realize_experiment()
 
     # when script is started manually, initiate plotting
     #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)

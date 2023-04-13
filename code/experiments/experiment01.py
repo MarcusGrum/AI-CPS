@@ -2,7 +2,7 @@
 A little script to realize an experiment,
 which is either started by communication client within the CoNM environment or manually.
 It realizes experiments on continual ANN training and testing on switching datasets.
-For instance, it simulates the manipulation of CPS knowledge base by process change: product change (in context of continual learning and training data manipulation).
+For instance, it  simulates the manipulation of CPS knowledge base by process change: product change (in context of continual learning and training data manipulation).
 Copyright (c) 2022 Marcus Grum
 """
 
@@ -28,7 +28,7 @@ import AI_simulation_basis_communication_client as aiClient
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global logDirectory
-logDirectory = "./../messageClient/logs"#/experiment01"
+logDirectory = "./../messageClient/logs"
 
 def load_data_fromfile(path):
     """
