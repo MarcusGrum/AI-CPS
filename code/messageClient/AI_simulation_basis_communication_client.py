@@ -20,7 +20,7 @@ import numpy
 # import experiments
 import sys
 sys.path.insert(0, '../experiments')
-import experiment01
+import experiment01, experiment02, experiment03, experiment04
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global hostName, hostArch, logDirectory
@@ -784,8 +784,11 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                     subprocess.Popen("docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --file "+logDirectory+"/"+sender+"-docker-file --tag marcusgrum/knowledgebase_"+sender+":latest --push  "+logDirectory+"/", shell=True, stdout=out, stderr=err)
 
      if (scenario == 'realize_annExperiment'):
-          # comment out to keep current results and avoid accidental activation
+          # comment out to keep current results and avoid accidental activation (unintended overwriting containers)
           #experiment01.realize_experiment()
+          #experiment02.realize_experiment()
+          #experiment03.realize_experiment()
+          #experiment04.realize_experiment()
           pass
 
 if __name__ == '__main__':
