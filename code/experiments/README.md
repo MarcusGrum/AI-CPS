@@ -34,17 +34,17 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 ### Experiment01
 
-#### Proceeding
+#### Proceeding for Experiment01
 
 <img src="../../documentation/experiment01/Experiment01_Proceeding.png" height="600" />
 
-#### KPIs
+#### KPIs in Experiment01
 
 KPIs collected by the experiment can be found as follows:
 
 <img src="../../documentation/experiment01/Experiment01_KpiCollection.png" height="600" />
 
-#### Results
+#### Results of Experiment01
 
 Results of this experiment can be found at the following path:
 
@@ -64,3 +64,21 @@ one can recognize this mechanism as effective approach to unlearn or intentional
 This can be seen at all, training and testing runs as well as accuracy and loss metrics.
 
 A publication about this is in progress.
+
+### Experiment02
+
+#### Proceeding for Experiment02
+
+<img src="../../documentation/experiment02/Experiment02_Proceeding.png" height="600" />
+
+### Experiment03
+
+#### Proceeding for Experiment03
+
+<img src="../../documentation/experiment03/Experiment03_Proceeding.png" height="600" />
+
+### Experiment01
+
+#### Proceeding for Experiment04
+
+<img src="../../documentation/experiment04/Experiment04_Proceeding.png" height="600" />
