@@ -48,7 +48,16 @@ The following presents an overview of all knowledge bases, their initial creatio
 
 KPIs collected by the experiment can be found as follows:
 
+For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
+These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
+
 <img src="../../documentation/experiment01/Experiment01_KpiCollection.png" height="600" />
+
+These files and KPIs are used for statistical analyses, whose code can be found at the following path:
+
+    ```
+    repository/documentation/experiment01/statistics
+    ```
 
 #### Results of Experiment01
 
