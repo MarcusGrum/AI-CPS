@@ -580,12 +580,12 @@ def realize_experiment():
     verbose = False
 
     # specify meta-parameters for experiment realization
-    maxNumberOfExperiments = 2
-    maxIterationsInPhase1 = 5
-    maxIterationsInPhase2 = 5
-    maxMachines = 3
-    maxValidationSets = 3
-    maxStreams = 2
+    maxNumberOfExperiments = 10 # given by statistical requirements
+    maxIterationsInPhase1 = 5   # given by experiment design
+    maxIterationsInPhase2 = 5   # given by experiment design
+    maxMachines = 3             # given by scenario
+    maxValidationSets = 3       # given by experiment design
+    maxStreams = 2              # given by experiment design
     maxNumberOfKPIs = 3 # 0 - accuracies, 1 - losses, 2 - n
     
     # initialize KPI collections
