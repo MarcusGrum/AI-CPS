@@ -36,13 +36,13 @@ The tool was originally developed by Dr.-Ing. Marcus Grum.
 
 #### Proceeding
 
-<img src="../../documentation/Experiment01_Proceeding.png" height="600" />
+<img src="../../documentation/experiment01/Experiment01_Proceeding.png" height="600" />
 
 #### KPIs
 
 KPIs collected by the experiment can be found as follows:
 
-<img src="../../documentation/Experiment01_KpiCollection.png" height="600" />
+<img src="../../documentation/experiment01/Experiment01_KpiCollection.png" height="600" />
 
 #### Results
 
