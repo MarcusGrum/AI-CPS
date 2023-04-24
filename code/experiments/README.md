@@ -92,7 +92,7 @@ A publication about this is in progress.
 
 <img src="../../documentation/experiment03/Experiment03_Proceeding.png" height="600" />
 
-### Experiment01
+### Experiment04
 
 #### Proceeding for Experiment04
 
