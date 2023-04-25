@@ -300,73 +300,73 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
         training_accuracy_plot1 =
             (
             numpy.mean(trainingKPIs[:,:,0,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,3,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,7,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,10,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,14,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,4,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,6,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,11,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,13,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,17,0], axis=0)
             ) / 6,
         testing_accuracy_plot1 =
             (
             numpy.mean(testingKPIs[:,:,0,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,3,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,7,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,10,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,14,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,4,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,6,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,11,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,13,0], axis=0)
             + numpy.mean(testingKPIs[:,:,17,0], axis=0)
             ) / 6, 
         training_loss_plot1 =
             (
             numpy.mean(trainingKPIs[:,:,0,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,3,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,7,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,10,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,14,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,4,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,6,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,11,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,13,1], axis=0)
             + numpy.mean(trainingKPIs[:,:,17,1], axis=0)
             ) / 6,
         testing_loss_plot1 =
             (
             numpy.mean(testingKPIs[:,:,0,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,3,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,7,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,10,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,14,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,4,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,6,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,11,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,13,1], axis=0)
             + numpy.mean(testingKPIs[:,:,17,1], axis=0)
             ) / 6,
         training_accuracy_plot1_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,0,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,3,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,7,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,10,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,14,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,4,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,6,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,11,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,13,0], axis=0)
             + numpy.std(trainingKPIs[:,:,17,0], axis=0)
             ) / 6,
         testing_accuracy_plot1_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,0,0], axis=0)
-            + numpy.std(testingKPIs[:,:,3,0], axis=0)
-            + numpy.std(testingKPIs[:,:,7,0], axis=0)
-            + numpy.std(testingKPIs[:,:,10,0], axis=0)
-            + numpy.std(testingKPIs[:,:,14,0], axis=0)
+            + numpy.std(testingKPIs[:,:,4,0], axis=0)
+            + numpy.std(testingKPIs[:,:,6,0], axis=0)
+            + numpy.std(testingKPIs[:,:,11,0], axis=0)
+            + numpy.std(testingKPIs[:,:,13,0], axis=0)
             + numpy.std(testingKPIs[:,:,17,0], axis=0)
             ) / 6, 
         training_loss_plot1_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,0,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,3,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,7,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,10,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,14,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,4,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,6,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,11,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,13,1], axis=0)
             + numpy.std(trainingKPIs[:,:,17,1], axis=0)
             ) / 6,
         testing_loss_plot1_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,0,1], axis=0)
-            + numpy.std(testingKPIs[:,:,3,1], axis=0)
-            + numpy.std(testingKPIs[:,:,7,1], axis=0)
-            + numpy.std(testingKPIs[:,:,10,1], axis=0)
-            + numpy.std(testingKPIs[:,:,14,1], axis=0)
+            + numpy.std(testingKPIs[:,:,4,1], axis=0)
+            + numpy.std(testingKPIs[:,:,6,1], axis=0)
+            + numpy.std(testingKPIs[:,:,11,1], axis=0)
+            + numpy.std(testingKPIs[:,:,13,1], axis=0)
             + numpy.std(testingKPIs[:,:,17,1], axis=0)
             ) / 6,
         # manipulation-based validation
@@ -374,73 +374,73 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
         training_accuracy_plot2 =
             (
             numpy.mean(trainingKPIs[:,:,1,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,5,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,6,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,11,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,12,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,3,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,8,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,9,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,14,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,16,0], axis=0)
             ) / 6,
         testing_accuracy_plot2 =
             (
             numpy.mean(testingKPIs[:,:,1,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,5,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,6,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,11,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,12,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,3,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,8,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,9,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,14,0], axis=0)
             + numpy.mean(testingKPIs[:,:,16,0], axis=0)
             ) / 6, 
         training_loss_plot2 =
             (
             numpy.mean(trainingKPIs[:,:,1,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,5,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,6,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,11,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,12,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,3,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,8,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,9,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,14,1], axis=0)
             + numpy.mean(trainingKPIs[:,:,16,1], axis=0)
             ) / 6,
         testing_loss_plot2 =
             (
             numpy.mean(testingKPIs[:,:,1,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,5,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,6,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,11,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,12,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,3,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,8,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,9,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,14,1], axis=0)
             + numpy.mean(testingKPIs[:,:,16,1], axis=0)
             ) / 6,
         training_accuracy_plot2_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,1,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,5,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,6,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,11,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,12,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,3,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,8,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,9,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,14,0], axis=0)
             + numpy.std(trainingKPIs[:,:,16,0], axis=0)
             ) / 6,
         testing_accuracy_plot2_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,1,0], axis=0)
-            + numpy.std(testingKPIs[:,:,5,0], axis=0)
-            + numpy.std(testingKPIs[:,:,6,0], axis=0)
-            + numpy.std(testingKPIs[:,:,11,0], axis=0)
-            + numpy.std(testingKPIs[:,:,12,0], axis=0)
+            + numpy.std(testingKPIs[:,:,3,0], axis=0)
+            + numpy.std(testingKPIs[:,:,8,0], axis=0)
+            + numpy.std(testingKPIs[:,:,9,0], axis=0)
+            + numpy.std(testingKPIs[:,:,14,0], axis=0)
             + numpy.std(testingKPIs[:,:,16,0], axis=0)
             ) / 6, 
         training_loss_plot2_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,1,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,5,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,6,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,11,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,12,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,3,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,8,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,9,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,14,1], axis=0)
             + numpy.std(trainingKPIs[:,:,16,1], axis=0)
             ) / 6,
         testing_loss_plot2_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,1,1], axis=0)
-            + numpy.std(testingKPIs[:,:,5,1], axis=0)
-            + numpy.std(testingKPIs[:,:,6,1], axis=0)
-            + numpy.std(testingKPIs[:,:,11,1], axis=0)
-            + numpy.std(testingKPIs[:,:,12,1], axis=0)
+            + numpy.std(testingKPIs[:,:,3,1], axis=0)
+            + numpy.std(testingKPIs[:,:,8,1], axis=0)
+            + numpy.std(testingKPIs[:,:,9,1], axis=0)
+            + numpy.std(testingKPIs[:,:,14,1], axis=0)
             + numpy.std(testingKPIs[:,:,16,1], axis=0)
             ) / 6,
         # baseline-based validation
@@ -448,73 +448,73 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
         training_accuracy_plot3 =
             (
             numpy.mean(trainingKPIs[:,:,2,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,4,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,8,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,9,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,13,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,5,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,7,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,10,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,12,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,15,0], axis=0)
             ) / 6,
         testing_accuracy_plot3 =
             (
             numpy.mean(testingKPIs[:,:,2,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,4,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,8,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,9,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,13,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,5,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,7,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,10,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,12,0], axis=0)
             + numpy.mean(testingKPIs[:,:,15,0], axis=0)
             ) / 6, 
         training_loss_plot3 =
             (
             numpy.mean(trainingKPIs[:,:,2,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,4,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,8,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,9,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,13,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,5,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,7,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,10,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,12,1], axis=0)
             + numpy.mean(trainingKPIs[:,:,15,1], axis=0)
             ) / 6,
         testing_loss_plot3 =
             (
             numpy.mean(testingKPIs[:,:,2,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,4,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,8,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,9,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,13,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,5,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,7,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,10,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,12,1], axis=0)
             + numpy.mean(testingKPIs[:,:,15,1], axis=0)
             ) / 6,
         training_accuracy_plot3_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,2,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,4,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,8,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,9,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,13,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,5,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,7,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,10,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,12,0], axis=0)
             + numpy.std(trainingKPIs[:,:,15,0], axis=0)
             ) / 6,
         testing_accuracy_plot3_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,2,0], axis=0)
-            + numpy.std(testingKPIs[:,:,4,0], axis=0)
-            + numpy.std(testingKPIs[:,:,8,0], axis=0)
-            + numpy.std(testingKPIs[:,:,9,0], axis=0)
-            + numpy.std(testingKPIs[:,:,13,0], axis=0)
+            + numpy.std(testingKPIs[:,:,5,0], axis=0)
+            + numpy.std(testingKPIs[:,:,7,0], axis=0)
+            + numpy.std(testingKPIs[:,:,10,0], axis=0)
+            + numpy.std(testingKPIs[:,:,12,0], axis=0)
             + numpy.std(testingKPIs[:,:,15,0], axis=0)
             ) / 6, 
         training_loss_plot3_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,2,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,4,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,8,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,9,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,13,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,5,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,7,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,10,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,12,1], axis=0)
             + numpy.std(trainingKPIs[:,:,15,1], axis=0)
             ) / 6,
         testing_loss_plot3_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,2,1], axis=0)
-            + numpy.std(testingKPIs[:,:,4,1], axis=0)
-            + numpy.std(testingKPIs[:,:,8,1], axis=0)
-            + numpy.std(testingKPIs[:,:,9,1], axis=0)
-            + numpy.std(testingKPIs[:,:,13,1], axis=0)
+            + numpy.std(testingKPIs[:,:,5,1], axis=0)
+            + numpy.std(testingKPIs[:,:,7,1], axis=0)
+            + numpy.std(testingKPIs[:,:,10,1], axis=0)
+            + numpy.std(testingKPIs[:,:,12,1], axis=0)
             + numpy.std(testingKPIs[:,:,15,1], axis=0)
             ) / 6,
         )
@@ -776,7 +776,7 @@ def realize_experiment():
                         trainingKPIs, testingKPIs = collect_KPIs(trainingKPIs=trainingKPIs, testingKPIs=testingKPIs, sender="experiment"+str(experimentId)+"_machine"+str(machineId)+"_iteration"+str(iterationId_1+iterationId_2+1)+suffix_3+sufsuffix_0, dim_1=experimentId-1, dim_2=iterationId_1+iterationId_2+1, dim_3=((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)+datasetId)
     
     # create a visual overview over all experiment runs
-    #realize_experiment_plotting(maxNumberOfExperiments = maxNumberOfExperiments, maxIterationsInPhase1 = maxIterationsInPhase1, maxIterationsInPhase2 = maxIterationsInPhase2, maxMachines = maxMachines, maxValidationSets = maxValidationSets, maxStreams = maxStreams, maxNumberOfKPIs = maxNumberOfKPIs)
+    realize_experiment_plotting(maxNumberOfExperiments = maxNumberOfExperiments, maxIterationsInPhase1 = maxIterationsInPhase1, maxIterationsInPhase2 = maxIterationsInPhase2, maxMachines = maxMachines, maxValidationSets = maxValidationSets, maxStreams = maxStreams, maxNumberOfKPIs = maxNumberOfKPIs)
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
@@ -1190,7 +1190,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
 if __name__ == '__main__':
     
     # when script is started manually, initiate experiment incl. plotting
-    realize_experiment()
+    #realize_experiment()
 
     # when script is started manually, initiate plotting
     #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
