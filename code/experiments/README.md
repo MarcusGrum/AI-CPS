@@ -78,6 +78,8 @@ Since learnt and unlearnt / forgotten knowledge base can be distinguished clearl
 one can recognize this mechanism as effective approach to unlearn or intentionally forget in ANNs.
 This can be seen at all, training and testing runs as well as accuracy and loss metrics.
 
+Statistics proofs this on a significant level.
+
 A publication about this is in progress.
 
 ### Experiment02
@@ -85,6 +87,44 @@ A publication about this is in progress.
 #### Proceeding for Experiment02
 
 <img src="../../documentation/experiment02/Experiment02_Proceeding.png" height="600" />
+
+#### KPIs in Experiment02
+
+KPIs collected by the experiment can be found as follows:
+
+For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
+These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
+
+<img src="../../documentation/experiment02/Experiment02_KpiCollection.png" height="600" />
+
+These files and KPIs are used for statistical analyses, whose code can be found at the following path:
+
+    ```
+    repository/documentation/experiment02/statistics
+    ```
+
+#### Results of Experiment02
+
+Results of this experiment can be found at the following path:
+
+    ```
+    repository/documentation/experiment02/
+    ```
+
+Here, one can find KPIs collected as well as plots generated.
+For instance, the overview plot shows accuracies and losses of training and testing courses.
+
+<img src="../../documentation/experiment02/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
+
+Here, one can see that bias and manipulation are learnt successfully and forgotten as well as remained successfully after learning base has changed.
+After the change of the learning base, bias focused product type is remained successfully, while mainipulation product type is forgotten successfully.
+Since learnt and unlearnt / forgotten knowledge base can be distinguished clearly separable (faced with non-overlapping standard deviations),
+one can recognize this mechanism as effective approach to unlearn or intentionally forget in ANNs.
+This can be seen at all, training and testing runs as well as accuracy and loss metrics.
+
+Statistics will proof this on a significant level.
+
+A publication about this is in progress.
 
 ### Experiment03
 
