@@ -559,3 +559,25 @@ such as the Research and Application Center Industry 4.0 (RACI),
 on the basis of AI-CPS.
 
 <img src="./documentation/UMLsequenceDiagram.png" height="600" />
+
+Here, a `NodeRed environment` can manage the AI knowledge base selection,
+such as by an `AI Case-Based Reasoning`. 
+The `AI simulation basis environment` carries out the ANN-based model application
+and communicates results back to interested parties via the MQTT messaging broker.
+
+Further details can be found at:
+
+Grum, M. et al. 2023. AI Case-Based Reasoning for Artificial Neural Networks. A2IA 2023 Conference.
+
+Applying this in ordinary production processes, experiments can be realized that focus on human-AI teaming.
+The following example focuses on (1) human trust, (2) human frustation as well as (3) human forgetting because of AI support.
+
+<img src="./documentation/CPF-Experiment_a.png" height="600" />
+
+Here, humans are trained remotely to realize a production process.
+Then, humans are faced with the trained production process within the real production environment.
+Thereafter, humans are faced with AI support at the trained production process within the real production environment.
+Lastly, humans are faced with the original production process (without AI support).
+In between, production performance as well as trust and frustration are surveyed.
+
+Experiments and publications about this are in progress.
