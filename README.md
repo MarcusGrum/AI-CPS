@@ -572,7 +572,7 @@ Grum, M. et al. 2023. AI Case-Based Reasoning for Artificial Neural Networks. A2
 Applying this in ordinary production processes, experiments can be realized that focus on human-AI teaming.
 The following example focuses on (1) human trust, (2) human frustation as well as (3) human forgetting because of AI support.
 
-<img src="./documentation/CPF-Experiment_a.png" height="600" />
+<img src="./documentation/Human-AI-Experiment01.png" height="600" />
 
 Here, humans are trained remotely to realize a production process.
 Then, humans are faced with the trained production process within the real production environment.
