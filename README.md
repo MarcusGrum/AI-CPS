@@ -574,7 +574,8 @@ The following example focuses on (1) human trust, (2) human frustation as well a
 
 <img src="./documentation/Human-AI-Experiment01.png" height="600" />
 
-Here, humans are trained remotely to realize a production process.
+As this Neuronal Modeling and Description Language (NMDL) model shows, 
+humans are trained remotely to realize a production process.
 Then, humans are faced with the trained production process within the real production environment.
 Thereafter, humans are faced with AI support at the trained production process within the real production environment.
 Lastly, humans are faced with the original production process (without AI support).
