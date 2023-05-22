@@ -452,7 +452,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
         title_plots = "Average Over All Experiments",
         iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
         # bias-based validation
-        title_plot1 = "Bias"
+        title_plot1 = "Bias",
         training_accuracy_plot1 = (
             numpy.mean(trainingKPIs[:,:,0,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,9,0], axis=0)
@@ -460,7 +460,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.mean(trainingKPIs[:,:,28,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,38,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,47,0], axis=0)
-        ) / 6
+        ) / 6,
         testing_accuracy_plot1 = (
             numpy.mean(testingKPIs[:,:,0,0], axis=0)
             + numpy.mean(testingKPIs[:,:,9,0], axis=0)
@@ -492,7 +492,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.std(trainingKPIs[:,:,28,0], axis=0)
             + numpy.std(trainingKPIs[:,:,38,0], axis=0)
             + numpy.std(trainingKPIs[:,:,47,0], axis=0)
-        ) / 6
+        ) / 6,
         testing_accuracy_plot1_standardDeviation = (
             numpy.std(testingKPIs[:,:,0,0], axis=0)
             + numpy.std(testingKPIs[:,:,9,0], axis=0)
@@ -601,7 +601,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.mean(trainingKPIs[:,:,32,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,42,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,52,0], axis=0)
-            ) / 6
+            ) / 6,
         testing_accuracy_plot3 =
             (
             numpy.mean(testingKPIs[:,:,4,0], axis=0)
@@ -628,7 +628,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.mean(testingKPIs[:,:,32,1], axis=0)
             + numpy.mean(testingKPIs[:,:,42,1], axis=0)
             + numpy.mean(testingKPIs[:,:,52,1], axis=0)
-            ) / 6
+            ) / 6,
         training_accuracy_plot3_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,4,0], axis=0)
@@ -666,7 +666,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.std(testingKPIs[:,:,52,1], axis=0)
             ) / 6,
         # baseline-based validation
-        title_plot4 = "Baseline"
+        title_plot4 = "Baseline",
         training_accuracy_plot4 = (
             numpy.mean(trainingKPIs[:, :, 1, 0], axis=0)
             + numpy.mean(trainingKPIs[:, :, 2, 0], axis=0)
@@ -1009,11 +1009,11 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             + numpy.std(testingKPIs[:, :, 51, 1], axis=0)
         ) / 12,
         #title_plot7, training_accuracy_plot7, testing_accuracy_plot7, training_loss_plot7, testing_loss_plot7,
-        [], [],[],[],[],
+        title_plot7=[], training_accuracy_plot7=[], testing_accuracy_plot7=[], training_loss_plot7=[], testing_loss_plot7=[],
         #title_plot8, training_accuracy_plot8, testing_accuracy_plot8, training_loss_plot8, testing_loss_plot8,
-        [], [],[],[],[],
+        title_plot8=[], training_accuracy_plot8=[], testing_accuracy_plot8=[], training_loss_plot8=[], testing_loss_plot8=[],
         #title_plot9, training_accuracy_plot9, testing_accuracy_plot9, training_loss_plot9, testing_loss_plot9,
-        [], [],[],[],[],
+        title_plot9=[], training_accuracy_plot9=[], testing_accuracy_plot9=[], training_loss_plot9=[], testing_loss_plot9=[],
         )
 
 def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
@@ -2227,7 +2227,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
     save_data_to_CsvFile([list(testing_N_baseline_standardDeviation)], path + "testing_N_defectBaseline_standardDeviation")
-    
+
     # Overview-specific KPIs
     rows = len(testing_N_baseline_standardDeviation)
     columns = 3 * 3 # (mu, std, n) * (bias, manipulation, complement, baseline, baseline_okay, baseline_defect)

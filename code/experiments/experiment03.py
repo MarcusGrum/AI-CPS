@@ -262,23 +262,23 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                         training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
                         testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1],
                         # blurred apple-based validation
-                        title_plot1 = "Blurred Apple",
-                        training_accuracy_plot1=trainingKPIs[dim_1,:,dim_3+0,0],
-                        testing_accuracy_plot1=testingKPIs[dim_1,:,dim_3+0,0], 
-                        training_loss_plot1=trainingKPIs[dim_1,:,dim_3+0,1],
-                        testing_loss_plot1=testingKPIs[dim_1,:,dim_3+0,1],
+                        title_plot4 = "Blurred Apple",
+                        training_accuracy_plot4=trainingKPIs[dim_1,:,dim_3+3,0],
+                        testing_accuracy_plot4=testingKPIs[dim_1,:,dim_3+3,0], 
+                        training_loss_plot4=trainingKPIs[dim_1,:,dim_3+3,1],
+                        testing_loss_plot4=testingKPIs[dim_1,:,dim_3+3,1],
                         # blurred banana-based validation
-                        title_plot2 = "Blurred Banana",
-                        training_accuracy_plot2=trainingKPIs[dim_1,:,dim_3+1,0],
-                        testing_accuracy_plot2=testingKPIs[dim_1,:,dim_3+1,0], 
-                        training_loss_plot2=trainingKPIs[dim_1,:,dim_3+1,1],
-                        testing_loss_plot2=testingKPIs[dim_1,:,dim_3+1,1],
+                        title_plot5 = "Blurred Banana",
+                        training_accuracy_plot5=trainingKPIs[dim_1,:,dim_3+4,0],
+                        testing_accuracy_plot5=testingKPIs[dim_1,:,dim_3+4,0], 
+                        training_loss_plot5=trainingKPIs[dim_1,:,dim_3+4,1],
+                        testing_loss_plot5=testingKPIs[dim_1,:,dim_3+4,1],
                         # blurred orange-based validation
-                        title_plot3 = "Blurred Orange",
-                        training_accuracy_plot3=trainingKPIs[dim_1,:,dim_3+2,0],
-                        testing_accuracy_plot3=testingKPIs[dim_1,:,dim_3+2,0], 
-                        training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
-                        testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1]
+                        title_plot6 = "Blurred Orange",
+                        training_accuracy_plot6=trainingKPIs[dim_1,:,dim_3+2,0],
+                        testing_accuracy_plot6=testingKPIs[dim_1,:,dim_3+2,0], 
+                        training_loss_plot6=trainingKPIs[dim_1,:,dim_3+2,1],
+                        testing_loss_plot6=testingKPIs[dim_1,:,dim_3+2,1]
                         )
                 dim_3 = dim_3 + maxValidationSets
 
