@@ -780,7 +780,7 @@ def realize_experiment():
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
-    This function separates individual KPI typess for this experiment and stores each KPI summary at log directory.
+    This function separates individual KPI types for this experiment and stores each KPI summary at log directory.
     KPI types, we can find for the following types of levels:
     (-) individual plots per experiment run
         (AB for run 1 / 2 / ... / maxNumberOfExperiments)

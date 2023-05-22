@@ -76,9 +76,15 @@ def plotEvaluationPerformance(
     title_plot1, training_accuracy_plot1, testing_accuracy_plot1, training_loss_plot1, testing_loss_plot1,
     title_plot2, training_accuracy_plot2, testing_accuracy_plot2, training_loss_plot2, testing_loss_plot2,
     title_plot3, training_accuracy_plot3, testing_accuracy_plot3, training_loss_plot3, testing_loss_plot3,
+    title_plot4, training_accuracy_plot4, testing_accuracy_plot4, training_loss_plot4, testing_loss_plot4,
+    title_plot5, training_accuracy_plot5, testing_accuracy_plot5, training_loss_plot5, testing_loss_plot5,
+    title_plot6, training_accuracy_plot6, testing_accuracy_plot6, training_loss_plot6, testing_loss_plot6,
         training_accuracy_plot1_standardDeviation=[], testing_accuracy_plot1_standardDeviation=[], training_loss_plot1_standardDeviation=[], testing_loss_plot1_standardDeviation=[],
         training_accuracy_plot2_standardDeviation=[], testing_accuracy_plot2_standardDeviation=[], training_loss_plot2_standardDeviation=[], testing_loss_plot2_standardDeviation=[],
         training_accuracy_plot3_standardDeviation=[], testing_accuracy_plot3_standardDeviation=[], training_loss_plot3_standardDeviation=[], testing_loss_plot3_standardDeviation=[],
+        training_accuracy_plot4_standardDeviation=[], testing_accuracy_plot4_standardDeviation=[], training_loss_plot4_standardDeviation=[], testing_loss_plot4_standardDeviation=[],
+        training_accuracy_plot5_standardDeviation=[], testing_accuracy_plot5_standardDeviation=[], training_loss_plot5_standardDeviation=[], testing_loss_plot5_standardDeviation=[],
+        training_accuracy_plot6_standardDeviation=[], testing_accuracy_plot6_standardDeviation=[], training_loss_plot6_standardDeviation=[], testing_loss_plot6_standardDeviation=[],
     ):
     """
     This function creates and stores the (1) accuracy plot and (2) loss plot
@@ -105,10 +111,16 @@ def plotEvaluationPerformance(
     plt.plot(iterations, training_accuracy_plot1, label=title_plot1+" Focus")
     plt.plot(iterations, training_accuracy_plot2, label=title_plot2+" Focus")
     plt.plot(iterations, training_accuracy_plot3, label=title_plot3+" Focus")
+    plt.plot(iterations, training_accuracy_plot4, label=title_plot4+" Focus")
+    plt.plot(iterations, training_accuracy_plot5, label=title_plot5+" Focus")
+    plt.plot(iterations, training_accuracy_plot6, label=title_plot6+" Focus")
     if("All" in title_plots):
         plt.errorbar(iterations, training_accuracy_plot1, training_accuracy_plot1_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, training_accuracy_plot2, training_accuracy_plot2_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, training_accuracy_plot3, training_accuracy_plot3_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_accuracy_plot4, training_accuracy_plot4_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_accuracy_plot5, training_accuracy_plot5_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_accuracy_plot6, training_accuracy_plot6_standardDeviation, linestyle='None', marker='^')
     plt.axvline(x=0, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=5, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=11, ymin=0., ymax=1., linestyle='dotted')
@@ -120,10 +132,16 @@ def plotEvaluationPerformance(
     plt.plot(iterations, training_loss_plot1, label=title_plot1+" Focus")
     plt.plot(iterations, training_loss_plot2, label=title_plot2+" Focus")
     plt.plot(iterations, training_loss_plot3, label=title_plot3+" Focus")
+    plt.plot(iterations, training_loss_plot4, label=title_plot4+" Focus")
+    plt.plot(iterations, training_loss_plot5, label=title_plot5+" Focus")
+    plt.plot(iterations, training_loss_plot6, label=title_plot6+" Focus")
     if("All" in title_plots):
         plt.errorbar(iterations, training_loss_plot1, training_loss_plot1_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, training_loss_plot2, training_loss_plot2_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, training_loss_plot3, training_loss_plot3_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_loss_plot4, training_loss_plot4_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_loss_plot5, training_loss_plot5_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, training_loss_plot6, training_loss_plot6_standardDeviation, linestyle='None', marker='^')
     plt.axvline(x=0, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=5, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=11, ymin=0., ymax=1., linestyle='dotted')
@@ -135,10 +153,16 @@ def plotEvaluationPerformance(
     plt.plot(iterations, testing_accuracy_plot1, label=title_plot1+" Focus")
     plt.plot(iterations, testing_accuracy_plot2, label=title_plot2+" Focus")
     plt.plot(iterations, testing_accuracy_plot3, label=title_plot3+" Focus")
+    plt.plot(iterations, testing_accuracy_plot4, label=title_plot4+" Focus")
+    plt.plot(iterations, testing_accuracy_plot5, label=title_plot5+" Focus")
+    plt.plot(iterations, testing_accuracy_plot6, label=title_plot6+" Focus")
     if("All" in title_plots):
         plt.errorbar(iterations, testing_accuracy_plot1, testing_accuracy_plot1_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, testing_accuracy_plot2, testing_accuracy_plot2_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, testing_accuracy_plot3, testing_accuracy_plot3_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_accuracy_plot4, testing_accuracy_plot4_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_accuracy_plot5, testing_accuracy_plot5_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_accuracy_plot6, testing_accuracy_plot6_standardDeviation, linestyle='None', marker='^')
     plt.axvline(x=0, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=5, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=11, ymin=0., ymax=1., linestyle='dotted')
@@ -150,10 +174,16 @@ def plotEvaluationPerformance(
     plt.plot(iterations, testing_loss_plot1, label=title_plot1+" Focus")
     plt.plot(iterations, testing_loss_plot2, label=title_plot2+" Focus")
     plt.plot(iterations, testing_loss_plot3, label=title_plot3+" Focus")
+    plt.plot(iterations, testing_loss_plot4, label=title_plot4+" Focus")
+    plt.plot(iterations, testing_loss_plot5, label=title_plot5+" Focus")
+    plt.plot(iterations, testing_loss_plot6, label=title_plot6+" Focus")
     if("All" in title_plots):
         plt.errorbar(iterations, testing_loss_plot1, testing_loss_plot1_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, testing_loss_plot2, testing_loss_plot2_standardDeviation, linestyle='None', marker='^')
         plt.errorbar(iterations, testing_loss_plot3, testing_loss_plot3_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_loss_plot4, testing_loss_plot4_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_loss_plot5, testing_loss_plot5_standardDeviation, linestyle='None', marker='^')
+        plt.errorbar(iterations, testing_loss_plot6, testing_loss_plot6_standardDeviation, linestyle='None', marker='^')
     plt.axvline(x=0, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=5, ymin=0., ymax=1., linestyle='dotted')
     plt.axvline(x=11, ymin=0., ymax=1., linestyle='dotted')
@@ -177,9 +207,9 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
     (1) individual plots per experiment run
         (AB for run 1 / 2 / ... / maxNumberOfExperiments)
     (2) average plots over all experiment runs
-        (AB / AO / BA / BO / OA / OB)
+        (AA / AAblurred / BB / BBblurred / OO / OOblurred)
     (3) overall plots averaging the same types of averaged experiment runs
-        (Bias / Manipulation / Baseline)
+        (Clean Refinement / Disturbance / Bias /Manipulation / Baseline / Blurred Baseline)
     """
 
     # 0 - accuracies, 1 - losses, 2 - n
@@ -198,7 +228,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                 dim_3 = ((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)
                 if(streamId==1):
                     if(machineId==1):
-                        prefix = "AAclean"
+                        prefix = "AA"
                     elif(machineId==2):
                         prefix = "BB"
                     elif(machineId==3):
@@ -230,6 +260,24 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                         training_accuracy_plot3=trainingKPIs[dim_1,:,dim_3+2,0],
                         testing_accuracy_plot3=testingKPIs[dim_1,:,dim_3+2,0], 
                         training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
+                        testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1],
+                        # blurred apple-based validation
+                        title_plot1 = "Blurred Apple",
+                        training_accuracy_plot1=trainingKPIs[dim_1,:,dim_3+0,0],
+                        testing_accuracy_plot1=testingKPIs[dim_1,:,dim_3+0,0], 
+                        training_loss_plot1=trainingKPIs[dim_1,:,dim_3+0,1],
+                        testing_loss_plot1=testingKPIs[dim_1,:,dim_3+0,1],
+                        # blurred banana-based validation
+                        title_plot2 = "Blurred Banana",
+                        training_accuracy_plot2=trainingKPIs[dim_1,:,dim_3+1,0],
+                        testing_accuracy_plot2=testingKPIs[dim_1,:,dim_3+1,0], 
+                        training_loss_plot2=trainingKPIs[dim_1,:,dim_3+1,1],
+                        testing_loss_plot2=testingKPIs[dim_1,:,dim_3+1,1],
+                        # blurred orange-based validation
+                        title_plot3 = "Blurred Orange",
+                        training_accuracy_plot3=trainingKPIs[dim_1,:,dim_3+2,0],
+                        testing_accuracy_plot3=testingKPIs[dim_1,:,dim_3+2,0], 
+                        training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
                         testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1]
                         )
                 dim_3 = dim_3 + maxValidationSets
@@ -243,7 +291,7 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
             dim_3 = ((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)
             if(streamId==1):
                 if(machineId==1):
-                    prefix = "AAclean"
+                    prefix = "AA"
                 elif(machineId==2):
                     prefix = "BB"
                 elif(machineId==3):
@@ -288,236 +336,488 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                 testing_accuracy_plot3_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+2,0], axis=0), 
                 training_loss_plot3_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+2,1], axis=0),
                 testing_loss_plot3_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+2,1], axis=0),
+                # blurred apple-based validation
+                title_plot4 = "Blurred Apple",
+                training_accuracy_plot4=numpy.mean(trainingKPIs[:,:,dim_3+3,0], axis=0),
+                testing_accuracy_plot4=numpy.mean(testingKPIs[:,:,dim_3+3,0], axis=0), 
+                training_loss_plot4=numpy.mean(trainingKPIs[:,:,dim_3+3,1], axis=0),
+                testing_loss_plot4=numpy.mean(testingKPIs[:,:,dim_3+3,1], axis=0),
+                training_accuracy_plot4_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+3,0], axis=0),
+                testing_accuracy_plot4_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+3,0], axis=0), 
+                training_loss_plot4_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+3,1], axis=0),
+                testing_loss_plot4_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+3,1], axis=0),
+                # blurred banana-based validation
+                title_plot5 = "Blurred Banana",
+                training_accuracy_plot5=numpy.mean(trainingKPIs[:,:,dim_3+4,0], axis=0),
+                testing_accuracy_plot5=numpy.mean(testingKPIs[:,:,dim_3+4,0], axis=0), 
+                training_loss_plot5=numpy.mean(trainingKPIs[:,:,dim_3+4,1], axis=0),
+                testing_loss_plot5=numpy.mean(testingKPIs[:,:,dim_3+4,1], axis=0),
+                training_accuracy_plot5_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+4,0], axis=0),
+                testing_accuracy_plot5_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+4,0], axis=0), 
+                training_loss_plot5_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+4,1], axis=0),
+                testing_loss_plot5_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+4,1], axis=0),
+                # blurred orange-based validation
+                title_plot6 = "Blurred Orange",
+                training_accuracy_plot6=numpy.mean(trainingKPIs[:,:,dim_3+5,0], axis=0),
+                testing_accuracy_plot6=numpy.mean(testingKPIs[:,:,dim_3+5,0], axis=0), 
+                training_loss_plot6=numpy.mean(trainingKPIs[:,:,dim_3+5,1], axis=0),
+                testing_loss_plot6=numpy.mean(testingKPIs[:,:,dim_3+5,1], axis=0),
+                training_accuracy_plot6_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+5,0], axis=0),
+                testing_accuracy_plot6_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+5,0], axis=0), 
+                training_loss_plot6_standardDeviation=numpy.std(trainingKPIs[:,:,dim_3+5,1], axis=0),
+                testing_loss_plot6_standardDeviation=numpy.std(testingKPIs[:,:,dim_3+5,1], axis=0)
                 )
             dim_3 = dim_3 + maxValidationSets
 
-    # Build plot for sum over bias / manipulation / baseline
-    print('printing plots over all biases, manipulations and baselines...')
+    # Build plot for sum over Clean Refinement / Disturbance / Bias / Manipulation / Baseline / Blurred Baseline
+    print('printing plots over all refinements, disturbances, biases, manipulations and baselines...')
     plotEvaluationPerformance(
         title_plots = "Average Over All Experiments",
         iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
-        # bias-based validation
-        title_plot1 = "Bias",
+        # clean refinement-based validation
+        title_plot1 = "Clean Refinement",
         training_accuracy_plot1 =
             (
             numpy.mean(trainingKPIs[:,:,0,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,3,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,7,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,10,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,14,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,17,0], axis=0)
-            ) / 6,
+            + numpy.mean(trainingKPIs[:,:,13,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,26,0], axis=0)
+            ) / 3,
         testing_accuracy_plot1 =
             (
             numpy.mean(testingKPIs[:,:,0,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,3,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,7,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,10,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,14,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,17,0], axis=0)
-            ) / 6, 
+            + numpy.mean(testingKPIs[:,:,13,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,26,0], axis=0)
+            ) / 3, 
         training_loss_plot1 =
             (
             numpy.mean(trainingKPIs[:,:,0,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,3,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,7,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,10,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,14,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,17,1], axis=0)
-            ) / 6,
+            + numpy.mean(trainingKPIs[:,:,13,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,26,1], axis=0)
+            ) / 3,
         testing_loss_plot1 =
             (
             numpy.mean(testingKPIs[:,:,0,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,3,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,7,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,10,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,14,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,17,1], axis=0)
-            ) / 6,
+            + numpy.mean(testingKPIs[:,:,13,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,26,1], axis=0)
+            ) / 3,
         training_accuracy_plot1_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,0,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,3,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,7,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,10,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,14,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,17,0], axis=0)
-            ) / 6,
+            + numpy.std(trainingKPIs[:,:,13,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,26,0], axis=0)
+            ) / 3,
         testing_accuracy_plot1_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,0,0], axis=0)
-            + numpy.std(testingKPIs[:,:,3,0], axis=0)
-            + numpy.std(testingKPIs[:,:,7,0], axis=0)
-            + numpy.std(testingKPIs[:,:,10,0], axis=0)
-            + numpy.std(testingKPIs[:,:,14,0], axis=0)
-            + numpy.std(testingKPIs[:,:,17,0], axis=0)
-            ) / 6, 
+            + numpy.std(testingKPIs[:,:13,0], axis=0)
+            + numpy.std(testingKPIs[:,:,26,0], axis=0)
+            ) / 3, 
         training_loss_plot1_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,0,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,3,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,7,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,10,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,14,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,17,1], axis=0)
-            ) / 6,
+            + numpy.std(trainingKPIs[:,:,13,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,26,1], axis=0)
+            ) / 3,
         testing_loss_plot1_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,0,1], axis=0)
-            + numpy.std(testingKPIs[:,:,3,1], axis=0)
-            + numpy.std(testingKPIs[:,:,7,1], axis=0)
-            + numpy.std(testingKPIs[:,:,10,1], axis=0)
-            + numpy.std(testingKPIs[:,:,14,1], axis=0)
-            + numpy.std(testingKPIs[:,:,17,1], axis=0)
-            ) / 6,
-        # manipulation-based validation
-        title_plot2 = "Baseline1",
+            + numpy.std(testingKPIs[:,:,13,1], axis=0)
+            + numpy.std(testingKPIs[:,:,26,1], axis=0)
+            ) / 3,
+        # disturbance-based validation
+        title_plot2 = "Disturbance",
         training_accuracy_plot2 =
             (
-            numpy.mean(trainingKPIs[:,:,1,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,5,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,6,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,11,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,12,0], axis=0)
+            numpy.mean(trainingKPIs[:,:,3,0], axis=0)
             + numpy.mean(trainingKPIs[:,:,16,0], axis=0)
-            ) / 6,
+            + numpy.mean(trainingKPIs[:,:,29,0], axis=0)
+            ) / 3,
         testing_accuracy_plot2 =
             (
-            numpy.mean(testingKPIs[:,:,1,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,5,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,6,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,11,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,12,0], axis=0)
+            numpy.mean(testingKPIs[:,:,3,0], axis=0)
             + numpy.mean(testingKPIs[:,:,16,0], axis=0)
-            ) / 6, 
+            + numpy.mean(testingKPIs[:,:,29,0], axis=0)
+            ) / 3, 
         training_loss_plot2 =
             (
-            numpy.mean(trainingKPIs[:,:,1,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,5,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,6,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,11,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,12,1], axis=0)
+            numpy.mean(trainingKPIs[:,:,3,1], axis=0)
             + numpy.mean(trainingKPIs[:,:,16,1], axis=0)
-            ) / 6,
+            + numpy.mean(trainingKPIs[:,:,29,1], axis=0)
+            ) / 3,
         testing_loss_plot2 =
             (
-            numpy.mean(testingKPIs[:,:,1,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,5,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,6,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,11,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,12,1], axis=0)
+            numpy.mean(testingKPIs[:,:,3,1], axis=0)
             + numpy.mean(testingKPIs[:,:,16,1], axis=0)
-            ) / 6,
+            + numpy.mean(testingKPIs[:,:,29,1], axis=0)
+            ) / 3,
         training_accuracy_plot2_standardDeviation =
             (
-            numpy.std(trainingKPIs[:,:,1,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,5,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,6,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,11,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,12,0], axis=0)
+            numpy.std(trainingKPIs[:,:,3,0], axis=0)
             + numpy.std(trainingKPIs[:,:,16,0], axis=0)
-            ) / 6,
+            + numpy.std(trainingKPIs[:,:,29,0], axis=0)
+            ) / 3,
         testing_accuracy_plot2_standardDeviation =
             (
-            numpy.std(testingKPIs[:,:,1,0], axis=0)
-            + numpy.std(testingKPIs[:,:,5,0], axis=0)
-            + numpy.std(testingKPIs[:,:,6,0], axis=0)
-            + numpy.std(testingKPIs[:,:,11,0], axis=0)
-            + numpy.std(testingKPIs[:,:,12,0], axis=0)
+            numpy.std(testingKPIs[:,:,3,0], axis=0)
             + numpy.std(testingKPIs[:,:,16,0], axis=0)
-            ) / 6, 
+            + numpy.std(testingKPIs[:,:,29,0], axis=0)
+            ) / 3, 
         training_loss_plot2_standardDeviation =
             (
-            numpy.std(trainingKPIs[:,:,1,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,5,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,6,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,11,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,12,1], axis=0)
+            numpy.std(trainingKPIs[:,:,3,1], axis=0)
             + numpy.std(trainingKPIs[:,:,16,1], axis=0)
-            ) / 6,
+            + numpy.std(trainingKPIs[:,:,29,1], axis=0)
+            ) / 3,
         testing_loss_plot2_standardDeviation =
             (
-            numpy.std(testingKPIs[:,:,1,1], axis=0)
-            + numpy.std(testingKPIs[:,:,5,1], axis=0)
-            + numpy.std(testingKPIs[:,:,6,1], axis=0)
-            + numpy.std(testingKPIs[:,:,11,1], axis=0)
-            + numpy.std(testingKPIs[:,:,12,1], axis=0)
+            numpy.std(testingKPIs[:,:,3,1], axis=0)
             + numpy.std(testingKPIs[:,:,16,1], axis=0)
-            ) / 6,
-        # baseline-based validation
-        title_plot3 = "Baseline2",
+            + numpy.std(testingKPIs[:,:,29,1], axis=0)
+            ) / 3,
+        # bias-based validation
+        title_plot3 = "Bias",
         training_accuracy_plot3 =
             (
-            numpy.mean(trainingKPIs[:,:,2,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,4,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,8,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,9,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,13,0], axis=0)
-            + numpy.mean(trainingKPIs[:,:,15,0], axis=0)
-            ) / 6,
+            numpy.mean(trainingKPIs[:,:,6,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,19,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,32,0], axis=0)
+            ) / 3,
         testing_accuracy_plot3 =
             (
-            numpy.mean(testingKPIs[:,:,2,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,4,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,8,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,9,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,13,0], axis=0)
-            + numpy.mean(testingKPIs[:,:,15,0], axis=0)
-            ) / 6, 
+            numpy.mean(testingKPIs[:,:,6,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,19,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,32,0], axis=0)
+            ) / 3, 
         training_loss_plot3 =
             (
-            numpy.mean(trainingKPIs[:,:,2,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,4,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,8,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,9,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,13,1], axis=0)
-            + numpy.mean(trainingKPIs[:,:,15,1], axis=0)
-            ) / 6,
+            numpy.mean(trainingKPIs[:,:,6,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,19,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,32,1], axis=0)
+            ) / 3,
         testing_loss_plot3 =
             (
-            numpy.mean(testingKPIs[:,:,2,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,4,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,8,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,9,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,13,1], axis=0)
-            + numpy.mean(testingKPIs[:,:,15,1], axis=0)
-            ) / 6,
+            numpy.mean(testingKPIs[:,:,6,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,19,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,32,1], axis=0)
+            ) / 3,
         training_accuracy_plot3_standardDeviation =
             (
-            numpy.std(trainingKPIs[:,:,2,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,4,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,8,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,9,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,13,0], axis=0)
-            + numpy.std(trainingKPIs[:,:,15,0], axis=0)
-            ) / 6,
+            numpy.std(trainingKPIs[:,:,6,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,19,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,32,0], axis=0)
+            ) / 3,
         testing_accuracy_plot3_standardDeviation =
             (
-            numpy.std(testingKPIs[:,:,2,0], axis=0)
-            + numpy.std(testingKPIs[:,:,4,0], axis=0)
-            + numpy.std(testingKPIs[:,:,8,0], axis=0)
-            + numpy.std(testingKPIs[:,:,9,0], axis=0)
-            + numpy.std(testingKPIs[:,:,13,0], axis=0)
-            + numpy.std(testingKPIs[:,:,15,0], axis=0)
-            ) / 6, 
+            numpy.std(testingKPIs[:,:,6,0], axis=0)
+            + numpy.std(testingKPIs[:,:,19,0], axis=0)
+            + numpy.std(testingKPIs[:,:,32,0], axis=0)
+            ) / 3, 
         training_loss_plot3_standardDeviation =
             (
-            numpy.std(trainingKPIs[:,:,2,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,4,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,8,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,9,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,13,1], axis=0)
-            + numpy.std(trainingKPIs[:,:,15,1], axis=0)
-            ) / 6,
+            numpy.std(trainingKPIs[:,:,6,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,19,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,32,1], axis=0)
+            ) / 3,
         testing_loss_plot3_standardDeviation =
             (
-            numpy.std(testingKPIs[:,:,2,1], axis=0)
-            + numpy.std(testingKPIs[:,:,4,1], axis=0)
+            numpy.std(testingKPIs[:,:,6,1], axis=0)
+            + numpy.std(testingKPIs[:,:,19,1], axis=0)
+            + numpy.std(testingKPIs[:,:,32,1], axis=0)
+            ) / 3,
+        # manipulation-based validation
+        title_plot4 = "Manipulation",
+        training_accuracy_plot4 =
+            (
+            numpy.mean(trainingKPIs[:,:,9,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,22,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,35,0], axis=0)
+            ) / 3,
+        testing_accuracy_plot4 =
+            (
+            numpy.mean(testingKPIs[:,:,9,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,22,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,35,0], axis=0)
+            ) / 3, 
+        training_loss_plot4 =
+            (
+            numpy.mean(trainingKPIs[:,:,9,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,22,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,35,1], axis=0)
+            ) / 3,
+        testing_loss_plot4 =
+            (
+            numpy.mean(testingKPIs[:,:,9,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,22,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,35,1], axis=0)
+            ) / 3,
+        training_accuracy_plot4_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,9,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,22,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,35,0], axis=0)
+            ) / 3,
+        testing_accuracy_plot4_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,9,0], axis=0)
+            + numpy.std(testingKPIs[:,:,22,0], axis=0)
+            + numpy.std(testingKPIs[:,:,35,0], axis=0)
+            ) / 3, 
+        training_loss_plot4_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,9,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,22,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,35,1], axis=0)
+            ) / 3,
+        testing_loss_plot4_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,9,1], axis=0)
+            + numpy.std(testingKPIs[:,:,22,1], axis=0)
+            + numpy.std(testingKPIs[:,:,35,1], axis=0)
+            ) / 3,
+        # baseline-based validation
+        title_plot5 = "Baseline",
+        training_accuracy_plot5 =
+            (
+            numpy.mean(trainingKPIs[:,:,1,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,2,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,7,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,8,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,12,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,14,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,18,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,20,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,24,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,25,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,30,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,31,0], axis=0)
+            ) / 12,
+        testing_accuracy_plot5 =
+            (
+            numpy.mean(testingKPIs[:,:,1,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,2,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,7,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,8,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,12,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,14,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,18,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,20,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,24,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,25,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,30,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,31,0], axis=0)
+            ) / 12, 
+        training_loss_plot5 =
+            (
+            numpy.mean(trainingKPIs[:,:,1,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,2,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,7,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,8,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,12,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,14,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,18,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,20,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,24,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,25,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,30,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,31,1], axis=0)
+            ) / 12,
+        testing_loss_plot5 =
+            (
+            numpy.mean(testingKPIs[:,:,1,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,2,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,7,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,8,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,12,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,14,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,18,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,20,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,24,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,25,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,30,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,31,1], axis=0)
+            ) / 12,
+        training_accuracy_plot5_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,1,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,2,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,7,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,8,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,12,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,14,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,18,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,20,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,24,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,25,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,30,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,31,0], axis=0)
+            ) / 12,
+        testing_accuracy_plot5_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,1,0], axis=0)
+            + numpy.std(testingKPIs[:,:,2,0], axis=0)
+            + numpy.std(testingKPIs[:,:,7,0], axis=0)
+            + numpy.std(testingKPIs[:,:,8,0], axis=0)
+            + numpy.std(testingKPIs[:,:,12,0], axis=0)
+            + numpy.std(testingKPIs[:,:,14,0], axis=0)
+            + numpy.std(testingKPIs[:,:,18,0], axis=0)
+            + numpy.std(testingKPIs[:,:,20,0], axis=0)
+            + numpy.std(testingKPIs[:,:,24,0], axis=0)
+            + numpy.std(testingKPIs[:,:,25,0], axis=0)
+            + numpy.std(testingKPIs[:,:,30,0], axis=0)
+            + numpy.std(testingKPIs[:,:,31,0], axis=0)
+            ) / 12, 
+        training_loss_plot5_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,1,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,2,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,7,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,8,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,12,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,14,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,18,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,20,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,24,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,25,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,30,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,31,1], axis=0)
+            ) / 12,
+        testing_loss_plot5_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,1,1], axis=0)
+            + numpy.std(testingKPIs[:,:,2,1], axis=0)
+            + numpy.std(testingKPIs[:,:,7,1], axis=0)
             + numpy.std(testingKPIs[:,:,8,1], axis=0)
-            + numpy.std(testingKPIs[:,:,9,1], axis=0)
-            + numpy.std(testingKPIs[:,:,13,1], axis=0)
+            + numpy.std(testingKPIs[:,:,12,1], axis=0)
+            + numpy.std(testingKPIs[:,:,14,1], axis=0)
+            + numpy.std(testingKPIs[:,:,18,1], axis=0)
+            + numpy.std(testingKPIs[:,:,20,1], axis=0)
+            + numpy.std(testingKPIs[:,:,24,1], axis=0)
+            + numpy.std(testingKPIs[:,:,25,1], axis=0)
+            + numpy.std(testingKPIs[:,:,30,1], axis=0)
+            + numpy.std(testingKPIs[:,:,31,1], axis=0)
+            ) / 12,
+        # blurred baseline-based validation
+        title_plot6 = "Blurred Baseline",
+        training_accuracy_plot6 =
+            (
+            numpy.mean(trainingKPIs[:,:,4,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,5,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,10,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,11,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,15,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,17,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,21,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,23,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,27,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,28,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,33,0], axis=0)
+            + numpy.mean(trainingKPIs[:,:,34,0], axis=0)
+            ) / 12,
+        testing_accuracy_plot6 =
+            (
+            numpy.mean(testingKPIs[:,:,4,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,5,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,10,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,11,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,15,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,17,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,21,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,23,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,27,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,28,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,33,0], axis=0)
+            + numpy.mean(testingKPIs[:,:,34,0], axis=0)
+            ) / 12, 
+        training_loss_plot6 =
+            (
+            numpy.mean(trainingKPIs[:,:,4,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,5,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,10,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,11,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,15,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,17,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,21,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,23,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,27,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,28,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,33,1], axis=0)
+            + numpy.mean(trainingKPIs[:,:,34,1], axis=0)
+            ) / 12,
+        testing_loss_plot6 =
+            (
+            numpy.mean(testingKPIs[:,:,4,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,5,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,10,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,11,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,15,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,17,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,21,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,23,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,27,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,28,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,33,1], axis=0)
+            + numpy.mean(testingKPIs[:,:,34,1], axis=0)
+            ) / 12,
+        training_accuracy_plot6_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,4,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,5,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,10,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,11,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,15,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,17,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,21,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,23,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,27,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,28,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,33,0], axis=0)
+            + numpy.std(trainingKPIs[:,:,34,0], axis=0)
+            ) / 12,
+        testing_accuracy_plot6_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,4,0], axis=0)
+            + numpy.std(testingKPIs[:,:,5,0], axis=0)
+            + numpy.std(testingKPIs[:,:,10,0], axis=0)
+            + numpy.std(testingKPIs[:,:,11,0], axis=0)
+            + numpy.std(testingKPIs[:,:,15,0], axis=0)
+            + numpy.std(testingKPIs[:,:,17,0], axis=0)
+            + numpy.std(testingKPIs[:,:,21,0], axis=0)
+            + numpy.std(testingKPIs[:,:,23,0], axis=0)
+            + numpy.std(testingKPIs[:,:,27,0], axis=0)
+            + numpy.std(testingKPIs[:,:,28,0], axis=0)
+            + numpy.std(testingKPIs[:,:,33,0], axis=0)
+            + numpy.std(testingKPIs[:,:,34,0], axis=0)
+            ) / 12, 
+        training_loss_plot6_standardDeviation =
+            (
+            numpy.std(trainingKPIs[:,:,4,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,5,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,10,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,11,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,15,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,17,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,21,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,23,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,27,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,28,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,33,1], axis=0)
+            + numpy.std(trainingKPIs[:,:,34,1], axis=0)
+            ) / 12,
+        testing_loss_plot6_standardDeviation =
+            (
+            numpy.std(testingKPIs[:,:,4,1], axis=0)
+            + numpy.std(testingKPIs[:,:,5,1], axis=0)
+            + numpy.std(testingKPIs[:,:,10,1], axis=0)
+            + numpy.std(testingKPIs[:,:,11,1], axis=0)
             + numpy.std(testingKPIs[:,:,15,1], axis=0)
-            ) / 6,
+            + numpy.std(testingKPIs[:,:,17,1], axis=0)
+            + numpy.std(testingKPIs[:,:,21,1], axis=0)
+            + numpy.std(testingKPIs[:,:,23,1], axis=0)
+            + numpy.std(testingKPIs[:,:,27,1], axis=0)
+            + numpy.std(testingKPIs[:,:,28,1], axis=0)
+            + numpy.std(testingKPIs[:,:,33,1], axis=0)
+            + numpy.std(testingKPIs[:,:,34,1], axis=0)
+            ) / 12,
         )
 
 def collect_KPIs(trainingKPIs, testingKPIs, sender, dim_1, dim_2, dim_3):
@@ -584,7 +884,7 @@ def realize_experiment():
     maxIterationsInPhase1 = 5   # given by experiment design
     maxIterationsInPhase2 = 5   # given by experiment design
     maxMachines = 3             # given by scenario
-    maxValidationSets = 3       # given by experiment design
+    maxValidationSets = 3+3     # given by experiment design (a/b/c + their variants as blurred)
     maxStreams = 2              # given by experiment design
     maxNumberOfKPIs = 3 # 0 - accuracies, 1 - losses, 2 - n
     
@@ -653,6 +953,15 @@ def realize_experiment():
                             elif (datasetId == 2):
                                 sufsuffix_0 = "_evalWith_o"
                                 evaluation_base="marcusgrum/learningbase_orange_01"
+                            elif (datasetId == 3):
+                                sufsuffix_0 = "_evalWith_a_blurred"
+                                evaluation_base="marcusgrum/learningbase_apple_blurred_01"
+                            elif (datasetId == 4):
+                                sufsuffix_0 = "_evalWith_b_blurred"
+                                evaluation_base="marcusgrum/learningbase_banana_blurred_01"
+                            elif (datasetId == 5):
+                                sufsuffix_0 = "_evalWith_o_blurred"
+                                evaluation_base="marcusgrum/learningbase_orange_blurred_01"
                             else:
                                 pass
                             # evaluate wired state before first learning iteration with apple, banana and orange dataset
@@ -674,6 +983,15 @@ def realize_experiment():
                         elif (datasetId == 2):
                             sufsuffix_0 = "_evalWith_o"
                             evaluation_base="marcusgrum/learningbase_orange_01"
+                        elif (datasetId == 3):
+                            sufsuffix_0 = "_evalWith_a_blurred"
+                            evaluation_base="marcusgrum/learningbase_apple_blurred_01"
+                        elif (datasetId == 4):
+                            sufsuffix_0 = "_evalWith_b_blurred"
+                            evaluation_base="marcusgrum/learningbase_banana_blurred_01"
+                        elif (datasetId == 5):
+                            sufsuffix_0 = "_evalWith_o_blurred"
+                            evaluation_base="marcusgrum/learningbase_orange_blurred_01"
                         else:
                             pass
                         # evaluate trained / refined state of current iteration with apple, banana and orange dataset
@@ -768,6 +1086,15 @@ def realize_experiment():
                         elif (datasetId == 2):
                             sufsuffix_0 = "_evalWith_o"
                             evaluation_base="marcusgrum/learningbase_orange_01"
+                        elif (datasetId == 3):
+                            sufsuffix_0 = "_evalWith_a_blurred"
+                            evaluation_base="marcusgrum/learningbase_apple_blurred_01"
+                        elif (datasetId == 4):
+                            sufsuffix_0 = "_evalWith_b_blurred"
+                            evaluation_base="marcusgrum/learningbase_banana_blurred_01"
+                        elif (datasetId == 5):
+                            sufsuffix_0 = "_evalWith_o_blurred"
+                            evaluation_base="marcusgrum/learningbase_orange_blurred_01"
                         else:
                             pass
                         # evaluate trained / refined state of current iteration with apple, banana and orange dataset
@@ -782,14 +1109,14 @@ def realize_experiment():
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
-    This function separates individual KPI typess for this experiment and stores each KPI summary at log directory.
+    This function separates individual KPI types for this experiment and stores each KPI summary at log directory.
     KPI types, we can find for the following types of levels:
     (-) individual plots per experiment run
         (AB for run 1 / 2 / ... / maxNumberOfExperiments)
     (-) average plots over all experiment runs
-        (AB / AO / BA / BO / OA / OB)
+        (AA / AAblurred / BB / BBblurred / OO / OOblurred)
     (x) overall plots averaging the same types of averaged experiment runs
-        (Bias / Manipulation / Baseline)
+        (Clean Refinement / Disturbance / Bias / Manipulation / Baseline / Blurred Baseline)
     """
 
     # storing KPIs
@@ -799,340 +1126,672 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
     trainingKPIs = load_data_fromfile(path=logDirectory+'/trainingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
     testingKPIs = load_data_fromfile(path=logDirectory+'/testingKPIs.csv').reshape((maxNumberOfExperiments, maxIterationsInPhase1+1+maxIterationsInPhase2+1, maxMachines*maxValidationSets*maxStreams, maxNumberOfKPIs))
 
-    # Build plot for sum over bias / manipulation / baseline
-    print('separating KPIs over all biases, manipulations and baselines...')
-    training_accuracy_bias_mu = (
+    # Build plot for sum over Clean Refinement / Disturbance / Bias / Manipulation / Baseline / Blurred Baseline
+    print('separating KPIs over all refinements, disturbances, biases, manipulations and baselines...')
+    
+    # clean refinement-based validation
+    training_accuracy_refinement_mu = (
         numpy.mean(trainingKPIs[:, :, 0, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 3, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 7, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 10, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 14, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 17, 0], axis=0)
-    ) / 6
+        + numpy.mean(trainingKPIs[:, :, 13, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 26, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_accuracy_refinement_mu)], path+"training_accuracy_refinement_mu")
+    testing_accuracy_refinement_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 26, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_accuracy_refinement_mu)], path+"testing_accuracy_refinement_mu")
+    training_loss_refinement_mu = (
+        numpy.mean(trainingKPIs[:, :, 0, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 13, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 26, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_loss_refinement_mu)], path+"training_loss_refinement_mu")
+    testing_loss_refinement_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 26, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_loss_refinement_mu)], path+"testing_loss_refinement_mu")
+    training_N_refinement_mu = (
+        numpy.mean(trainingKPIs[:, :, 0, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 13, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 26, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_N_refinement_mu)], path+"training_N_refinement_mu")
+    testing_N_refinement_mu = (
+        numpy.mean(testingKPIs[:, :, 0, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 13, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 26, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_N_refinement_mu)], path+"testing_N_refinement_mu")
+    training_accuracy_refinement_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 26, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_accuracy_refinement_standardDeviation)], path+"training_accuracy_refinement_standardDeviation")
+    testing_accuracy_refinement_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 26, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_accuracy_refinement_standardDeviation)], path+"testing_accuracy_refinement_standardDeviation")
+    training_loss_refinement_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 26, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_loss_refinement_standardDeviation)], path+"training_loss_refinement_standardDeviation")
+    testing_loss_refinement_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 26, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_loss_refinement_standardDeviation)], path+"testing_loss_refinement_standardDeviation")
+    training_N_refinement_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 0, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 13, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 26, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_N_refinement_standardDeviation)], path+"training_N_refinement_standardDeviation")
+    testing_N_refinement_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 0, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 13, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 26, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_N_refinement_standardDeviation)], path+"testing_N_refinement_standardDeviation")
+
+    # disturbance-based validation
+    training_accuracy_disturbance_mu = (
+        numpy.mean(trainingKPIs[:, :, 3, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 29, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_accuracy_disturbance_mu)], path+"training_accuracy_disturbance_mu")
+    testing_accuracy_disturbance_mu = (
+        numpy.mean(testingKPIs[:, :, 3, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 29, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_accuracy_disturbance_mu)], path+"testing_accuracy_disturbance_mu")
+    training_loss_disturbance_mu = (
+        numpy.mean(trainingKPIs[:, :, 3, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 29, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_loss_disturbance_mu)], path+"training_loss_disturbance_mu")
+    testing_loss_disturbance_mu = (
+        numpy.mean(testingKPIs[:, :, 3, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 29, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_loss_disturbance_mu)], path+"testing_loss_disturbance_mu")
+    training_N_disturbance_mu = (
+        numpy.mean(trainingKPIs[:, :, 3, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 16, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 29, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_N_disturbance_mu)], path+"training_N_disturbance_mu")
+    testing_N_disturbance_mu = (
+        numpy.mean(testingKPIs[:, :, 3, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 16, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 29, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_N_disturbance_mu)], path+"testing_N_disturbance_mu")
+    training_accuracy_disturbance_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 3, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 29, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_accuracy_disturbance_standardDeviation)], path+"training_accuracy_disturbance_standardDeviation")
+    testing_accuracy_disturbance_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 3, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 29, 0], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_accuracy_disturbance_standardDeviation)], path+"testing_accuracy_disturbance_standardDeviation")
+    training_loss_disturbance_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 3, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 29, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_loss_disturbance_standardDeviation)], path+"training_loss_disturbance_standardDeviation")
+    testing_loss_disturbance_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 3, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 29, 1], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_loss_disturbance_standardDeviation)], path+"testing_loss_disturbance_standardDeviation")
+    training_N_disturbance_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 3, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 16, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 29, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(training_N_disturbance_standardDeviation)], path+"training_N_disturbance_standardDeviation")
+    testing_N_disturbance_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 3, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 16, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 29, 2], axis=0)
+    ) / 3
+    save_data_to_CsvFile([list(testing_N_disturbance_standardDeviation)], path+"testing_N_disturbance_standardDeviation")
+
+    # bias-based validation
+    training_accuracy_bias_mu = (
+        numpy.mean(trainingKPIs[:, :, 6, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 19, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 32, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_accuracy_bias_mu)], path+"training_accuracy_bias_mu")
     testing_accuracy_bias_mu = (
-        numpy.mean(testingKPIs[:, :, 0, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 3, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 7, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 10, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 14, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 17, 0], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 6, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 19, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 32, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_accuracy_bias_mu)], path+"testing_accuracy_bias_mu")
     training_loss_bias_mu = (
-        numpy.mean(trainingKPIs[:, :, 0, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 3, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 7, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 10, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 14, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 17, 1], axis=0)
-    ) / 6
+        numpy.mean(trainingKPIs[:, :, 6, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 19, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 32, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_loss_bias_mu)], path+"training_loss_bias_mu")
     testing_loss_bias_mu = (
-        numpy.mean(testingKPIs[:, :, 0, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 3, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 7, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 10, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 14, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 17, 1], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 6, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 19, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 32, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_loss_bias_mu)], path+"testing_loss_bias_mu")
     training_N_bias_mu = (
-        numpy.mean(trainingKPIs[:, :, 0, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 3, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 7, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 10, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 14, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 17, 2], axis=0)
-    ) / 6
+        numpy.mean(trainingKPIs[:, :, 6, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 19, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 32, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_N_bias_mu)], path+"training_N_bias_mu")
     testing_N_bias_mu = (
-        numpy.mean(testingKPIs[:, :, 0, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 3, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 7, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 10, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 14, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 17, 2], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 6, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 19, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 32, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_N_bias_mu)], path+"testing_N_bias_mu")
     training_accuracy_bias_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 0, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 3, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 7, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 10, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 14, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 17, 0], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 6, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 19, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 32, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_accuracy_bias_standardDeviation)], path+"training_accuracy_bias_standardDeviation")
     testing_accuracy_bias_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 0, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 3, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 7, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 10, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 14, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 17, 0], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 6, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 19, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 32, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_accuracy_bias_standardDeviation)], path+"testing_accuracy_bias_standardDeviation")
     training_loss_bias_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 0, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 3, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 7, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 10, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 14, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 17, 1], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 6, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 19, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 32, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_loss_bias_standardDeviation)], path+"training_loss_bias_standardDeviation")
     testing_loss_bias_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 0, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 3, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 7, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 10, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 14, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 17, 1], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 6, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 19, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 32, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_loss_bias_standardDeviation)], path+"testing_loss_bias_standardDeviation")
     training_N_bias_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 0, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 3, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 7, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 10, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 14, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 17, 2], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 6, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 19, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 32, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_N_bias_standardDeviation)], path+"training_N_bias_standardDeviation")
     testing_N_bias_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 0, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 3, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 7, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 10, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 14, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 17, 2], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 6, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 19, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 32, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_N_bias_standardDeviation)], path+"testing_N_bias_standardDeviation")
 
     # manipulation-based validation
     training_accuracy_manipulation_mu = (
-        numpy.mean(trainingKPIs[:, :, 1, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 5, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 6, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 11, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 12, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 16, 0], axis=0)
-    ) / 6
+        numpy.mean(trainingKPIs[:, :, 9, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 22, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 35, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_accuracy_manipulation_mu)], path+"training_accuracy_manipulation_mu")
     testing_accuracy_manipulation_mu = (
-        numpy.mean(testingKPIs[:, :, 1, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 5, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 6, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 11, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 12, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 16, 0], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 9, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 22, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 35, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_accuracy_manipulation_mu)], path+"testing_accuracy_manipulation_mu")
     training_loss_manipulation_mu = (
-        numpy.mean(trainingKPIs[:, :, 1, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 5, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 6, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 11, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 12, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 16, 1], axis=0)
-    ) / 6
+        numpy.mean(trainingKPIs[:, :, 9, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 22, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 35, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_loss_manipulation_mu)], path+"training_loss_manipulation_mu")
     testing_loss_manipulation_mu = (
-        numpy.mean(testingKPIs[:, :, 1, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 5, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 6, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 11, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 12, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 16, 1], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 9, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 22, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 35, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_loss_manipulation_mu)], path+"testing_loss_manipulation_mu")
     training_N_manipulation_mu = (
-        numpy.mean(trainingKPIs[:, :, 1, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 5, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 6, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 11, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 12, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 16, 2], axis=0)
-    ) / 6
+        numpy.mean(trainingKPIs[:, :, 9, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 22, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 35, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_N_manipulation_mu)], path+"training_N_manipulation_mu")
     testing_N_manipulation_mu = (
-        numpy.mean(testingKPIs[:, :, 1, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 5, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 6, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 11, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 12, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 16, 2], axis=0)
-    ) / 6
+        numpy.mean(testingKPIs[:, :, 9, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 22, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 35, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_N_manipulation_mu)], path+"testing_N_manipulation_mu")
     training_accuracy_manipulation_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 1, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 5, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 6, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 11, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 12, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 16, 0], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 9, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 22, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 35, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_accuracy_manipulation_standardDeviation)], path+"training_accuracy_manipulation_standardDeviation")
     testing_accuracy_manipulation_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 1, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 5, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 6, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 11, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 12, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 16, 0], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 9, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 22, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 35, 0], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_accuracy_manipulation_standardDeviation)], path+"testing_accuracy_manipulation_standardDeviation")
     training_loss_manipulation_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 1, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 5, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 6, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 11, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 12, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 16, 1], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 9, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 22, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 35, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_loss_manipulation_standardDeviation)], path+"training_loss_manipulation_standardDeviation")
     testing_loss_manipulation_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 1, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 5, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 6, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 11, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 12, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 16, 1], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 9, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 22, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 35, 1], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_loss_manipulation_standardDeviation)], path+"testing_loss_manipulation_standardDeviation")
     training_N_manipulation_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 1, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 5, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 6, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 11, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 12, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 16, 2], axis=0)
-    ) / 6
+        numpy.std(trainingKPIs[:, :, 9, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 22, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 35, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(training_N_manipulation_standardDeviation)], path+"training_N_manipulation_standardDeviation")
     testing_N_manipulation_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 1, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 5, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 6, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 11, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 12, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 16, 2], axis=0)
-    ) / 6
+        numpy.std(testingKPIs[:, :, 9, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 22, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 35, 2], axis=0)
+    ) / 3
     save_data_to_CsvFile([list(testing_N_manipulation_standardDeviation)], path+"testing_N_manipulation_standardDeviation")
 
     # baseline-based validation
     training_accuracy_baseline_mu = (
-        numpy.mean(trainingKPIs[:, :, 2, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 4, 0], axis=0)
+        numpy.mean(trainingKPIs[:, :, 1, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 2, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 0], axis=0)
         + numpy.mean(trainingKPIs[:, :, 8, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 9, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 13, 0], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 15, 0], axis=0)
-    ) / 6
+        + numpy.mean(trainingKPIs[:, :, 12, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 18, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 20, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 24, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 25, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 30, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 31, 0], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_accuracy_baseline_mu)], path+"training_accuracy_baseline_mu")
     testing_accuracy_baseline_mu = (
-        numpy.mean(testingKPIs[:, :, 2, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 4, 0], axis=0)
+        numpy.mean(testingKPIs[:, :, 1, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 2, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 0], axis=0)
         + numpy.mean(testingKPIs[:, :, 8, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 9, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 13, 0], axis=0)
-        + numpy.mean(testingKPIs[:, :, 15, 0], axis=0)
-    ) / 6
+        + numpy.mean(testingKPIs[:, :, 12, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 18, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 20, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 24, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 25, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 30, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 31, 0], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_accuracy_baseline_mu)], path+"testing_accuracy_baseline_mu")
     training_loss_baseline_mu = (
-        numpy.mean(trainingKPIs[:, :, 2, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 4, 1], axis=0)
+        numpy.mean(trainingKPIs[:, :, 1, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 2, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 1], axis=0)
         + numpy.mean(trainingKPIs[:, :, 8, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 9, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 13, 1], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 15, 1], axis=0)
-    ) / 6
+        + numpy.mean(trainingKPIs[:, :, 12, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 18, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 20, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 24, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 25, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 30, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 31, 1], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_loss_baseline_mu)], path+"training_loss_baseline_mu")
     testing_loss_baseline_mu = (
-        numpy.mean(testingKPIs[:, :, 2, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 4, 1], axis=0)
+        numpy.mean(testingKPIs[:, :, 1, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 2, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 1], axis=0)
         + numpy.mean(testingKPIs[:, :, 8, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 9, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 13, 1], axis=0)
-        + numpy.mean(testingKPIs[:, :, 15, 1], axis=0)
-    ) / 6
+        + numpy.mean(testingKPIs[:, :, 12, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 18, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 20, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 24, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 25, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 30, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 31, 1], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_loss_baseline_mu)], path+"testing_loss_baseline_mu")
     training_N_baseline_mu = (
-        numpy.mean(trainingKPIs[:, :, 2, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 4, 2], axis=0)
+        numpy.mean(trainingKPIs[:, :, 1, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 2, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 7, 2], axis=0)
         + numpy.mean(trainingKPIs[:, :, 8, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 9, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 13, 2], axis=0)
-        + numpy.mean(trainingKPIs[:, :, 15, 2], axis=0)
-    ) / 6
+        + numpy.mean(trainingKPIs[:, :, 12, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 14, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 18, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 20, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 24, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 25, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 30, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 31, 2], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_N_baseline_mu)], path+"training_N_baseline_mu")
     testing_N_baseline_mu = (
-        numpy.mean(testingKPIs[:, :, 2, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 4, 2], axis=0)
+        numpy.mean(testingKPIs[:, :, 1, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 2, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 7, 2], axis=0)
         + numpy.mean(testingKPIs[:, :, 8, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 9, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 13, 2], axis=0)
-        + numpy.mean(testingKPIs[:, :, 15, 2], axis=0)
-    ) / 6
+        + numpy.mean(testingKPIs[:, :, 12, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 14, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 18, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 20, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 24, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 25, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 30, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 31, 2], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_N_baseline_mu)], path+"testing_N_baseline_mu")
     training_accuracy_baseline_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 2, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 4, 0], axis=0)
+        numpy.std(trainingKPIs[:, :, 1, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 2, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 0], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 9, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 13, 0], axis=0)
-        + numpy.std(trainingKPIs[:, :, 15, 0], axis=0)
-    ) / 6
+        + numpy.std(trainingKPIs[:, :, 12, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 18, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 20, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 24, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 25, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 30, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 31, 0], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_accuracy_baseline_standardDeviation)], path+"training_accuracy_baseline_standardDeviation")
     testing_accuracy_baseline_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 2, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 4, 0], axis=0)
+        numpy.std(testingKPIs[:, :, 1, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 2, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 0], axis=0)
         + numpy.std(testingKPIs[:, :, 8, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 9, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 13, 0], axis=0)
-        + numpy.std(testingKPIs[:, :, 15, 0], axis=0)
-    ) / 6
+        + numpy.std(testingKPIs[:, :, 12, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 18, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 20, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 24, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 25, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 30, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 31, 0], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_accuracy_baseline_standardDeviation)], path+"testing_accuracy_baseline_standardDeviation")
     training_loss_baseline_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 2, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 4, 1], axis=0)
+        numpy.std(trainingKPIs[:, :, 1, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 2, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 1], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 9, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 13, 1], axis=0)
-        + numpy.std(trainingKPIs[:, :, 15, 1], axis=0)
-    ) / 6
+        + numpy.std(trainingKPIs[:, :, 12, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 18, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 20, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 24, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 25, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 30, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 31, 1], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_loss_baseline_standardDeviation)], path+"training_loss_baseline_standardDeviation")
     testing_loss_baseline_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 2, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 4, 1], axis=0)
+        numpy.std(testingKPIs[:, :, 1, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 2, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 1], axis=0)
         + numpy.std(testingKPIs[:, :, 8, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 9, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 13, 1], axis=0)
-        + numpy.std(testingKPIs[:, :, 15, 1], axis=0)
-    ) / 6
+        + numpy.std(testingKPIs[:, :, 12, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 18, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 20, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 24, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 25, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 30, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 31, 1], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_loss_baseline_standardDeviation)], path+"testing_loss_baseline_standardDeviation")
     training_N_baseline_standardDeviation = (
-        numpy.std(trainingKPIs[:, :, 2, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 4, 2], axis=0)
+        numpy.std(trainingKPIs[:, :, 1, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 2, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 7, 2], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 9, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 13, 2], axis=0)
-        + numpy.std(trainingKPIs[:, :, 15, 2], axis=0)
-    ) / 6
+        + numpy.std(trainingKPIs[:, :, 12, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 14, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 18, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 20, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 24, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 25, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 30, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 31, 2], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(training_N_baseline_standardDeviation)], path+"training_N_baseline_standardDeviation")
     testing_N_baseline_standardDeviation = (
-        numpy.std(testingKPIs[:, :, 2, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 4, 2], axis=0)
+        numpy.std(testingKPIs[:, :, 1, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 2, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 7, 2], axis=0)
         + numpy.std(testingKPIs[:, :, 8, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 9, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 13, 2], axis=0)
-        + numpy.std(testingKPIs[:, :, 15, 2], axis=0)
-    ) / 6
+        + numpy.std(testingKPIs[:, :, 12, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 14, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 18, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 20, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 24, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 25, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 30, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 31, 2], axis=0)
+    ) / 12
     save_data_to_CsvFile([list(testing_N_baseline_standardDeviation)], path+"testing_N_baseline_standardDeviation")
+
+    # blurred baseline-based validation
+    training_accuracy_blurredBaseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 4, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 21, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 23, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 27, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 28, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 33, 0], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 34, 0], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_accuracy_blurredBaseline_mu)], path+"training_accuracy_blurredBaseline_mu")
+    testing_accuracy_blurredBaseline_mu = (
+        numpy.mean(testingKPIs[:, :, 4, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 21, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 23, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 27, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 28, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 33, 0], axis=0)
+        + numpy.mean(testingKPIs[:, :, 34, 0], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_accuracy_blurredBaseline_mu)], path+"testing_accuracy_blurredBaseline_mu")
+    training_loss_blurredBaseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 4, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 21, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 23, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 27, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 28, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 33, 1], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 34, 1], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_loss_blurredBaseline_mu)], path + "training_loss_blurredBaseline_mu")
+    testing_loss_blurredBaseline_mu = (
+        numpy.mean(testingKPIs[:, :, 4, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 21, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 23, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 27, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 28, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 33, 1], axis=0)
+        + numpy.mean(testingKPIs[:, :, 34, 1], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_loss_blurredBaseline_mu)], path + "testing_loss_blurredBaseline_mu")
+    training_N_blurredBaseline_mu = (
+        numpy.mean(trainingKPIs[:, :, 4, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 5, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 10, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 11, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 15, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 17, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 21, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 23, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 27, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 28, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 33, 2], axis=0)
+        + numpy.mean(trainingKPIs[:, :, 34, 2], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_N_blurredBaseline_mu)], path+"training_N_blurredBaseline_mu")
+    testing_N_blurredBaseline_mu = (
+        numpy.mean(testingKPIs[:, :, 4, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 5, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 10, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 11, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 15, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 17, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 21, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 23, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 27, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 28, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 33, 2], axis=0)
+        + numpy.mean(testingKPIs[:, :, 34, 2], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_N_blurredBaseline_mu)], path+"testing_N_blurredBaseline_mu")
+    training_accuracy_blurredBaseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 4, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 21, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 23, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 27, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 28, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 33, 0], axis=0)
+        + numpy.std(trainingKPIs[:, :, 34, 0], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_accuracy_blurredBaseline_standardDeviation)], path+"training_accuracy_blurredBaseline_standardDeviation")
+    testing_accuracy_blurredBaseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 4, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 21, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 23, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 27, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 28, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 33, 0], axis=0)
+        + numpy.std(testingKPIs[:, :, 34, 0], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_accuracy_blurredBaseline_standardDeviation)], path+"testing_accuracy_blurredBaseline_standardDeviation")
+    training_loss_blurredBaseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 4, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 21, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 23, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 27, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 28, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 33, 1], axis=0)
+        + numpy.std(trainingKPIs[:, :, 34, 1], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_loss_blurredBaseline_standardDeviation)], path+"training_loss_blurredBaseline_standardDeviation")
+    testing_loss_blurredBaseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 4, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 21, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 23, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 27, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 28, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 33, 1], axis=0)
+        + numpy.std(testingKPIs[:, :, 34, 1], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_loss_blurredBaseline_standardDeviation)], path+"testing_loss_blurredBaseline_standardDeviation")
+    training_N_blurredBaseline_standardDeviation = (
+        numpy.std(trainingKPIs[:, :, 4, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 5, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 10, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 11, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 15, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 17, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 21, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 23, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 27, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 28, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 33, 2], axis=0)
+        + numpy.std(trainingKPIs[:, :, 34, 2], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(training_N_blurredBaseline_standardDeviation)], path+"training_N_blurredBaseline_standardDeviation")
+    testing_N_blurredBaseline_standardDeviation = (
+        numpy.std(testingKPIs[:, :, 4, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 5, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 10, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 11, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 15, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 17, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 21, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 23, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 27, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 28, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 33, 2], axis=0)
+        + numpy.std(testingKPIs[:, :, 34, 2], axis=0)
+    ) / 12
+    save_data_to_CsvFile([list(testing_N_blurredBaseline_standardDeviation)], path+"testing_N_blurredBaseline_standardDeviation")
 
     # Overview-specific KPIs
     rows = len(testing_N_baseline_standardDeviation)
-    columns = 3 * 3 # (mu, std, n) * (bias, manipulation, baseline)
+    columns = 3 * 6 # (mu, std, n) * (refinement, disturbance, bias, manipulation, baseline, baseline_blurred)
     decimals = 3
     training_overview_accuracy = numpy.zeros((rows,columns))
     training_overview_loss = numpy.zeros((rows,columns))
@@ -1140,48 +1799,84 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
     testing_overview_loss = numpy.zeros((rows,columns))
     for i in range(rows):
         # create training overview in terms of accuracy
-        training_overview_accuracy[i,0]  = numpy.around(training_accuracy_bias_mu[i], decimals = decimals)
-        training_overview_accuracy[i,1]  = numpy.around(training_accuracy_bias_standardDeviation[i], decimals = decimals)
-        training_overview_accuracy[i,2]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
-        training_overview_accuracy[i,3]  = numpy.around(training_accuracy_manipulation_mu[i], decimals = decimals)
-        training_overview_accuracy[i,4]  = numpy.around(training_accuracy_manipulation_standardDeviation[i], decimals = decimals)
-        training_overview_accuracy[i,5]  = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
-        training_overview_accuracy[i,6]  = numpy.around(training_accuracy_baseline_mu[i], decimals = decimals)
-        training_overview_accuracy[i,7]  = numpy.around(training_accuracy_baseline_standardDeviation[i], decimals = decimals)
-        training_overview_accuracy[i,8]  = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+        training_overview_accuracy[i,0]  = numpy.around(training_accuracy_refinement_mu[i], decimals = decimals)
+        training_overview_accuracy[i,1]  = numpy.around(training_accuracy_refinement_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,2]  = numpy.around(training_N_refinement_mu[i], decimals = decimals)
+        training_overview_accuracy[i,3]  = numpy.around(training_accuracy_disturbance_mu[i], decimals = decimals)
+        training_overview_accuracy[i,4]  = numpy.around(training_accuracy_disturbance_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,5]  = numpy.around(training_N_disturbance_mu[i], decimals = decimals)
+        training_overview_accuracy[i,6]  = numpy.around(training_accuracy_bias_mu[i], decimals = decimals)
+        training_overview_accuracy[i,7]  = numpy.around(training_accuracy_bias_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,8]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
+        training_overview_accuracy[i,9]  = numpy.around(training_accuracy_manipulation_mu[i], decimals = decimals)
+        training_overview_accuracy[i,10] = numpy.around(training_accuracy_manipulation_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,11] = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
+        training_overview_accuracy[i,12] = numpy.around(training_accuracy_baseline_mu[i], decimals = decimals)
+        training_overview_accuracy[i,13] = numpy.around(training_accuracy_baseline_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,14] = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+        training_overview_accuracy[i,15] = numpy.around(training_accuracy_blurredBaseline_mu[i], decimals = decimals)
+        training_overview_accuracy[i,16] = numpy.around(training_accuracy_blurredBaseline_standardDeviation[i], decimals = decimals)
+        training_overview_accuracy[i,17] = numpy.around(training_N_blurredBaseline_mu[i], decimals = decimals)
 
         # create training overview in terms of loss
-        training_overview_loss[i,0]  = numpy.around(training_loss_bias_mu[i], decimals = decimals)
-        training_overview_loss[i,1]  = numpy.around(training_loss_bias_standardDeviation[i], decimals = decimals)
-        training_overview_loss[i,2]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
-        training_overview_loss[i,3]  = numpy.around(training_loss_manipulation_mu[i], decimals = decimals)
-        training_overview_loss[i,4]  = numpy.around(training_loss_manipulation_standardDeviation[i], decimals = decimals)
-        training_overview_loss[i,5]  = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
-        training_overview_loss[i,6]  = numpy.around(training_loss_baseline_mu[i], decimals = decimals)
-        training_overview_loss[i,7]  = numpy.around(training_loss_baseline_standardDeviation[i], decimals = decimals)
-        training_overview_loss[i,8]  = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+        training_overview_loss[i,0]  = numpy.around(training_loss_refinement_mu[i], decimals = decimals)
+        training_overview_loss[i,1]  = numpy.around(training_loss_refinement_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,2]  = numpy.around(training_N_refinement_mu[i], decimals = decimals)
+        training_overview_loss[i,3]  = numpy.around(training_loss_disturbance_mu[i], decimals = decimals)
+        training_overview_loss[i,4]  = numpy.around(training_loss_disturbance_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,5]  = numpy.around(training_N_disturbance_mu[i], decimals = decimals)
+        training_overview_loss[i,6]  = numpy.around(training_loss_bias_mu[i], decimals = decimals)
+        training_overview_loss[i,7]  = numpy.around(training_loss_bias_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,8]  = numpy.around(training_N_bias_mu[i], decimals = decimals)
+        training_overview_loss[i,9]  = numpy.around(training_loss_manipulation_mu[i], decimals = decimals)
+        training_overview_loss[i,10] = numpy.around(training_loss_manipulation_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,11] = numpy.around(training_N_manipulation_mu[i], decimals = decimals)
+        training_overview_loss[i,12] = numpy.around(training_loss_baseline_mu[i], decimals = decimals)
+        training_overview_loss[i,13] = numpy.around(training_loss_baseline_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,14] = numpy.around(training_N_baseline_mu[i], decimals = decimals)
+        training_overview_loss[i,15] = numpy.around(training_loss_blurredBaseline_mu[i], decimals = decimals)
+        training_overview_loss[i,16] = numpy.around(training_loss_blurredBaseline_standardDeviation[i], decimals = decimals)
+        training_overview_loss[i,17] = numpy.around(training_N_blurredBaseline_mu[i], decimals = decimals)
 
         # create testing overview in terms of accuracy
-        testing_overview_accuracy[i,0]  = numpy.around(testing_accuracy_bias_mu[i], decimals = decimals)
-        testing_overview_accuracy[i,1]  = numpy.around(testing_accuracy_bias_standardDeviation[i], decimals = decimals)
-        testing_overview_accuracy[i,2]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
-        testing_overview_accuracy[i,3]  = numpy.around(testing_accuracy_manipulation_mu[i], decimals = decimals)
-        testing_overview_accuracy[i,4]  = numpy.around(testing_accuracy_manipulation_standardDeviation[i], decimals = decimals)
-        testing_overview_accuracy[i,5]  = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
-        testing_overview_accuracy[i,6]  = numpy.around(testing_accuracy_baseline_mu[i], decimals = decimals)
-        testing_overview_accuracy[i,7]  = numpy.around(testing_accuracy_baseline_standardDeviation[i], decimals = decimals)
-        testing_overview_accuracy[i,8]  = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,0]  = numpy.around(testing_accuracy_refinement_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,1]  = numpy.around(testing_accuracy_refinement_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,2]  = numpy.around(testing_N_refinement_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,3]  = numpy.around(testing_accuracy_disturbance_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,4]  = numpy.around(testing_accuracy_disturbance_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,5]  = numpy.around(testing_N_disturbance_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,6]  = numpy.around(testing_accuracy_bias_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,7]  = numpy.around(testing_accuracy_bias_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,8]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,9]  = numpy.around(testing_accuracy_manipulation_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,10] = numpy.around(testing_accuracy_manipulation_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,11] = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,12] = numpy.around(testing_accuracy_baseline_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,13] = numpy.around(testing_accuracy_baseline_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,14] = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,15] = numpy.around(testing_accuracy_blurredBaseline_mu[i], decimals = decimals)
+        testing_overview_accuracy[i,16] = numpy.around(testing_accuracy_blurredBaseline_standardDeviation[i], decimals = decimals)
+        testing_overview_accuracy[i,17] = numpy.around(testing_N_blurredBaseline_mu[i], decimals = decimals)
 
         # create testing overview in terms of loss
-        testing_overview_loss[i,0]  = numpy.around(testing_loss_bias_mu[i], decimals = decimals)
-        testing_overview_loss[i,1]  = numpy.around(testing_loss_bias_standardDeviation[i], decimals = decimals)
-        testing_overview_loss[i,2]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
-        testing_overview_loss[i,3]  = numpy.around(testing_loss_manipulation_mu[i], decimals = decimals)
-        testing_overview_loss[i,4]  = numpy.around(testing_loss_manipulation_standardDeviation[i], decimals = decimals)
-        testing_overview_loss[i,5]  = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
-        testing_overview_loss[i,6]  = numpy.around(testing_loss_baseline_mu[i], decimals = decimals)
-        testing_overview_loss[i,7]  = numpy.around(testing_loss_baseline_standardDeviation[i], decimals = decimals)
-        testing_overview_loss[i,8]  = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+        testing_overview_loss[i,0]  = numpy.around(testing_loss_refinement_mu[i], decimals = decimals)
+        testing_overview_loss[i,1]  = numpy.around(testing_loss_refinement_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,2]  = numpy.around(testing_N_refinement_mu[i], decimals = decimals)
+        testing_overview_loss[i,3]  = numpy.around(testing_loss_disturbance_mu[i], decimals = decimals)
+        testing_overview_loss[i,4]  = numpy.around(testing_loss_disturbance_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,5]  = numpy.around(testing_N_disturbance_mu[i], decimals = decimals)
+        testing_overview_loss[i,6]  = numpy.around(testing_loss_bias_mu[i], decimals = decimals)
+        testing_overview_loss[i,7]  = numpy.around(testing_loss_bias_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,8]  = numpy.around(testing_N_bias_mu[i], decimals = decimals)
+        testing_overview_loss[i,9]  = numpy.around(testing_loss_manipulation_mu[i], decimals = decimals)
+        testing_overview_loss[i,10] = numpy.around(testing_loss_manipulation_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,11] = numpy.around(testing_N_manipulation_mu[i], decimals = decimals)
+        testing_overview_loss[i,12] = numpy.around(testing_loss_baseline_mu[i], decimals = decimals)
+        testing_overview_loss[i,13] = numpy.around(testing_loss_baseline_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,14] = numpy.around(testing_N_baseline_mu[i], decimals = decimals)
+        testing_overview_loss[i,15] = numpy.around(testing_loss_blurredBaseline_mu[i], decimals = decimals)
+        testing_overview_loss[i,16] = numpy.around(testing_loss_blurredBaseline_standardDeviation[i], decimals = decimals)
+        testing_overview_loss[i,17] = numpy.around(testing_N_blurredBaseline_mu[i], decimals = decimals)
 
     # store overview KPIs
     save_data_to_CsvFile([list(training_overview_accuracy)][0], path+"training_overview_accuracy")
@@ -1195,10 +1890,10 @@ if __name__ == '__main__':
     realize_experiment()
 
     # when script is started manually, initiate plotting
-    #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
+    #realize_experiment_plotting(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 6, maxStreams = 2, maxNumberOfKPIs = 3)
 
     # when script is started manually, initiate KPI separation for storing in individual files
-    #summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3)
+    #summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 6, maxStreams = 2, maxNumberOfKPIs = 3)
 
     # comment out to keep current results and avoid accidental activation
     pass

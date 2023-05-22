@@ -196,41 +196,41 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
                 print("      streamId = " + str(streamId))
                 dim_3 = ((machineId-1)*maxStreams*maxValidationSets)+((streamId-1)*maxValidationSets)
                 if(streamId==1):
-                        if(machineId==1):
-                            prefix = "AB"
-                        elif(machineId==2):
-                            prefix = "BA"
-                        elif(machineId==3):
-                            prefix = "OA"
+                    if(machineId==1):
+                        prefix = "AB"
+                    elif(machineId==2):
+                        prefix = "BA"
+                    elif(machineId==3):
+                        prefix = "OA"
                 elif(streamId==2):
-                        if(machineId==1):
-                            prefix = "AO"
-                        elif(machineId==2):
-                            prefix = "BO"
-                        elif(machineId==3):
-                            prefix = "OB"
+                    if(machineId==1):
+                        prefix = "AO"
+                    elif(machineId==2):
+                        prefix = "BO"
+                    elif(machineId==3):
+                        prefix = "OB"
                 plotEvaluationPerformance(
-                        title_plots = "Experiment Number " + str(experimentId) + " with Focus " + prefix,
-                        iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
-                        # apple-based validation
-                        title_plot1 = "Apple",
-                        training_accuracy_plot1=trainingKPIs[dim_1,:,dim_3+0,0],
-                        testing_accuracy_plot1=testingKPIs[dim_1,:,dim_3+0,0], 
-                        training_loss_plot1=trainingKPIs[dim_1,:,dim_3+0,1],
-                        testing_loss_plot1=testingKPIs[dim_1,:,dim_3+0,1],
-                        # banana-based validation
-                        title_plot2 = "Banana",
-                        training_accuracy_plot2=trainingKPIs[dim_1,:,dim_3+1,0],
-                        testing_accuracy_plot2=testingKPIs[dim_1,:,dim_3+1,0], 
-                        training_loss_plot2=trainingKPIs[dim_1,:,dim_3+1,1],
-                        testing_loss_plot2=testingKPIs[dim_1,:,dim_3+1,1],
-                        # orange-based validation
-                        title_plot3 = "Orange",
-                        training_accuracy_plot3=trainingKPIs[dim_1,:,dim_3+2,0],
-                        testing_accuracy_plot3=testingKPIs[dim_1,:,dim_3+2,0], 
-                        training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
-                        testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1]
-                        )
+                    title_plots = "Experiment Number " + str(experimentId) + " with Focus " + prefix,
+                    iterations=numpy.arange(maxIterationsInPhase1+1+maxIterationsInPhase2+1),
+                    # apple-based validation
+                    title_plot1 = "Apple",
+                    training_accuracy_plot1=trainingKPIs[dim_1,:,dim_3+0,0],
+                    testing_accuracy_plot1=testingKPIs[dim_1,:,dim_3+0,0], 
+                    training_loss_plot1=trainingKPIs[dim_1,:,dim_3+0,1],
+                    testing_loss_plot1=testingKPIs[dim_1,:,dim_3+0,1],
+                    # banana-based validation
+                    title_plot2 = "Banana",
+                    training_accuracy_plot2=trainingKPIs[dim_1,:,dim_3+1,0],
+                    testing_accuracy_plot2=testingKPIs[dim_1,:,dim_3+1,0], 
+                    training_loss_plot2=trainingKPIs[dim_1,:,dim_3+1,1],
+                    testing_loss_plot2=testingKPIs[dim_1,:,dim_3+1,1],
+                    # orange-based validation
+                    title_plot3 = "Orange",
+                    training_accuracy_plot3=trainingKPIs[dim_1,:,dim_3+2,0],
+                    testing_accuracy_plot3=testingKPIs[dim_1,:,dim_3+2,0], 
+                    training_loss_plot3=trainingKPIs[dim_1,:,dim_3+2,1],
+                    testing_loss_plot3=testingKPIs[dim_1,:,dim_3+2,1]
+                    )
                 dim_3 = dim_3 + maxValidationSets
 
     # Build plot for sum over experiments
@@ -779,7 +779,7 @@ def realize_experiment():
 
 def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIterationsInPhase2 = 5, maxMachines = 3, maxValidationSets = 3, maxStreams = 2, maxNumberOfKPIs = 3):
     """
-    This function separates individual KPI typess for this experiment and stores each KPI summary at log directory.
+    This function separates individual KPI types for this experiment and stores each KPI summary at log directory.
     KPI types, we can find for the following types of levels:
     (-) individual plots per experiment run
         (AB for run 1 / 2 / ... / maxNumberOfExperiments)

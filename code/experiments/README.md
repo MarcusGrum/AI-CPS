@@ -132,8 +132,76 @@ A publication about this is in progress.
 
 <img src="../../documentation/experiment03/Experiment03_Proceeding.png" height="600" />
 
+#### KPIs in Experiment03
+
+KPIs collected by the experiment can be found as follows:
+
+For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
+These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
+
+<img src="../../documentation/experiment02/Experiment02_KpiCollection.png" height="600" />
+
+These files and KPIs are used for statistical analyses, whose code can be found at the following path:
+
+    ```
+    repository/documentation/experiment02/statistics
+    ```
+
+#### Results of Experiment03
+
+Results of this experiment can be found at the following path:
+
+    ```
+    repository/documentation/experiment03/
+    ```
+
+Here, one can find KPIs collected as well as plots generated.
+For instance, the overview plot shows accuracies and losses of training and testing courses.
+
+<img src="../../documentation/experiment03/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
+
+Here, one can see ...
+
+Statistics will proof this on a significant level.
+
+A publication about this is in progress.
+
 ### Experiment04
 
 #### Proceeding for Experiment04
 
 <img src="../../documentation/experiment04/Experiment04_Proceeding.png" height="600" />
+
+#### KPIs in Experiment04
+
+KPIs collected by the experiment can be found as follows:
+
+For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
+These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
+
+<img src="../../documentation/experiment02/Experiment04_KpiCollection.png" height="600" />
+
+These files and KPIs are used for statistical analyses, whose code can be found at the following path:
+
+    ```
+    repository/documentation/experiment04/statistics
+    ```
+
+#### Results of Experiment04
+
+Results of this experiment can be found at the following path:
+
+    ```
+    repository/documentation/experiment04/
+    ```
+
+Here, one can find KPIs collected as well as plots generated.
+For instance, the overview plot shows accuracies and losses of training and testing courses.
+
+<img src="../../documentation/experiment04/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
+
+Here, one can see ...
+
+Statistics will proof this on a significant level.
+
+A publication about this is in progress.
