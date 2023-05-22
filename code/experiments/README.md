@@ -139,12 +139,12 @@ KPIs collected by the experiment can be found as follows:
 For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
 These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
 
-<img src="../../documentation/experiment02/Experiment02_KpiCollection.png" height="600" />
+<img src="../../documentation/experiment03/Experiment03_KpiCollection.png" height="600" />
 
 These files and KPIs are used for statistical analyses, whose code can be found at the following path:
 
     ```
-    repository/documentation/experiment02/statistics
+    repository/documentation/experiment03/statistics
     ```
 
 #### Results of Experiment03
@@ -179,7 +179,7 @@ KPIs collected by the experiment can be found as follows:
 For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
 These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
 
-<img src="../../documentation/experiment02/Experiment04_KpiCollection.png" height="600" />
+<img src="../../documentation/experiment04/Experiment04_KpiCollection.png" height="600" />
 
 These files and KPIs are used for statistical analyses, whose code can be found at the following path:
 
