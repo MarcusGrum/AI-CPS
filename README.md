@@ -528,19 +528,22 @@ The third CLI represents a machine that is activated by messages in order to rea
 
 ## Application examples
 
-### Realize experiments
+### Realize virtual experiments
 
-Experiment examples can be found at this repository at `./code/experiments`.
+Virtual / computer-based simulated experiment examples can be found at this repository at `./code/experiments`.
 
 For instance, ...
 
-- `experiment01` simulates the manipulation of CPS knowledge base by process change: product change (in context of continual learning and training data manipulation),
+- `experiment01` simulates the manipulation of CPS knowledge base by process change - alternative product change (in context of continual learning and training data manipulation): Inhowfar do AI-based CPS forget if a process changes leads to a different product type distribution (in this case alternative products) that does not correspond to the CPS's current specialization?
 
-- `experiment02` ...
+- `experiment02` simulates the manipulation of CPS knowledge base by smart sensors overtaking tasks partly - filtering sensory input (in context of continual learning and training data manipulation): Inhowfar do AI-based CPS forget if fruit evaluation is overtakten by preceeding smart sensors and the CPS's current specialization does not correspond to the required set of skills?
 
-- `experiment03` ...
+- `experiment03` simulates the manipulation of CPS knowledge base by worsening sensors badly affecting tasks: filtering sensory input (in context of continual learning and training data manipulation): Inhowfar do AI-based CPS forget if current evaluation task is disturbed by defect sensors, such as providing blurred images that do not correspond to the CPS's current specialization?
 
-- `experiment04` ... . 
+- `experiment04` simulates the manipulation of CPS knowledge base by process change - sub-set product change (in context of continual learning and training data manipulation): Inhowfar do AI-based CPS forget if a process changes leads to a different product type distribution (in this case a sub-set of trained products) that does not correspond to the CPS's current specialization? 
+
+Here, AI-based CPS can carry out tasks in simulation runs and their performance can be measured.
+As these are considered as AI-based individuals, statistical analyses can explore their performance.
 
 ### EV3-Based Industry4.0-Production-System
 
@@ -554,9 +557,8 @@ Grum M. 2022. Construction of a Concept of Neuronal Modeling. Springer Gabler Wi
 
 ### Research and Application Center Industry 4.0
 
-For instance, you can base an entire cyber-physical production system, 
-such as the Research and Application Center Industry 4.0 (RACI),
-on the basis of AI-CPS.
+For instance, you can include AI-CPS in a cyber-physical production system, 
+such as the Research and Application Center Industry 4.0 (RACI).
 
 <img src="./documentation/UMLsequenceDiagram.png" height="600" />
 
