@@ -2230,7 +2230,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
 
     # Overview-specific KPIs
     rows = len(testing_N_baseline_standardDeviation)
-    columns = 3 * 3 # (mu, std, n) * (bias, manipulation, complement, baseline, baseline_okay, baseline_defect)
+    columns = 3 * 6 # (mu, std, n) * (bias, manipulation, complement, baseline, baseline_okay, baseline_defect)
     decimals = 3
     training_overview_accuracy = numpy.zeros((rows,columns))
     training_overview_loss = numpy.zeros((rows,columns))
