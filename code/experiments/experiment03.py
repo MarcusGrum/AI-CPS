@@ -409,9 +409,9 @@ def realize_experiment_plotting(maxNumberOfExperiments = 2, maxIterationsInPhase
         testing_accuracy_plot1_standardDeviation =
             (
             numpy.std(testingKPIs[:,:,0,0], axis=0)
-            + numpy.std(testingKPIs[:,:13,0], axis=0)
+            + numpy.std(testingKPIs[:,:,13,0], axis=0)
             + numpy.std(testingKPIs[:,:,26,0], axis=0)
-            ) / 3, 
+            ) / 3,
         training_loss_plot1_standardDeviation =
             (
             numpy.std(trainingKPIs[:,:,0,1], axis=0)
