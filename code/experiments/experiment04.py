@@ -1895,7 +1895,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 50, 0], axis=0)
     ) / 12
     save_data_to_CsvFile([list(testing_accuracy_okayBaseline_mu)], path + "testing_accuracy_okayBaseline_mu")
-    training_loss_baseline_mu = (
+    training_loss_okayBaseline_mu = (
         numpy.mean(trainingKPIs[:, :, 5, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 7, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 14, :], axis=0)
@@ -1909,8 +1909,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(trainingKPIs[:, :, 48, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_loss_baseline_mu)], path + "training_loss_okayBaseline_mu")
-    testing_loss_baseline_mu = (
+    save_data_to_CsvFile([list(training_loss_okayBaseline_mu)], path + "training_loss_okayBaseline_mu")
+    testing_loss_okayBaseline_mu = (
         numpy.mean(testingKPIs[:, :, 5, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 7, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 14, :], axis=0)
@@ -1924,8 +1924,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 48, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_loss_baseline_mu)], path + "testing_loss_okayBaseline_mu")
-    training_N_baseline_mu = (
+    save_data_to_CsvFile([list(testing_loss_okayBaseline_mu)], path + "testing_loss_okayBaseline_mu")
+    training_N_okayBaseline_mu = (
         numpy.mean(trainingKPIs[:, :, 5, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 7, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 14, :], axis=0)
@@ -1939,8 +1939,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(trainingKPIs[:, :, 48, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_N_baseline_mu)], path + "training_N_baseline_mu")
-    testing_N_baseline_mu = (
+    save_data_to_CsvFile([list(training_N_okayBaseline_mu)], path + "training_N_baseline_mu")
+    testing_N_okayBaseline_mu = (
         numpy.mean(testingKPIs[:, :, 5, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 7, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 14, :], axis=0)
@@ -1954,8 +1954,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 48, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_N_baseline_mu)], path + "testing_N_okayBaseline_mu")
-    training_accuracy_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_N_okayBaseline_mu)], path + "testing_N_okayBaseline_mu")
+    training_accuracy_okayBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 5, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 7, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 14, :], axis=0)
@@ -1969,8 +1969,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 48, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_accuracy_baseline_standardDeviation)], path + "training_accuracy_okayBaseline_standardDeviation")
-    testing_accuracy_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_accuracy_okayBaseline_standardDeviation)], path + "training_accuracy_okayBaseline_standardDeviation")
+    testing_accuracy_okayBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 5, :], axis=0)
         + numpy.std(testingKPIs[:, :, 7, :], axis=0)
         + numpy.std(testingKPIs[:, :, 14, :], axis=0)
@@ -1984,8 +1984,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 48, :], axis=0)
         + numpy.std(testingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_accuracy_baseline_standardDeviation)], path + "testing_accuracy_okayBaseline_standardDeviation")
-    training_loss_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_accuracy_okayBaseline_standardDeviation)], path + "testing_accuracy_okayBaseline_standardDeviation")
+    training_loss_okayBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 5, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 7, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 14, :], axis=0)
@@ -1999,8 +1999,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 48, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_loss_baseline_standardDeviation)], path + "training_loss_okayBaseline_standardDeviation")
-    testing_loss_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_loss_okayBaseline_standardDeviation)], path + "training_loss_okayBaseline_standardDeviation")
+    testing_loss_okayBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 5, :], axis=0)
         + numpy.std(testingKPIs[:, :, 7, :], axis=0)
         + numpy.std(testingKPIs[:, :, 14, :], axis=0)
@@ -2014,8 +2014,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 48, :], axis=0)
         + numpy.std(testingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_loss_baseline_standardDeviation)], path + "testing_loss_okayBaseline_standardDeviation")
-    training_N_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_loss_okayBaseline_standardDeviation)], path + "testing_loss_okayBaseline_standardDeviation")
+    training_N_okayBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 5, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 7, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 14, :], axis=0)
@@ -2029,8 +2029,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 48, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_N_baseline_standardDeviation)], path + "training_N_okayBaseline_standardDeviation")
-    testing_N_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_N_okayBaseline_standardDeviation)], path + "training_N_okayBaseline_standardDeviation")
+    testing_N_okayBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 5, :], axis=0)
         + numpy.std(testingKPIs[:, :, 7, :], axis=0)
         + numpy.std(testingKPIs[:, :, 14, :], axis=0)
@@ -2044,7 +2044,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 48, :], axis=0)
         + numpy.std(testingKPIs[:, :, 50, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_N_baseline_standardDeviation)], path + "testing_N_okayBaseline_standardDeviation")
+    save_data_to_CsvFile([list(testing_N_okayBaseline_standardDeviation)], path + "testing_N_okayBaseline_standardDeviation")
 
     # defectBaseline-based validation
     training_accuracy_defectBaseline_mu = (
@@ -2077,7 +2077,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 51, 0], axis=0)
     ) / 12
     save_data_to_CsvFile([list(testing_accuracy_defectBaseline_mu)], path + "testing_accuracy_defectBaseline_mu")
-    training_loss_baseline_mu = (
+    training_loss_defectBaseline_mu = (
         numpy.mean(trainingKPIs[:, :, 6, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 8, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 15, :], axis=0)
@@ -2091,8 +2091,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(trainingKPIs[:, :, 49, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_loss_baseline_mu)], path + "training_loss_defectBaseline_mu")
-    testing_loss_baseline_mu = (
+    save_data_to_CsvFile([list(training_loss_defectBaseline_mu)], path + "training_loss_defectBaseline_mu")
+    testing_loss_defectBaseline_mu = (
         numpy.mean(testingKPIs[:, :, 6, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 8, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 15, :], axis=0)
@@ -2106,8 +2106,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 49, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_loss_baseline_mu)], path + "testing_loss_defectBaseline_mu")
-    training_N_baseline_mu = (
+    save_data_to_CsvFile([list(testing_loss_defectBaseline_mu)], path + "testing_loss_defectBaseline_mu")
+    training_N_defectBaseline_mu = (
         numpy.mean(trainingKPIs[:, :, 6, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 8, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 15, :], axis=0)
@@ -2121,8 +2121,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(trainingKPIs[:, :, 49, :], axis=0)
         + numpy.mean(trainingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_N_baseline_mu)], path + "training_N_baseline_mu")
-    testing_N_baseline_mu = (
+    save_data_to_CsvFile([list(training_N_defectBaseline_mu)], path + "training_N_baseline_mu")
+    testing_N_defectBaseline_mu = (
         numpy.mean(testingKPIs[:, :, 6, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 8, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 15, :], axis=0)
@@ -2136,8 +2136,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.mean(testingKPIs[:, :, 49, :], axis=0)
         + numpy.mean(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_N_baseline_mu)], path + "testing_N_defectBaseline_mu")
-    training_accuracy_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_N_defectBaseline_mu)], path + "testing_N_defectBaseline_mu")
+    training_accuracy_defectBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 6, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 15, :], axis=0)
@@ -2151,8 +2151,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 49, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_accuracy_baseline_standardDeviation)], path + "training_accuracy_defectBaseline_standardDeviation")
-    testing_accuracy_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_accuracy_defectBaseline_standardDeviation)], path + "training_accuracy_defectBaseline_standardDeviation")
+    testing_accuracy_defectBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 6, :], axis=0)
         + numpy.std(testingKPIs[:, :, 8, :], axis=0)
         + numpy.std(testingKPIs[:, :, 15, :], axis=0)
@@ -2166,8 +2166,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 49, :], axis=0)
         + numpy.std(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_accuracy_baseline_standardDeviation)], path + "testing_accuracy_defectBaseline_standardDeviation")
-    training_loss_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_accuracy_defectBaseline_standardDeviation)], path + "testing_accuracy_defectBaseline_standardDeviation")
+    training_loss_defectBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 6, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 15, :], axis=0)
@@ -2181,8 +2181,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 49, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_loss_baseline_standardDeviation)], path + "training_loss_defectBaseline_standardDeviation")
-    testing_loss_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_loss_defectBaseline_standardDeviation)], path + "training_loss_defectBaseline_standardDeviation")
+    testing_loss_defectBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 6, :], axis=0)
         + numpy.std(testingKPIs[:, :, 8, :], axis=0)
         + numpy.std(testingKPIs[:, :, 15, :], axis=0)
@@ -2196,8 +2196,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 49, :], axis=0)
         + numpy.std(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_loss_baseline_standardDeviation)], path + "testing_loss_defectBaseline_standardDeviation")
-    training_N_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(testing_loss_defectBaseline_standardDeviation)], path + "testing_loss_defectBaseline_standardDeviation")
+    training_N_defectBaseline_standardDeviation = (
         numpy.std(trainingKPIs[:, :, 6, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 8, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 15, :], axis=0)
@@ -2211,8 +2211,8 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(trainingKPIs[:, :, 49, :], axis=0)
         + numpy.std(trainingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(training_N_baseline_standardDeviation)], path + "training_N_defectBaseline_standardDeviation")
-    testing_N_baseline_standardDeviation = (
+    save_data_to_CsvFile([list(training_N_defectBaseline_standardDeviation)], path + "training_N_defectBaseline_standardDeviation")
+    testing_N_defectBaseline_standardDeviation = (
         numpy.std(testingKPIs[:, :, 6, :], axis=0)
         + numpy.std(testingKPIs[:, :, 8, :], axis=0)
         + numpy.std(testingKPIs[:, :, 15, :], axis=0)
@@ -2226,7 +2226,7 @@ def summarize_KPIs(maxNumberOfExperiments = 10, maxIterationsInPhase1 = 5, maxIt
         + numpy.std(testingKPIs[:, :, 49, :], axis=0)
         + numpy.std(testingKPIs[:, :, 51, :], axis=0)
     ) / 12
-    save_data_to_CsvFile([list(testing_N_baseline_standardDeviation)], path + "testing_N_defectBaseline_standardDeviation")
+    save_data_to_CsvFile([list(testing_N_defectBaseline_standardDeviation)], path + "testing_N_defectBaseline_standardDeviation")
 
     # Overview-specific KPIs
     rows = len(testing_N_baseline_standardDeviation)
