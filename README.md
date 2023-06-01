@@ -557,7 +557,7 @@ Grum M. 2022. Construction of a Concept of Neuronal Modeling. Springer Gabler Wi
 
 ### Research and Application Center Industry 4.0
 
-For instance, you can include AI-CPS in a cyber-physical production system, 
+For instance, you can include AI-CPS in traditional cyber-physical production systems, 
 such as the Research and Application Center Industry 4.0 (RACI).
 
 <img src="./documentation/UMLsequenceDiagram.png" height="600" />

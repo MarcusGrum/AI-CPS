@@ -40,6 +40,9 @@ The following presents an overview of all knowledge bases, their initial creatio
 
 ### Experiment01
 
+The `experiment01` simulates the manipulation of CPS knowledge base by process change - alternative product change (in context of continual learning and training data manipulation): 
+Inhowfar do AI-based CPS forget if a process changes leads to a different product type distribution (in this case alternative products) that does not correspond to the CPS's current specialization?
+
 #### Proceeding for Experiment01
 
 <img src="../../documentation/experiment01/Experiment01_Proceeding.png" height="600" />
@@ -80,9 +83,22 @@ This can be seen at all, training and testing runs as well as accuracy and loss 
 
 Statistics proofs this on a significant level.
 
+#### Attempts for a research answer of Experiment01
+
+The research question can be answered as follows:
+If a process change leads to a different product type distribution (in this case alternative products) that does not correspond to the CPS's current specialization,
+the CPS's current specialization adapts to the currently required set of skills
+and fully forgets once learnt knowledge effectively while relevant knowledge (as required by the new process) is learnt.
+
+On the other hand, the corresponding data set manipulation shows as adequate mechanism to fully forget knowledge:
+The one kind of knowledge shall be forgotten, while the other kind of knowledge shall be learnt.
+
 A publication about this is in progress.
 
 ### Experiment02
+
+The `experiment02` simulates the manipulation of CPS knowledge base by smart sensors overtaking tasks partly - filtering sensory input (in context of continual learning and training data manipulation): 
+Inhowfar do AI-based CPS forget if fruit evaluation is overtakten by preceeding smart sensors and the CPS's current specialization does not correspond to the required set of skills?
 
 #### Proceeding for Experiment02
 
@@ -120,13 +136,25 @@ Here, one can see that bias and manipulation are learnt successfully and forgott
 After the change of the learning base, bias focused product type is remained successfully, while mainipulation product type is forgotten successfully.
 Since learnt and unlearnt / forgotten knowledge base can be distinguished clearly separable (faced with non-overlapping standard deviations),
 one can recognize this mechanism as effective approach to unlearn or intentionally forget in ANNs.
-This can be seen at all, training and testing runs as well as accuracy and loss metrics.
+This can be seen at all performance levels, which means all training and testing runs as well as accuracy and loss metrics.
 
 Statistics will proof this on a significant level.
+
+#### Attempts for a research answer of Experiment02
+
+The research question can be answered as follows:
+If preceeding smart sensors overtake tasks partly, the CPS's current specialization adapts to the currently required set of skills
+and preserves once learnt knowledge effectively while irelevant knowledge (as the smart sensor cares about this) is forgotten.
+
+On the other hand, the corresponding data set manipulation shows as adequate mechanism to partly forget knowledge:
+The one kind of knowledge shall be preserved, while the other kind of knowledge shall be forgotten.
 
 A publication about this is in progress.
 
 ### Experiment03
+
+The `experiment03` simulates the manipulation of CPS knowledge base by worsening sensors badly affecting tasks: filtering sensory input (in context of continual learning and training data manipulation): 
+Inhowfar do AI-based CPS forget if current evaluation task is disturbed by defect sensors, such as providing blurred images that do not correspond to the CPS's current specialization?
 
 #### Proceeding for Experiment03
 
@@ -160,13 +188,34 @@ For instance, the overview plot shows accuracies and losses of training and test
 
 <img src="../../documentation/experiment03/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
 
-Here, one can see ...
+Here, faced with the comparison of `clean refinement` and `disturbance`, one can see 
+that the specialization shows a certain fault tolerance.
+Although the disturbed input shows worse performance characteristics (only in terms of `accuracy`, bot not in terms of `loss`),
+even disturbed input shows acceptable performance.
+
+Faced with the comparions of `bias` with `manipulation`, one can see
+that a focus on learning disturbed material will lead to a slightly better performance in this disturbed setting.
+But if tends to worsen performance on the biased, clean and original setting.
 
 Statistics will proof this on a significant level.
+
+#### Attempts for a research answer of Experiment03
+
+The research question can be answered as follows:
+If defect sensors worsen input, the CPS's current specialization will adapt to the worsened setting and the currently required set of skills.
+This might be interpreted to forgetting for a certain percentage.
+As the CPS as learned to deal with the defect input, performance will rise in defect environment setting, but lower performance in the original, non-defect environment setting.
+So, before a forgetting is trained in an expensive way, it is recommended to repair the sensor at a reasonable price.
+
+On the other hand, the corresponding data set manipulation shows as adequate mechanism to forget at a percentage knowledge level:
+The one kind of knowledge will be preserved, while fine details of that kind of knowledge will be forgotten.
 
 A publication about this is in progress.
 
 ### Experiment04
+
+The `experiment04` simulates the manipulation of CPS knowledge base by process change - sub-set product change (in context of continual learning and training data manipulation): 
+Inhowfar do AI-based CPS forget if a process changes leads to a different product type distribution (in this case a sub-set of trained products) that does not correspond to the CPS's current specialization?
 
 #### Proceeding for Experiment04
 
@@ -200,8 +249,26 @@ For instance, the overview plot shows accuracies and losses of training and test
 
 <img src="../../documentation/experiment04/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
 
-Here, one can see ...
+Here, one can see 
+that the `bias` worsens when training focuses on a sub-set of that training material.
+Apparently, the complement has been unlearnt efficiently.
+
+The `manipulation` improves slightly due to the refinement on exactly the manipulation material.
+The `complement` worsens drastically due to its exclusion in learning procedures. 
 
 Statistics will proof this on a significant level.
+
+#### Attempts for a research answer of Experiment04
+
+The research question can be answered as follows:
+If if a process changes leads to a different product type distribution (in this case a sub-set of trained products) 
+that does not correspond to the CPS's current specialization,
+the CPS's current specialization adapts to the currently required set of skills
+and preserves once learnt knowledge effectively while irelevant knowledge is forgotten.
+Please remark the different performance levels in terms of `accuracy` and `loss`.
+It might be better to learn on a new ANN.
+
+On the other hand, the corresponding data set manipulation shows as adequate mechanism to partly forget knowledge:
+The one kind of knowledge shall be preserved, while the other kind of knowledge shall be forgotten.
 
 A publication about this is in progress.
