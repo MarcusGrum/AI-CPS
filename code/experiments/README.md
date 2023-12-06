@@ -190,7 +190,7 @@ For instance, the overview plot shows accuracies and losses of training and test
 
 Here, faced with the comparison of `clean refinement` and `disturbance`, one can see 
 that the specialization shows a certain fault tolerance.
-Although the disturbed input shows worse performance characteristics (only in terms of `accuracy`, bot not in terms of `loss`),
+Although the disturbed input shows worse performance characteristics (only in terms of `accuracy`, but not in terms of `loss`),
 even disturbed input shows acceptable performance.
 
 Faced with the comparions of `bias` with `manipulation`, one can see
