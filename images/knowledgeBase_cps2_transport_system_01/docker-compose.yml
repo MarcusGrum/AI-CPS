@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  knowledge_base:
+    build: .
+    image: marcusgrum/knowledgebase_cps2_transport_system_01:latest
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/;
+volumes:
+  ai_system:
+    external: true
