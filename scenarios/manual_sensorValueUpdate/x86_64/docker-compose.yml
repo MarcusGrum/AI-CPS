@@ -1,0 +1,19 @@
+version: "3.0"
+services:
+  sensor_base_digitalTwinOfCps1:
+    image: busybox
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      echo '1.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps1_conveyor_workpieceSensorLeft.txt;
+      echo '2.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps1_conveyor_workpieceSensorCenter.txt;
+      echo '3.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps1_conveyor_workpieceSensorRight.txt;
+      echo '4.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps2_conveyor_workpieceSensorLeft.txt;
+      echo '5.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps2_conveyor_workpieceSensorCenter.txt;
+      echo '6.0' > /tmp/digitalTwinOfCps1/activationBase/currentActivation/cps2_conveyor_workpieceSensorRight.txt;
+volumes:
+  ai_system:
+    external: true

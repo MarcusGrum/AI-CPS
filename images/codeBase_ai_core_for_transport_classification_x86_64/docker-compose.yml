@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  code_base:
+    build: .
+    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/codeBase/ && cp -r /codeBase/ /tmp/;
+volumes:
+  ai_system:
+    external: true

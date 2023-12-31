@@ -1,0 +1,36 @@
+version: "3.0"
+services:
+  knowledge_base_testSender:
+    image: marcusgrum/knowledgebase_apple_banana_orange_pump_20
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/testSender/knowledgeBase/ && mkdir -p /tmp/testSender/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/testSender/;
+  activation_base_testSender:
+    image: marcusgrum/activationbase_apple_okay_01
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/testSender/activationBase/ && mkdir -p /tmp/testSender/activationBase/ && cp -r /activationBase/ /tmp/testSender/;
+  code_base_testSender:
+    image: marcusgrum/codebase_ai_core_for_image_classification_x86_64
+    volumes:
+       - ai_system:/tmp
+    depends_on:
+      - "knowledge_base_testSender"
+      - "activation_base_testSender"
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/testSender/codeBase/ && mkdir -p /tmp/testSender/codeBase/ && cp -r /codeBase/ /tmp/testSender/;
+      python3 /tmp/testSender/codeBase/apply_annSolution.py testSender testReceiver;
+volumes:
+  ai_system:
+    external: true

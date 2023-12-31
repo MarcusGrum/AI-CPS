@@ -20,7 +20,7 @@ import numpy
 # import experiments
 import sys
 sys.path.insert(0, '../experiments')
-import experiment01, experiment02, experiment03, experiment04
+import experiment01, experiment02, experiment03, experiment04, experiment05
 
 # specify global variables, so that they are known (1) at messageClient start and (2) at function calls from external scripts
 global hostName, hostArch, logDirectory
@@ -96,18 +96,21 @@ def on_message(client, userdata, msg):
      """
      This function continuously receives messages from broker and starts scenario realization.
      It can be called via the following CLI commands:
-          1. Initiate example apply_annSolution from remote:
+          1. Initiate example apply_annSolution from remote (for image classification):
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          2. Initiate example create_annSolution from remote:
+          2. Initiate example create_annSolution from remote (for image classification):
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=create_annSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          3. Initiate example refine_annSolution from remote:
+          3. Initiate example refine_annSolution from remote (for image classification):
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=refine_annSolution, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=marcusgrum/learningbase_apple_banana_orange_pump_02, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          4. Initiate example wire_annSolution from remote:
+          4. Initiate example wire_annSolution from remote (for image classification):
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=wire_annSolution, knowledge_base=-, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
-          5. Initiate example publish_annSolution from remote:
+          5. Initiate example publish_annSolution from remote (for image classification):
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=publish_annSolution, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
           6. Initiate experiment realize_annExperiment from remote:
           mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=realize_annExperiment, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
+          
+          1b. Initiate example apply_annSolution_for_transportClassification from remote (for transport classification):
+          mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps1_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=SenderA, receiver=ReceiverB." -h "test.mosquitto.org" -p 1883
      """
 
      # provide variables as global so that these are known in this thread
@@ -119,10 +122,11 @@ def on_message(client, userdata, msg):
      print(msg.topic + " " + str(message))
      scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver = unroll_message(str(message))
 
-     # realize scenario, such as create_annSolution / apply_annSolution / refine_annSolution / publish_annSolution #/ realize_annExperiment
-     realize_scenario(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver, sub_process_method="parallel")
+     if(receiver == hostName):
+          # realize scenario, such as create_annSolution / apply_annSolution / refine_annSolution / publish_annSolution #/ realize_annExperiment
+          realize_scenario(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver, sub_process_method="parallel")
 
-     print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + ' successfully!')
+          print('Message of ' + sender + ' has been initiated at ' + receiver + ' by ' + hostName + '(' + os.uname()[1] + ') successfully!')
 
 
 def unroll_message(message):
@@ -140,6 +144,20 @@ def unroll_message(message):
 
      return scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver
 
+def unroll_sensorValuesFromScenario(message):
+     """
+     This functions unrolls variables from message and returns them.
+     """
+
+     scenario                            = message.partition(", cps1_conveyor_workpieceSensorLeft=")[0]
+     cps1_conveyor_workpieceSensorLeft   = (message.partition("cps1_conveyor_workpieceSensorLeft=")[2]).partition(", cps1_conveyor_workpieceSensorCenter=")[0]
+     cps1_conveyor_workpieceSensorCenter = (message.partition("cps1_conveyor_workpieceSensorCenter=")[2]).partition(", cps1_conveyor_workpieceSensorRight=")[0]
+     cps1_conveyor_workpieceSensorRight  = (message.partition("cps1_conveyor_workpieceSensorRight=")[2]).partition(", cps2_conveyor_workpieceSensorLeft=")[0]
+     cps2_conveyor_workpieceSensorLeft   = (message.partition("cps2_conveyor_workpieceSensorLeft=")[2]).partition(", cps2_conveyor_workpieceSensorCenter=")[0]
+     cps2_conveyor_workpieceSensorCenter = (message.partition("cps2_conveyor_workpieceSensorCenter=")[2]).partition(", cps2_conveyor_workpieceSensorRight=")[0]
+     cps2_conveyor_workpieceSensorRight  = (message.partition("cps2_conveyor_workpieceSensorRight=")[2]).partition(", knowledge_base=")[0]
+     
+     return scenario, cps1_conveyor_workpieceSensorLeft, cps1_conveyor_workpieceSensorCenter, cps1_conveyor_workpieceSensorRight, cps2_conveyor_workpieceSensorLeft, cps2_conveyor_workpieceSensorCenter, cps2_conveyor_workpieceSensorRight
 
 def build_docker_file_for_publication_at_dockerhub(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
@@ -156,7 +174,6 @@ def build_docker_file_for_publication_at_dockerhub(scenario, knowledge_base, act
                f.write('FROM busybox'+'\n')
                f.write(
                     'ADD ./'+sender+'_currentSolution.h5  /knowledgeBase/currentSolution.h5'+'\n')
-
 
 def build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
@@ -290,6 +307,95 @@ def build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, ac
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
+def build_docker_compose_file_for_apply_annSolution_of_transportClassification(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
+     """
+     This functions builds docker-compose file for scenario called apply_annSolution
+     and considers variables from message, here.
+     The file is stored at current working directory.
+     """
+
+     # if architecture = 'x86_64' or if architecture = 'x86_64_gpu'
+     if (hostArch == 'x86_64') or (hostArch == 'x86_64_gpu'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.0"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  knowledge_base_'+sender+':\n') # e.g. marcusgrum/knowledgebase_cps1_transport_system_01
+               f.write('    image: ' + knowledge_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/' + sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+               # no activation base since activation base of previous ann activation is used
+               #f.write('  activation_base_'+sender+':\n') # e.g. marcusgrum/activationbase_apple_okay_01
+               #f.write('    image: ' + activation_base + ''+'\n')
+               #f.write('    volumes:'+'\n')
+               #f.write('       - ai_system:/tmp/'+''+'\n')
+               #f.write('    command:'+'\n')
+               #f.write('    - sh'+'\n')
+               #f.write('    - "-c"'+'\n')
+               #f.write('    - |'+'\n')
+               #f.write('      rm -rf /tmp/'+sender+'/activationBase/ && mkdir -p /tmp/' + sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  code_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_transport_classification_x86_64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    depends_on:'+'\n')
+               f.write('      - "knowledge_base_'+sender+'"'+'\n')
+               #f.write('      - "activation_base_'+sender+'"'+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/apply_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
+     # if architecture = 'aarch64'
+     if (hostArch == 'aarch64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.9"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  knowledge_base_'+sender+':\n') # e.g. marcusgrum/knowledgebase_cps1_transport_system_01
+               f.write('    image: ' + knowledge_base + ''+'\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/knowledgeBase/ && mkdir -p /tmp/' + sender+'/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/'+sender+'/;'+'\n')
+               # no activation base since activation base of previous ann activation is used
+               #f.write('  activation_base_'+sender+':\n') # e.g. marcusgrum/activationbase_apple_okay_01
+               #f.write('    image: ' + activation_base + ''+'\n')
+               #f.write('    volumes:'+'\n')
+               #f.write('       - ai_system:/tmp/'+''+'\n')
+               #f.write('    command:'+'\n')
+               #f.write('    - sh'+'\n')
+               #f.write('    - "-c"'+'\n')
+               #f.write('    - |'+'\n')
+               #f.write('      rm -rf /tmp/'+sender+'/activationBase/ && mkdir -p /tmp/' + sender+'/activationBase/ && cp -r /activationBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('  code_base_'+sender+':\n')
+               f.write('    user: root'+'\n') # e.g. marcusgrum/codebase_ai_core_for_transport_classification_x86_64
+               f.write('    image: ' + code_base + '_' + hostArch + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    depends_on:'+'\n')
+               f.write('      - "knowledge_base_'+sender+'"'+'\n')
+               #f.write('      - "activation_base_'+sender+'"'+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      rm -rf /tmp/'+sender+'/codeBase/ && mkdir -p /tmp/' + sender+'/codeBase/ && cp -r /codeBase/ /tmp/'+sender+'/;'+'\n')
+               f.write('      python3 /tmp/'+sender + '/codeBase/apply_annSolution.py ' + sender + " " + receiver + ';\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
 
 def build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
@@ -392,7 +498,6 @@ def build_docker_compose_file_for_create_annSolution(scenario, knowledge_base, a
                f.write('volumes:'+'\n')
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
-
 
 def build_docker_compose_file_for_refine_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver):
      """
@@ -727,6 +832,37 @@ def build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, act
                f.write('  ai_system:'+'\n')
                f.write('    external: true'+'\n')
 
+def build_docker_compose_file_for_manual_sensorValueUpdate(sender, cps1_conveyor_workpieceSensorLeft, cps1_conveyor_workpieceSensorCenter, cps1_conveyor_workpieceSensorRight, cps2_conveyor_workpieceSensorLeft, cps2_conveyor_workpieceSensorCenter, cps2_conveyor_workpieceSensorRight):
+     """
+     This functions builds docker-compose file for scenario called manual_sensorValueUpdate
+     and considers variables from message, here.
+     The file is stored at current working directory.
+     """
+
+     # if architecture = 'x86_64' or if architecture = 'x86_64_gpu' or if architecture = 'aarch64'
+     if (hostArch == 'x86_64') or (hostArch == 'x86_64_gpu') or (hostArch == 'aarch64'):
+          with open(logDirectory+'/'+sender+'-docker-compose.yml', 'w') as f:
+               f.write('version: "3.0"'+'\n')
+               f.write('services:'+'\n')
+               f.write('  sensor_base_'+sender+':\n') # e.g. marcusgrum/codebase_ai_core_for_transport_classification_x86_64
+               f.write('    image: busybox' + '\n')
+               f.write('    volumes:'+'\n')
+               f.write('       - ai_system:/tmp/'+''+'\n')
+               f.write('    command:'+'\n')
+               f.write('    - sh'+'\n')
+               f.write('    - "-c"'+'\n')
+               f.write('    - |'+'\n')
+               f.write('      mkdir -p /tmp/' + sender + '/activationBase/currentActivation/;\n')
+               f.write('      echo ' + cps1_conveyor_workpieceSensorLeft   + ' > /tmp/' + sender + '/activationBase/currentActivation/cps1_conveyor_workpieceSensorLeft.txt;\n')
+               f.write('      echo ' + cps1_conveyor_workpieceSensorCenter + ' > /tmp/' + sender + '/activationBase/currentActivation/cps1_conveyor_workpieceSensorCenter.txt;\n')
+               f.write('      echo ' + cps1_conveyor_workpieceSensorRight  + ' > /tmp/' + sender + '/activationBase/currentActivation/cps1_conveyor_workpieceSensorRight.txt;\n')
+               f.write('      echo ' + cps2_conveyor_workpieceSensorLeft   + ' > /tmp/' + sender + '/activationBase/currentActivation/cps2_conveyor_workpieceSensorLeft.txt;\n')
+               f.write('      echo ' + cps2_conveyor_workpieceSensorCenter + ' > /tmp/' + sender + '/activationBase/currentActivation/cps2_conveyor_workpieceSensorCenter.txt;\n')
+               f.write('      echo ' + cps2_conveyor_workpieceSensorRight  + ' > /tmp/' + sender + '/activationBase/currentActivation/cps2_conveyor_workpieceSensorRight.txt;\n')
+               f.write('volumes:'+'\n')
+               f.write('  ai_system:'+'\n')
+               f.write('    external: true'+'\n')
+
 def realize_scenario(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver, sub_process_method):
      """
      This function realizes scenarios, such as from communication client
@@ -734,6 +870,7 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
      """
 
      # build docker-compose file based on message
+     # for standard situations (experiment01-04)
      if (scenario == 'apply_annSolution'):
           build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
      if (scenario == 'create_annSolution'):
@@ -744,6 +881,15 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
           build_docker_compose_file_for_wire_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
      if (scenario == 'evaluate_annSolution'):
           build_docker_compose_file_for_evaluate_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+
+     # for experiment05
+     if (scenario == 'apply_annSolution_for_imageClassification'):
+          build_docker_compose_file_for_apply_annSolution(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if (scenario == 'apply_annSolution_for_transportClassification'):
+          build_docker_compose_file_for_apply_annSolution_of_transportClassification(scenario, knowledge_base, activation_base, code_base, learning_base, sender, receiver)
+     if ('manual_sensorValueUpdate' in scenario):
+          scenario, cps1_conveyor_workpieceSensorLeft, cps1_conveyor_workpieceSensorCenter, cps1_conveyor_workpieceSensorRight, cps2_conveyor_workpieceSensorLeft, cps2_conveyor_workpieceSensorCenter, cps2_conveyor_workpieceSensorRight = unroll_sensorValuesFromScenario(scenario)
+          build_docker_compose_file_for_manual_sensorValueUpdate(sender, cps1_conveyor_workpieceSensorLeft, cps1_conveyor_workpieceSensorCenter, cps1_conveyor_workpieceSensorRight, cps2_conveyor_workpieceSensorLeft, cps2_conveyor_workpieceSensorCenter, cps2_conveyor_workpieceSensorRight)
 
      # realize instructions from messages by running docker-compose file created at machine-specific working directory
      if (scenario == 'apply_annSolution') or (scenario == 'create_annSolution') or (scenario == 'refine_annSolution') or (scenario == 'wire_annSolution') or (scenario == 'evaluate_annSolution'):
@@ -762,7 +908,8 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
                # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
                with open(logDirectory+"/"+sender+"_stdout.txt", "wb") as out, open(logDirectory+"/"+sender+"_stderr.txt", "wb") as err:
                     # carry out current scenario
-                    subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
+                    p = subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
+                    print('Message of ' + sender + ' has been triggered at ' + receiver + ' successfully!')
 
      # If new knowledgeBase needs to be published to docker's hub, when create or refine scenarios have been finalized:
      if (scenario == 'publish_annSolution'):
@@ -789,16 +936,47 @@ def realize_scenario(scenario, knowledge_base, activation_base, code_base, learn
           #experiment02.realize_experiment()
           #experiment03.realize_experiment()
           #experiment04.realize_experiment()
+          #experiment05.realize_experiment()
           pass
+     
+     # for experiment05
+     if (scenario == 'apply_annSolution_for_imageClassification') or (scenario == 'apply_annSolution_for_transportClassification') or (scenario == 'manual_sensorValueUpdate'):
+          if (sub_process_method == "parallel"):
+               # b) by subprocess.Popen()
+               # Remark: By this variant, parallel requests at the same machine are realized in parallel. Hence, individual stdout and stderr have been created so that CLI output is separated correctly.
+               # Please note, message broaker does not manage requests. Indeed, each machine requires a manager for efficient ressource allocation.
+               with open(logDirectory+"/"+sender+"_stdout.txt", "wb") as out, open(logDirectory+"/"+sender+"_stderr.txt", "wb") as err:
+                    # carry out current scenario
+                    p = subprocess.Popen("docker-compose -f "+logDirectory+"/"+sender+"-docker-compose.yml up --remove-orphans", shell=True, stdout=out, stderr=err)
+                    print('Message of ' + sender + ' has been triggered at ' + receiver + ' successfully!')
+                    # wait for finalization at experiment 5
+                    p.wait(timeout=None)
+                    if (scenario == 'apply_annSolution_for_imageClassification'):
+                         # announce finalization of ANN requests
+                         client.publish(MQTT_Topic_CoNM, 'This is a result indication! My name is '+ hostName+' and I have processed the ann request.')
+                    if (scenario == 'apply_annSolution_for_transportClassification'):
+                         # announce finalization of ANN requests
+                         client.publish(MQTT_Topic_CoNM, 'This is a result indication! My name is '+ hostName+' and I have processed the ann request.')
+                    if (scenario == 'manual_sensorValueUpdate'): # this can be used for testing
+                         # announce finalization of sensor update
+                         # maybe put this in a separate client, so that ANN requests can be realized at AI-Lab 
+                         # and decentralized systems can be virtually realized at production systems...?
+                         client.publish(MQTT_Topic_CoNM, 'This is a sonsor update indication! My name is '+ hostName+' and I have updated the files by given values.')
+
 
 if __name__ == '__main__':
      """
      This function initiates communication client
      and manages the corresponding AI reguests.
-     - Optional ToDo: Pull images for having most recent updates. 
-                      Current code assumes images to be static (not changing over time).
-                      If continual changes occure, a new AI case (and corresponding images) are released.
+     Optional ToDo: 
+     - Pull images for having most recent updates. 
+     - Current code assumes images to be static (not changing over time).
+     - If continual changes occure, a new AI case (and corresponding images) are released.
      """
+
+     # optionally input parameters from CLI to rename host
+     if (sys.argv[1] != ""):
+          hostName = sys.argv[1]
 
      # specify client for messaging
      client = mqtt.Client()

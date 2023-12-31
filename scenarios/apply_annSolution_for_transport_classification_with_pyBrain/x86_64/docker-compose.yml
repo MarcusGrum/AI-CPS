@@ -1,0 +1,26 @@
+version: "3.0"
+services:
+  knowledge_base_digitalTwinOfCps1:
+    image: marcusgrum/knowledgebase_cps1_transport_system_01
+    volumes:
+       - ai_system:/tmp
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/digitalTwinOfCps1/knowledgeBase/ && mkdir -p /tmp/digitalTwinOfCps1/knowledgeBase/ && cp -r /knowledgeBase/ /tmp/digitalTwinOfCps1/;
+  code_base_digitalTwinOfCps1:
+    image: marcusgrum/codebase_ai_core_for_transport_classification_x86_64
+    volumes:
+       - ai_system:/tmp
+    depends_on:
+      - "knowledge_base_digitalTwinOfCps1"
+    command:
+    - sh
+    - "-c"
+    - |
+      rm -rf /tmp/digitalTwinOfCps1/codeBase/ && mkdir -p /tmp/digitalTwinOfCps1/codeBase/ && cp -r /codeBase/ /tmp/digitalTwinOfCps1/;
+      python3 /tmp/digitalTwinOfCps1/codeBase/apply_annSolution.py digitalTwinOfCps1 cps1;
+volumes:
+  ai_system:
+    external: true
