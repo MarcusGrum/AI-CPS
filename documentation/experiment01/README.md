@@ -42,7 +42,7 @@ At each experiment, new knowledge bases are created (cf. proceeding).
 Since knowledge bases shall be comparable over all experiment runs, subsequent experiments reuse knowledge bases that already have been set up in former experiments.
 The following presents an overview of all knowledge bases, their initial creation, and their reuse.
 
-<img src="../../KnowledgeBaseOverview.png" height="1440" />
+<img src="../KnowledgeBaseOverview.png" height="1440" />
 
 ### Proceeding for Experiment01
 
