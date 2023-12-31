@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<PyBrain>
+	<Network name="RecurrentNetwork-9" class="pybrain.structure.networks.recurrent.RecurrentNetwork">
+		<name val="'RecurrentNetwork-9'"/>
+		<Modules>
+			<LinearLayer name="i" class="pybrain.structure.modules.linearlayer.LinearLayer" inmodule="True">
+				<name val="'i'"/>
+				<dim val="12"/>
+			</LinearLayer>
+			<TanhLayer name="o" class="pybrain.structure.modules.tanhlayer.TanhLayer" outmodule="True">
+				<name val="'o'"/>
+				<dim val="5"/>
+			</TanhLayer>
+			<BiasUnit name="bias" class="pybrain.structure.modules.biasunit.BiasUnit">
+				<name val="'bias'"/>
+			</BiasUnit>
+			<LSTMLayer name="lstm_block" class="pybrain.structure.modules.lstm.LSTMLayer">
+				<dim val="1"/>
+				<peepholes val="True"/>
+				<name val="'lstm_block'"/>
+				<Parameters>[-2.501551630283226, 1.3041144987395346, -6.078396509801704]</Parameters>
+			</LSTMLayer>
+		</Modules>
+		<Connections>
+			<FullConnection name="FullConnection-5" class="pybrain.structure.connections.full.FullConnection">
+				<inmod val="bias"/>
+				<outmod val="lstm_block"/>
+				<Parameters>[6.40613887280718, -0.7725176661964888, -1.769119314700026, 0.9780424736355476]</Parameters>
+			</FullConnection>
+			<FullConnection name="FullConnection-6" class="pybrain.structure.connections.full.FullConnection">
+				<inmod val="bias"/>
+				<outmod val="o"/>
+				<Parameters>[-0.07827628255206637, 5.549787774605469, -0.0019324473083521386, 1.5927072982145873, 0.5196579721624811]</Parameters>
+			</FullConnection>
+			<FullConnection name="FullConnection-7" class="pybrain.structure.connections.full.FullConnection">
+				<inmod val="i"/>
+				<outmod val="lstm_block"/>
+				<Parameters>[-1.0396712184669799, -0.6430427151874061, -1.049921353088664, -0.7155064549740225, -1.039104066208126, -0.6726775387313295, 3.5999811170575167, 3.7125505398103527, -6.267523498982883, -1.5671637414531772, -4.517467827192438, 0.0739336582873869, 1.9177068682129566, -0.19537349378084254, 2.167951485220296, 0.9348077072077848, -0.12317531206275434, -1.2714221045222458, -0.43304855246840424, -0.5745845272182335, -1.4179471205307441, 1.1577194948846599, 0.4418003990781781, -1.7152569849192283, -0.3545611115773663, -0.3322405141667144, -0.3515789877481036, -0.3318892606041991, -0.3361536962825837, -0.3747406918535735, 1.051928268367265, 1.061506762167683, -0.9785126160986931, 0.4282334450615982, -0.7420594265403518, -0.007670822337134617, -0.08110436401326022, 0.1837151419722256, -0.09146871968884994, 0.22667713305404585, -0.051442922487200414, 0.07266546411558376, -0.4923739886294098, -0.5210114291765068, -1.1282296858285439, -2.2225678191272586, -4.648329032724395, -0.04395905022192454]</Parameters>
+			</FullConnection>
+			<FullConnection name="FullConnection-8" class="pybrain.structure.connections.full.FullConnection">
+				<inmod val="lstm_block"/>
+				<outmod val="o"/>
+				<Parameters>[-0.7593608108879722, 7.764062033970012, -0.50185884823534, 2.334502323332177, 0.2580832114257092]</Parameters>
+			</FullConnection>
+			<FullConnection name="FullConnection-4" class="pybrain.structure.connections.full.FullConnection" recurrent="True">
+				<inmod val="o"/>
+				<outmod val="lstm_block"/>
+				<Parameters>[-0.5009945357049715, 0.21606417674841186, 0.5616544012878317, 1.5066574770675314, 0.4987875899024309, -0.44450521263498777, -0.23307872511337643, 0.10236681924012578, 0.39163960789105184, -0.7474470886448004, -0.24153878169109066, -0.23813701473990634, -0.050484741778872584, 2.014830302929651, -0.3255108049324383, 0.5005553862773506, 0.6564591351596414, 0.18123797981137202, 0.4626534147846586, -0.9673337698333363]</Parameters>
+			</FullConnection>
+		</Connections>
+	</Network>
+</PyBrain>

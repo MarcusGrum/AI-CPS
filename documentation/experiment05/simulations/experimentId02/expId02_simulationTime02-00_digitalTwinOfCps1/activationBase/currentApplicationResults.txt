@@ -1,0 +1,2 @@
+/tmp/digitalTwinOfCps1/activationBase/currentActivation/currentActivation.jpeg -> pump-ok
+[0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1.][ 0.  1.  0.  0. -0.] -> idling

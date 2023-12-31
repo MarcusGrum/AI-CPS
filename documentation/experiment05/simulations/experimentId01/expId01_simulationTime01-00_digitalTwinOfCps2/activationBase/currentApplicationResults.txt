@@ -1,0 +1,2 @@
+/tmp/digitalTwinOfCps2/activationBase/currentActivation/currentActivation.jpeg -> pump-ok
+[0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1.][ 1. -0.  0. -0. -0.] -> transport-to-the-right

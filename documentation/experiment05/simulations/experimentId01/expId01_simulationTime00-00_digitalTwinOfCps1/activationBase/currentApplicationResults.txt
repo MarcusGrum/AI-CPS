@@ -1,0 +1,2 @@
+/tmp/digitalTwinOfCps1/activationBase/currentActivation/currentActivation.png -> apple-ok
+[0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.][ 1. -0. -0. -0. -0.] -> transport-to-the-right

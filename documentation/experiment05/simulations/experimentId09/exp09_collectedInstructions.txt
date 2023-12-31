@@ -1,0 +1,138 @@
+	------------------- timeStep 01
+	
+	cps1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_apple_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+		cps1 - get most recent sensor values (same values as at cps2, see blow)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+	cps1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps1_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+
+	cps2 - cycle 1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 1 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps1 and cps2
+	# to be done manually
+	
+	cps2 - cycle 2 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 2 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 2 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps2
+	# to be done manually
+	
+	cps2 - cycle 3 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 3 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 3 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883	
+	
+	backup files of cps2
+	# to be done manually
+	
+	------------------- timeStep 02
+	cps1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+		cps1 - get most recent sensor values (same values as at cps2, see blow)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=0.0, cps1_conveyor_workpieceSensorRight=1.0, cps2_conveyor_workpieceSensorLeft=1.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+	cps1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps1_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+	cps2 - cycle 1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 1 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=0.0, cps1_conveyor_workpieceSensorRight=1.0, cps2_conveyor_workpieceSensorLeft=1.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps1 and cps2
+	# to be done manually
+	
+	cps2 - cycle 2 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 2 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=0.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 2 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps2
+	# to be done manually
+	
+	cps2 - cycle 2 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 2 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=0.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 2 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps2
+	# to be done manually
+	
+	------------------- timeStep 03
+	cps1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_banana_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+		cps1 - get most recent sensor values (same values as at cps2, see blow)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+	cps1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps1_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps1, receiver=cps1." -h "localhost" -p 1883
+	
+	cps2 - cycle 1 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 1 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 1 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps1 and cps2
+	# to be done manually
+	
+	cps2 - cycle 2 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 2 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 2 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps2
+	# to be done manually
+	
+	cps2 - cycle 3 - ANN-based picture classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_imageClassification, knowledge_base=marcusgrum/knowledgebase_apple_banana_orange_pump_20, activation_base=marcusgrum/activationbase_pump_okay_01, code_base=marcusgrum/codebase_ai_core_for_image_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+		cps2 - cycle 3 - get most recent sensor values (same values as at cps1, see above)
+		mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=manual_sensorValueUpdate, cps1_conveyor_workpieceSensorLeft=0.0, cps1_conveyor_workpieceSensorCenter=1.0, cps1_conveyor_workpieceSensorRight=0.0, cps2_conveyor_workpieceSensorLeft=0.0, cps2_conveyor_workpieceSensorCenter=0.0, cps2_conveyor_workpieceSensorRight=0.0, knowledge_base=-, activation_base=-, code_base=-, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	cps2 - cycle 3 - ANN-based transport classification:
+	mosquitto_pub -t "CoNM/workflow_system" -u user1 -P password1 -m "Please realize the following AI case: scenario=apply_annSolution_for_transportClassification, knowledge_base=marcusgrum/knowledgebase_cps2_transport_system_01, activation_base=-, code_base=marcusgrum/codebase_ai_core_for_transport_classification, learning_base=-, sender=digitalTwinOfCps2, receiver=cps2." -h "localhost" -p 1883
+	
+	backup files of cps2
+	# to be done manually
