@@ -5,6 +5,10 @@ while realizing different combinations of `activation rates` and `activation cyc
 It so focuses on the following research question:
 Inhowfar are AI-based CPS disturbed due to different combinations of `activation rates` and `activation cycles`?
 
+Further, it demonstrates the combined AI application of multiple AI libraries, such as TensorFlow and a custom version of PyBrain.
+
+Third, it demonstrates the triggering of timed simulations with a simulation controle and its simulated instances via SimPy.
+
 ## Getting-Started
 
 ### ...via message client remotely
@@ -104,6 +108,5 @@ It clarifies the decodified ANN outcomes and shows the identified fruit, recogni
 
 The research question can be answered as follows:
 
-TBD
-
-A publication about this is in progress.
+The two relevant target dimensions of disruption incidents and inefficiencies were examined in experimental studies and key factors influencing activation rates and activation cycles were identified.
+A publication about this is in progress. So please stay tuned for further details and explanations on this, here.
