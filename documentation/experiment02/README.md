@@ -42,11 +42,11 @@ At each experiment, new knowledge bases are created (cf. proceeding).
 Since knowledge bases shall be comparable over all experiment runs, subsequent experiments reuse knowledge bases that already have been set up in former experiments.
 The following presents an overview of all knowledge bases, their initial creation, and their reuse.
 
-<img src="./KnowledgeBaseOverview.png" height="1440" />
+<img src="../KnowledgeBaseOverview.png" height="1440" />
 
 ### Proceeding for Experiment02
 
-<img src="./experiment02/Experiment02_Proceeding.png" height="600" />
+<img src="../experiment02/Experiment02_Proceeding.png" height="600" />
 
 ### KPIs in Experiment02
 
@@ -55,7 +55,7 @@ KPIs collected by the experiment can be found as follows:
 For training as well as testing, `accuracies`, `losses`, `number of data` (training or testing data) have been collected as individual kpi files.
 These have been reorganized and summarized as `mu`, `sigma` and `n` as the following presents.
 
-<img src="./experiment02/Experiment02_KpiCollection.png" height="600" />
+<img src="../experiment02/Experiment02_KpiCollection.png" height="600" />
 
 These files and KPIs are used for statistical analyses, whose code can be found at the following path:
 
@@ -74,7 +74,7 @@ Results of this experiment can be found at the following path:
 Here, one can find KPIs collected as well as plots generated.
 For instance, the overview plot shows accuracies and losses of training and testing courses.
 
-<img src="./experiment02/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
+<img src="../experiment02/plots/Plot_Average_Over_All_Experiments.png" height="1000" />
 
 Here, one can see that bias and manipulation are learnt successfully and forgotten as well as remained successfully after learning base has changed.
 After the change of the learning base, bias focused product type is remained successfully, while mainipulation product type is forgotten successfully.
