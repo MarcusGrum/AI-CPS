@@ -81,7 +81,7 @@ Assuming to have two kinds of cps that do either provide the same or different k
 and synchronous /coupled or asynchronous / decoupled `activation cycles`,
 principally, four different kinds of experiment variants need to be examined:
 
-<img src="../experiment05/figures/ExperimentVariants.png" height="150" />
+<img src="../experiment05/figures/ExperimentVariants.png" height="300" />
 
 Having a closer look at possible relations of `activation rates` and `activation cycles`,
 a more versatile research on 14 experiment variants is enabled:
