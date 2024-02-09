@@ -110,3 +110,19 @@ The research question can be answered as follows:
 
 The two relevant target dimensions of disruption incidents and inefficiencies were examined in experimental studies and key factors influencing activation rates and activation cycles were identified.
 A publication about this is in progress. So please stay tuned for further details and explanations on this, here.
+
+## Publications about Experiment05
+
+Up to its publication, please cite this experiment and the article as follows:
+
+    ```
+    Grum, M. (2024). Managing Multi-Site Artificial Neural Networks' Activation Rates and Activation Cycles 
+    - Demonstrating the Effects of Activation Types on ANN-based Cyber-Physical Production Systems. 
+    In: Technical Report BIS-AI-AS-2024-01, First Edition, January 2024, 
+    J.-Chair of Business Information Systems, esp. AI-based Appl. Sys., University of Potsdam, Potsdam, Germany.
+    ```
+You can find it at
+
+    ```
+    repository/documentation/experiment05/publications
+    ```
